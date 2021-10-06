@@ -1,6 +1,7 @@
 <template>
     <header>
         <nav class="container">
+
             <router-link to="/" class="logo">
                 <img src="@/assets/logo-bike.png" alt="LucasBiker">
             </router-link>
@@ -10,22 +11,33 @@
                 <div class="bar2"></div>
                 <div class="bar3"></div>
             </div>
+
             <div class="menu ativo">
+
                 <template v-if="user.loggedIn">
+
                     <span class="nome-usuario">Olá, {{user.data.displayName.split(' ')[0]}}</span>
+                    
+                    <router-link class="carrinho" to="/carrinho">
+                        <img src="@/assets/carrinho.png" alt="Carrinho">
+                        <span class="quantidade-carrinho">1</span>
+                    </router-link>
+
                 </template>
 
-                <router-link v-else class="btn-login" to="/register">
-                    <img src="@/assets/iconLogin.png" alt="Icon Login">
-                </router-link>
-                <router-link class="carrinho" to="/carrinho">
-                    <img src="@/assets/carrinho.png" alt="Carrinho">
-                    <span class="quantidade-carrinho">1</span>
-                </router-link>
+                <template v-else>
+                    <router-link to="register">
+                        <img src="@/assets/iconLogin.png" alt="Icon Login">
+                    </router-link>
+
+                    <router-link class="carrinho" to="/carrinho">
+                        <img src="@/assets/carrinho.png" alt="Carrinho">
+                        <span class="quantidade-carrinho">1</span>
+                    </router-link>
+                </template>
+
             </div>
         </nav>
-
-        {{user}}
     </header>
 </template>
 
@@ -35,33 +47,34 @@ import { mapGetters } from "vuex";
 import firebase from "firebase";
 
 export default {
-    name: 'Header',
 
-    computed: {
-        ...mapGetters({
-        user: "user"
-        })
+  computed: {
+    ...mapGetters({
+      user: "user"
+    })
+
+  },
+
+  methods: {
+    abrirMenu() {
+        const menu = document.querySelector('.menu')
+        menu.classList.toggle('ativo')
     },
 
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "home"
+          });
+        });
+    }
 
-    methods: {
-        abrirMenu() {
-            const menu = document.querySelector('.menu')
-            menu.classList.toggle('ativo')
-        },
+  }
+};
 
-        signOut() {
-            firebase
-            .auth()
-            .signOut()
-            .then(() => {
-            this.$router.replace({
-                name: "home"
-            });
-            });
-        }
-    },
-}
 </script>
 
 <style>
