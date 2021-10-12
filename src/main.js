@@ -13,7 +13,8 @@ const firebaseConfig = {
   storageBucket: "ecommerce-lucas.appspot.com",
   messagingSenderId: "349354161964",
   appId: "1:349354161964:web:2c4f366f688d75d6b89e89",
-  measurementId: "G-9PH4WQV2VK"
+  measurementId: "G-9PH4WQV2VK",
+  databaseURL: 'https://ecommerce-lucas-default-rtdb.firebaseio.com/'
 };
 
 firebase.initializeApp(firebaseConfig);

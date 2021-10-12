@@ -53,9 +53,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/produto">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -64,9 +64,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -75,9 +75,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
           </div>
           
@@ -98,9 +98,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -109,9 +109,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -120,9 +120,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
           </div>
           
@@ -143,9 +143,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -154,9 +154,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -165,9 +165,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
           </div>
           
@@ -188,9 +188,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -199,9 +199,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
 
             <div>
@@ -210,9 +210,9 @@
               <p class="item-valor-antigo">R$ 3.999,99</p>
               <p class="item-valor">R$2.719,99</p>
               <p class="item-parcelado">ou 6x de R$453,33</p>
-              <button class="btn-comprar">
-                <a href="/">Comprar</a>
-              </button>
+              <router-link class="btn-comprar" to="/pedidos">
+                <button class="btn-comprar">Comprar</button>
+              </router-link>
             </div>
           </div>
           
@@ -247,7 +247,6 @@ export default {
 
       const imagensHome = document.querySelectorAll('.carrosel-inicio')
 
-      //se for a primeira foto e clicou pra voltar, retorna pra ultima
       if(this.slideIndex == -1) {
         this.slideIndex = imagensHome.length - 1
         imagensHome[this.slideIndex].style.display = 'block'
@@ -255,7 +254,6 @@ export default {
 
       }
 
-      //se chegar na ultima foto e clicar pra passar, ele retorna pra primeira
       if(this.slideIndex == imagensHome.length) {
         this.slideIndex = 0
         imagensHome[this.slideIndex].style.display = 'block'
@@ -263,7 +261,6 @@ export default {
 
       }
 
-      //passa slide
       if(n == 1 || n == 0) {
         imagensHome[this.slideIndex].style.display = 'block'
 
@@ -273,7 +270,6 @@ export default {
         }
       }
 
-      //volta slide
       if(n == -1 || n == 0) {
         imagensHome[this.slideIndex].style.display = 'block'
 

@@ -55,9 +55,7 @@ export default {
   border: none;
   border-radius: 10px;
   font-size: 18px;
-}
-
-.btn-comprar a {
+  cursor: pointer;
   color: #fff;
 }
 

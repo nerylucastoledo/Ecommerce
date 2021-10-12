@@ -16,12 +16,21 @@
 
                 <template v-if="user.loggedIn">
 
-                    <span class="nome-usuario">Olá, {{user.data.displayName.split(' ')[0]}}</span>
-                    
+                    <router-link class="pedidos" to="/pedidos">
+                        <span>Pedidos</span>
+                        <img src="@/assets/icon-pedidos.png" alt="Pedidos">
+                    </router-link>
+
                     <router-link class="carrinho" to="/carrinho">
+                        <span>Carrinho</span>
                         <img src="@/assets/carrinho.png" alt="Carrinho">
                         <span class="quantidade-carrinho">1</span>
                     </router-link>
+
+                    <span class="sair-login" @click="signOut">
+                        <span class="nome-usuario">Olá, {{user.data.displayName.split(' ')[0]}}</span>
+                        <img src="@/assets/icon-sair.png" alt="Sair">
+                    </span>
 
                 </template>
 
@@ -67,7 +76,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "home"
+            name: "Home"
           });
         });
     }
@@ -122,8 +131,12 @@ nav {
 }
 
 .carrinho {
-    margin-left: 40px;
     position: relative;
+}
+
+.pedidos img, .sair-login img {
+    width: 25px;
+    height: 25px;
 }
 
 .quantidade-carrinho {
@@ -138,7 +151,20 @@ nav {
 }
 
 .nome-usuario {
-    color: #fff;
+    color: #000;
+}
+
+.sair-login img, .pedidos img, .carrinho img {
+    margin-left: 10px;
+}
+
+.sair-login {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 20px;
 }
 
 @media (max-width: 500px) {
@@ -151,7 +177,7 @@ nav {
         position: absolute;
         right: 0px;
         top: 100px;
-        background-color: #F3F2F2
+        background-color: #F3F2F2;
     }
 
     .menu-mobile {
