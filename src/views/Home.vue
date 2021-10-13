@@ -84,49 +84,8 @@
         </div>
     </section>
 
-    <section class="lucasbiker-home">
-        <div class="container">
-
-          <h1 class="titulo-principal">RACING</h1>
-
-          <img id="img-categoria-home" src="../assets/racing.png" alt="Racing">
-
-          <div class="lucasbiker-home-items">
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-          </div>
-          
-        </div>
+    <section>
+      <ListRacing/>
     </section>
 
     <section class="lucasbiker-home">
@@ -225,9 +184,14 @@
 <script>
 
 import { mapGetters } from "vuex";
+import ListRacing from '../components/ListRacing.vue'
 
 export default {
   name: 'Home',
+
+  components: {
+    ListRacing
+  },
 
   data() {
     return {

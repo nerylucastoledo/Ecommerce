@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-        <h1>Login</h1>
+        <h1 class="titulo-login">Login</h1>
         <p class="erro-usuario" v-if="error">{{error}}</p>
         <form action="#" @submit.prevent="submit">
             <label for="email">Email</label>
@@ -26,7 +26,7 @@
             />
 
             <div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn">Login</button>
             </div>
         </form>
     </div>

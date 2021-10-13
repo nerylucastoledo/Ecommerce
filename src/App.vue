@@ -81,19 +81,19 @@ input:hover, input:focus, textarea:hover, textarea:focus {
   border-color: #CC2131;
 }
 
-  .btn {
-    display: block;
-    padding: 10px 30px;
-    background: #CC2131;
-    border-radius: 4px;
-    color: #fff;
-    text-align: center;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
-    transition: all 0.3s;
-    border: none;
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    cursor: pointer;
-  }
+.btn {
+  display: block;
+  padding: 10px 30px;
+  background: #CC2131;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
+  transition: all 0.3s;
+  border: none;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+}
 
 </style>

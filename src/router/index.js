@@ -24,9 +24,10 @@ const routes = [
     component: Register
   },
   {
-    path: '/produto',
-    name: 'Produto',
-    component: Produto
+    path: '/produto/:id',
+    name: 'produto',
+    component: Produto,
+    props: true
   },
 ]
 

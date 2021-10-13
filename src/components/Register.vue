@@ -1,6 +1,6 @@
 <template>
   <section class="login">
-        <h1>Crie sua conta</h1>
+        <h1 class="titulo-login">Crie sua conta</h1>
         <form action="#" @submit.prevent="submit">
                 <label for="name" class="col-md-4 col-form-label text-md-right">Nome</label>
                 <input
@@ -89,7 +89,7 @@ export default {
     margin-bottom: 60px;
 }
 
-h1 {
+.titulo-login {
     text-align: center;
     font-size: 2rem;
     margin-top: 40px;
