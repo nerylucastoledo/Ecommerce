@@ -6,6 +6,19 @@ import * as firebase from 'firebase';
 
 Vue.config.productionTip = false
 
+Vue.filter("numeroPreco", valor => {
+  valor = Number(valor)
+  if(!isNaN(valor)) {
+    return valor.toLocaleString("pt-BR", {
+      style: 'currency', 
+      currency: 'BRL',
+      minimumFractionDigits: 3
+    })
+  } else {
+    return ""
+  }
+})
+
 const firebaseConfig = {
   apiKey: "AIzaSyCQpCwOx80RJqeniw97quGzaoqeHZG0AWg",
   authDomain: "ecommerce-lucas.firebaseapp.com",

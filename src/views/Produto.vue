@@ -3,29 +3,57 @@
         <div class="conteudo-produto">
             <div class="avaliacoes">
                 <div>
+
                     <img :src="imagem" alt="Moto Motorizada">
                     <h3 class="titulo-avaliacoes">Avaliações</h3>
+
                     <div v-if="avaliacoes">
-                        <div class="avaliacao" v-for="(avaliacao, index) in avaliacoes" :key="avaliacao+index">
-                            <p class="qntd-estrelas-comentario">☆☆☆☆ {{avaliacao.qntd_estrelas}}</p>
+                        <div 
+                            class="avaliacao" 
+                            v-for="(avaliacao, index) in avaliacoes" 
+                            :key="avaliacao+index">
+                            
+                            <span
+                                class="qntd-estrelas-comentario"
+                                v-for="(estrela, index) in avaliacao.qntd_estrelas" 
+                                :key="estrela+index">
+                                {{estrelas}}
+                            </span>
+
                             <div class="comentario">
                                 <p class="nome-avaliador">{{avaliacao.nome_avaliador}}</p>
                                 <p class="conteudo-comentario">{{avaliacao.comentario}}</p>
                             </div>
+
                         </div>
                     </div>
                     <div v-else>
                         <p>Nenhuma avaliação disponível.</p>
                     </div>
+
                 </div>
 
             </div>
             <div class="info-produto" v-if="produto">
                 <p class="categoria-e-preco">Nova</p>
                 <h1 class="nome-produto">{{produto.nome_produto}}</h1>
-                <p class="qntd-estrelas">☆☆☆☆</p>
+
+                <span
+                    class="qntd-estrelas"
+                    v-for="(estrela, index) in qntd_estrelas_do_produto" 
+                    :key="estrela+index">
+                    {{estrelas}}
+                </span>
+
+                <span
+                    class="qntd-estrelas"
+                    v-for="estrela in estrelas_restantes" 
+                    :key="estrela+'estrela'">
+                    {{estrela_vazia}}
+                </span>
+
                 <h2 class="valor-produto">R${{produto.valor_produto}}</h2>
-                <p class="categoria-e-preco">ou 6x de R$1.719,99</p>
+                <p class="categoria-e-preco">ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
                 <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
 
                 <p v-if="quantidade_no_estoque > 0" class="estoque">
@@ -60,20 +88,35 @@ export default {
             produto: null,
             quantidade_no_estoque: 0,
             avaliacoes: null,
-            imagem: null
+            imagem: null,
+            estrelas: "★",
+            estrela_vazia: "☆",
+            qntd_estrelas_do_produto: 0,
+            estrelas_restantes: 0
         }
     },
 
     methods: {
         getProduto() {
-            fetch(`http://127.0.0.1:8000/produto/?id=${this.id}`)
+            fetch(`https://resteapicommercelucas.herokuapp.com/produto/?id=${this.id}`)
             .then(req => req.json())
             .then(res => {
                 this.produto = res[0]
                 this.quantidade_no_estoque = res[0].quantidade_estoque
                 this.avaliacoes = res[0].avaliacoes
                 this.imagem = res[0].imagem_produto
+                this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
+                
             })
+        },
+
+        verificarAQuantidadeDeEstrelas(avaliacoes, qntd_comentario) {
+            var quantidade = 0
+            avaliacoes.forEach(element => {
+                quantidade += element.qntd_estrelas
+            });
+            this.qntd_estrelas_do_produto = Math.trunc(quantidade / qntd_comentario)
+            this.estrelas_restantes = 5 - this.qntd_estrelas_do_produto
         }
     },
 
@@ -93,7 +136,7 @@ export default {
 }
 
 .conteudo-produto img {
-    max-width: 100%;
+    width: 100%;
     max-height: 300px;
     border-radius: 5px;
 }
@@ -129,10 +172,11 @@ export default {
 .qntd-estrelas {
     color: #CC2131;
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-right: -10px;
 }
 
 .valor-produto {
+    margin-top: 20px;
     font-size: 30px;
 }
 
@@ -178,13 +222,9 @@ export default {
     max-width: 600px;
 }
 
-.avaliacao {
-    border-bottom: 1px solid #000;
-}
-
 .titulo-avaliacoes {
     margin-top: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     text-align: center;
     text-transform: uppercase;
     font-style: italic;
@@ -192,17 +232,18 @@ export default {
 }
 
 .qntd-estrelas-comentario {
-    text-align: right;
+    float: right;
     color: #CC2131;
     font-size: 24px;
     margin-bottom: 10px;
 }
 
 .comentario {
-    background-color: #C4C4C4;
+    background-color: #fff;
     border-radius: 10px;
-    padding: 10px 10px;
+    padding: 10px 10px 15px;
     margin-bottom: 20px;
+    font-weight: 550;
 }
 
 .nome-avaliador {

@@ -8,7 +8,7 @@
 
             <div class="lucasbiker-home-items" v-if="listaRacing">
                 <div v-for="(bicicleta, index) in listaRacing" :key="bicicleta+index">
-                <img src="@/assets/bike.png" alt="Bike">
+                <img :src="bicicleta.imagem_produto" alt="Bike">
                 <h2 class="item-nome">{{bicicleta.nome_produto}}</h2>
                 <p class="item-valor-antigo">R$ {{bicicleta.preco_antigo}}</p>
                 <p class="item-valor">R$ {{bicicleta.valor_produto}}</p>
@@ -33,7 +33,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch('http://127.0.0.1:8000/produto/')
+            fetch('https://resteapicommercelucas.herokuapp.com/produto/')
             .then(req => req.json())
             .then(res => {
                 this.listaRacing = res
