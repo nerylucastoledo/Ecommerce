@@ -28,7 +28,7 @@ Lado Admin:
 > Status do Projeto: Em andamento! 	:warning:
 
 ## Projeto integrado com Api Rest
-A api que está sendo utilziada foi feita em django rest framework.
+A api que está sendo utilizada no projeto foi feita em django rest framework.
 
 ## Projeto integrado com AWS
 Todas as imagens do projeto estão sendo adicionadas no s3 da amazon.
