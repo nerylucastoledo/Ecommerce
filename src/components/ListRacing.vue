@@ -12,7 +12,7 @@
                 <h2 class="item-nome">{{bicicleta.nome_produto}}</h2>
                 <p class="item-valor-antigo">R$ {{bicicleta.preco_antigo}}</p>
                 <p class="item-valor">R$ {{bicicleta.valor_produto}}</p>
-                <p class="item-parcelado">ou 6x de R$453,33</p>
+                <p class="item-parcelado">ou 6x de {{bicicleta.valor_produto / 6 | numeroPreco}}</p>
                 <router-link class="btn-comprar" :to="{name: 'produto', params: {id: bicicleta.id_produto}}">
                     <button class="btn-comprar">Comprar</button>
                 </router-link>
@@ -33,7 +33,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/')
+            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Racing')
             .then(req => req.json())
             .then(res => {
                 this.listaRacing = res

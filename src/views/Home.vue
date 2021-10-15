@@ -25,13 +25,13 @@
             </div>
 
             <div>
-              <img src="@/assets/icon-cartao.png" alt="Cartao entrega">
-              <p>Entregamos para todo o Brasil.</p>
+              <img src="@/assets/icon-cartao.png" alt="Cartao">
+              <p>Parcelamos em 6x sem juros.</p>
             </div>
 
             <div>
-              <img id="img-caloi" src="@/assets/icon-caloi.png" alt="Caloi entrega">
-              <p>Entregamos para todo o Brasil.</p>
+              <img id="img-caloi" src="@/assets/icon-caloi.png" alt="Caloi">
+              <p>Nosso parceiro oficial</p>
           </div>
   
           </div>
@@ -41,141 +41,20 @@
 
     </div>
 
-    <section class="lucasbiker-home">
-        <div class="container">
-
-          <h1 class="titulo-principal">ÚLTIMOS LANÇAMENTOS</h1>
-
-          <div class="lucasbiker-home-items">
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/produto">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-          </div>
-          
-        </div>
+    <section>
+      <UltimosLancamentos/>
     </section>
 
     <section>
       <ListRacing/>
     </section>
 
-    <section class="lucasbiker-home">
-        <div class="container">
-
-          <h1 class="titulo-principal">RETRÔ</h1>
-
-          <img id="img-categoria-home" src="../assets/retro-2.png" alt="Retrô">
-
-          <div class="lucasbiker-home-items">
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-          </div>
-          
-        </div>
+    <section>
+      <ListRetro/>
     </section>
 
-    <section class="lucasbiker-home">
-        <div class="container">
-
-          <h1 class="titulo-principal">MOTORIZADA</h1>
-
-          <img id="img-categoria-home" src="../assets/motorizada-2.png" alt="Motorizada">
-
-          <div class="lucasbiker-home-items">
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-
-            <div>
-              <img src="@/assets/bike.png" alt="Bike">
-              <h2 class="item-nome">Bicicleta Over</h2>
-              <p class="item-valor-antigo">R$ 3.999,99</p>
-              <p class="item-valor">R$2.719,99</p>
-              <p class="item-parcelado">ou 6x de R$453,33</p>
-              <router-link class="btn-comprar" to="/pedidos">
-                <button class="btn-comprar">Comprar</button>
-              </router-link>
-            </div>
-          </div>
-          
-        </div>
+    <section>
+      <ListMotorizada/>
     </section>
 
   </div>
@@ -185,12 +64,18 @@
 
 import { mapGetters } from "vuex";
 import ListRacing from '../components/ListRacing.vue'
+import UltimosLancamentos from '../components/UltimosLancamentos.vue'
+import ListRetro from '../components/ListRetro.vue'
+import ListMotorizada from '../components/ListMotorizada.vue'
 
 export default {
   name: 'Home',
 
   components: {
-    ListRacing
+    ListRacing,
+    UltimosLancamentos,
+    ListRetro,
+    ListMotorizada
   },
 
   data() {
@@ -294,7 +179,7 @@ export default {
 
 .info-home img{
   width: 100%;
-  max-height: 500px;
+  max-height: 600px;
 }
 
 /* conteudo principal */

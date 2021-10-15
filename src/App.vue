@@ -96,4 +96,9 @@ input:hover, input:focus, textarea:hover, textarea:focus {
   cursor: pointer;
 }
 
+.titulo {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
 </style>
