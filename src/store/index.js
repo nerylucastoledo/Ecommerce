@@ -9,7 +9,9 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null
-    }
+    },
+    carrinho: 0,
+    idProdutosCarrinho: []
 
   },
 
@@ -24,8 +26,27 @@ export default new Vuex.Store({
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
     },
+
     SET_USER(state, data) {
       state.user.data = data;
+    },
+
+    INCREMENTAR_CARRINHO(state, value) {
+      state.carrinho += 1
+      state.idProdutosCarrinho.push(value)
+    },
+
+    DECREMENTAR_CARRINHO(state, value) {
+      state.carrinho -= 1
+
+      let removerItem = value
+      let indice = state.idProdutosCarrinho.indexOf(removerItem)
+
+      while(indice >= 0) {
+        state.idProdutosCarrinho.splice(indice, 1)
+        indice = state.idProdutosCarrinho.indexOf(removerItem)
+      }
+
     }
 
   },
@@ -41,6 +62,14 @@ export default new Vuex.Store({
       } else {
         commit("SET_USER", null);
       }
+    },
+
+    incrementarCarrinho(context, produto) {
+      context.commit('INCREMENTAR_CARRINHO', produto)
+    },
+
+    decrementarCarrinho(context, produto) {
+      context.commit('DECREMENTAR_CARRINHO', produto)
     }
 
   },

@@ -66,8 +66,7 @@
                 <p class="quantidade">Quantidade <span class="qntd-estoque">({{quantidade_no_estoque}} disponível)</span></p>
 
                 <button class="btn-comprar btn">Comprar agora</button>
-
-                <button class="btn-carrinho btn">Adicionar ao carrinho</button>
+                <button class="btn-carrinho btn" @click="adicionarProdutoCarrinho(produto.id_produto)">Adicionar ao carrinho</button>
 
 
             </div>
@@ -117,6 +116,10 @@ export default {
             });
             this.qntd_estrelas_do_produto = Math.trunc(quantidade / qntd_comentario)
             this.estrelas_restantes = 5 - this.qntd_estrelas_do_produto
+        },
+
+        adicionarProdutoCarrinho(id) {
+            this.$store.dispatch('incrementarCarrinho', id)
         }
     },
 

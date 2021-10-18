@@ -24,7 +24,7 @@
                     <router-link class="carrinho" to="/carrinho">
                         <span>Carrinho</span>
                         <img src="@/assets/carrinho.png" alt="Carrinho">
-                        <span class="quantidade-carrinho">1</span>
+                        <span class="quantidade-carrinho">{{this.$store.state.carrinho}}</span>
                     </router-link>
 
                     <span class="sair-login" @click="signOut">
