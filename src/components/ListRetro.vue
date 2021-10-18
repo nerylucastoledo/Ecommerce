@@ -1,10 +1,8 @@
 <template>
-    <section class="lucasbiker-home">
+    <section>
         <div class="container">
 
-            <h1 class="titulo-principal">RETRÔ</h1>
-
-            <img id="img-categoria-home" src="../assets/retro-2.png" alt="Retrô">
+            <slot></slot>
 
             <div class="lucasbiker-home-items" v-if="listaRacing">
                 <div v-for="(bicicleta, index) in listaRacing" :key="bicicleta+index">

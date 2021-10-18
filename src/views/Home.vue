@@ -1,60 +1,38 @@
 <template>
   <div class="home">
-    <div class="info-home">
+    
+    <Carrossel/>
 
-      <div class="carrosel-inicio">
-        <img src="../assets/imagem-principal.png" alt="Imagem Principal">
-      </div>
-
-      <div class="carrosel-inicio">
-        <img src="../assets/motorizada.png" alt="Imagem Principal">
-      </div>
-
-      <div class="carrosel-inicio">
-        <img src="../assets/retro.png" alt="Imagem Principal">
-      </div>
-
-      <div class="info-empresa">
-        <div class="container">
-
-          <div class="info-empresa-items">
-
-            <div>
-              <img src="@/assets/icon-caminhao.png" alt="Caminhao entrega">
-              <p>Entregamos para todo o Brasil.</p>
-            </div>
-
-            <div>
-              <img src="@/assets/icon-cartao.png" alt="Cartao">
-              <p>Parcelamos em 6x sem juros.</p>
-            </div>
-
-            <div>
-              <img id="img-caloi" src="@/assets/icon-caloi.png" alt="Caloi">
-              <p>Nosso parceiro oficial</p>
-          </div>
-  
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <section>
+    <section class="lucasbiker-home">
       <UltimosLancamentos/>
     </section>
 
-    <section>
-      <ListRacing/>
+    <section class="lucasbiker-home">
+      <ListRacing>
+        <h1 class="titulo-principal">RACING</h1>
+        <img id="img-categoria-home" src="../assets/racing.png" alt="Racing">
+      </ListRacing>
+
+      <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
+    
     </section>
 
-    <section>
-      <ListRetro/>
+    <section class="lucasbiker-home">
+      <ListRetro>
+        <h1 class="titulo-principal">RETRÔ</h1>
+        <img id="img-categoria-home" src="../assets/retro-2.png" alt="Retrô">
+      </ListRetro>
+
+      <router-link class="btn-produtos" to="/retro">Ver produtos</router-link>
     </section>
 
-    <section>
-      <ListMotorizada/>
+    <section class="lucasbiker-home">
+      <ListMotorizada>
+        <h1 class="titulo-principal">MOTORIZADA</h1>
+        <img id="img-categoria-home" src="../assets/motorizada-2.png" alt="Motorizada">
+      </ListMotorizada>
+
+      <router-link class="btn-produtos" to="/motorizada">Ver produtos</router-link>
     </section>
 
   </div>
@@ -62,7 +40,7 @@
 
 <script>
 
-import { mapGetters } from "vuex";
+import Carrossel from '../components/Carrossel.vue'
 import ListRacing from '../components/ListRacing.vue'
 import UltimosLancamentos from '../components/UltimosLancamentos.vue'
 import ListRetro from '../components/ListRetro.vue'
@@ -75,111 +53,18 @@ export default {
     ListRacing,
     UltimosLancamentos,
     ListRetro,
-    ListMotorizada
+    ListMotorizada,
+    Carrossel
   },
 
-  data() {
-    return {
-      slideIndex: 0
-    }
-  },
-
-  computed: {
-    ...mapGetters({
-      user: "user"
-    })
-  },
-
-  methods: {
-    carroselImagem(n) {
-      this.slideIndex += n
-
-      const imagensHome = document.querySelectorAll('.carrosel-inicio')
-
-      if(this.slideIndex == -1) {
-        this.slideIndex = imagensHome.length - 1
-        imagensHome[this.slideIndex].style.display = 'block'
-        imagensHome[0].style.display = 'none'
-
-      }
-
-      if(this.slideIndex == imagensHome.length) {
-        this.slideIndex = 0
-        imagensHome[this.slideIndex].style.display = 'block'
-        imagensHome[imagensHome.length - 1].style.display = 'none'
-
-      }
-
-      if(n == 1 || n == 0) {
-        imagensHome[this.slideIndex].style.display = 'block'
-
-        if(this.slideIndex - 1 != -1) {
-          imagensHome[this.slideIndex - 1].style.display = 'none'
-
-        }
-      }
-
-      if(n == -1 || n == 0) {
-        imagensHome[this.slideIndex].style.display = 'block'
-
-        if(this.slideIndex + 1 != 3) {
-          imagensHome[this.slideIndex + 1].style.display = 'none'
-
-        }
-      }
-    },
-  },
-  
-  created() {
-    setTimeout(() => {
-      this.carroselImagem(0)
-    }, 50)
-
-    setInterval(() => {
-      this.carroselImagem(1)
-    }, 3000)
-  }
 }
 
 </script>
 
 <style>
+
 .home {
   margin-top: 100px;
-}
-
-/*SLIDE */
-
-.botao-mudar-slide {
-  z-index: 2;
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  left: 100px;
-  font-size: 64px;
-  background-color: transparent;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-.botaodireira {
-  left: auto;
-  right: 100px;
-}
-
-.carrosel-inicio {
-  display: none;
-}
-
-.info-home {
-  position: relative;
-}
-
-.info-home img{
-  width: 100%;
-  max-height: 600px;
 }
 
 /* conteudo principal */
@@ -195,13 +80,13 @@ export default {
   margin: 60px 0;
 }
 
+.lucasbiker-home a {
+  margin-bottom: 60px;
+}
+
 .lucasbiker-home:last-child {
   border-bottom: none;
   margin: 0px;
-}
-
-.lucasbiker-home h1 {
-  margin-bottom: 60px;
 }
 
 .lucasbiker-home-items {
@@ -216,7 +101,6 @@ export default {
   text-align: center;
   margin: 60px auto 60px;
 }
-
 
 .lucasbiker-home-items div img {
   width: 300px;
@@ -272,6 +156,31 @@ export default {
 
 #img-categoria-home {
   max-width: 100%;
+  margin-top: 60px;
+}
+
+.btn-produtos {
+  display: block;
+  padding: 15px 10px;
+  background: transparent;
+  border-radius: 10px;
+  color: #CC2131;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
+  transition: all 0.3s;
+  border: none;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #CC2131;
+}
+
+.btn-produtos:hover {
+  background: #CC2131;
+  color: #fff;
+  border: 1px solid #CC2131;
 }
 
 </style>

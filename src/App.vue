@@ -59,6 +59,11 @@ export default {
   color: #fff;
 }
 
+.btn-comprar:hover {
+  transition: .3s;
+  transform: scale(1.1);
+}
+
 label {
   margin-bottom: 5px;
 }
@@ -99,6 +104,13 @@ input:hover, input:focus, textarea:hover, textarea:focus {
 .titulo {
   text-align: center;
   margin-bottom: 60px;
+}
+
+.background {
+  height: 650px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 </style>

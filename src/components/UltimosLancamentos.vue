@@ -1,5 +1,5 @@
 <template>
-    <section class="lucasbiker-home">
+    <section>
         <div class="container">
 
             <h1 class="titulo-principal">ÚLTIMOS LANÇAMENTOS</h1>
