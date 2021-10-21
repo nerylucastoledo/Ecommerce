@@ -24,7 +24,7 @@
                     <router-link class="carrinho" to="/carrinho">
                         <span>Carrinho</span>
                         <img src="@/assets/carrinho.png" alt="Carrinho">
-                        <span class="quantidade-carrinho">{{this.$store.state.carrinho}}</span>
+                        <span class="quantidade-carrinho">{{ carrinhoQuantidade }}</span>
                     </router-link>
 
                     <span class="sair-login" @click="signOut">
@@ -41,7 +41,7 @@
 
                     <router-link class="carrinho" to="/carrinho">
                         <img src="@/assets/carrinho.png" alt="Carrinho">
-                        <span class="quantidade-carrinho">1</span>
+                        <span class="quantidade-carrinho">{{ carrinhoQuantidade }}</span>
                     </router-link>
                 </template>
 
@@ -57,31 +57,56 @@ import firebase from "firebase";
 
 export default {
 
-  computed: {
-    ...mapGetters({
-      user: "user"
-    })
-
-  },
-
-  methods: {
-    abrirMenu() {
-        const menu = document.querySelector('.menu')
-        menu.classList.toggle('ativo')
+    data() {
+        return {
+            carrinho: {
+                items: []
+            }
+        }
     },
 
-    signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({
-            name: "Home"
-          });
-        });
-    }
+    computed: {
+        ...mapGetters({
+            user: "user"
+        }),
+        carrinhoQuantidade() {
+            let total = 0
 
-  }
+            for(let i = 0; i < this.carrinho.items.length; i++) {
+                total += this.carrinho.items[i].quantidade
+            }
+
+            return total
+        }
+    },
+
+    methods: {
+        abrirMenu() {
+            const menu = document.querySelector('.menu')
+            menu.classList.toggle('ativo')
+        },
+
+        signOut() {
+            firebase.auth().signOut().then(() => {
+                if(this.$route.name != 'Home') {
+                    this.$router.replace({
+                        name: "Home"
+                    });
+                    this.$store.dispatch('zerarCarrinho')
+
+                } else {
+                    this.$store.dispatch('zerarCarrinho')
+                    
+                }
+            });
+        },
+
+    },
+
+    mounted() {
+        this.carrinho = this.$store.state.carrinho
+    },
+
 };
 
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div class="produto">
         <div class="conteudo-produto">
+
             <div class="avaliacoes">
                 <div>
 
@@ -27,14 +28,16 @@
 
                         </div>
                     </div>
+
                     <div v-else>
                         <p>Nenhuma avaliação disponível.</p>
                     </div>
 
                 </div>
-
             </div>
+
             <div class="info-produto" v-if="produto">
+
                 <p class="categoria-e-preco">Nova</p>
                 <h1 class="nome-produto">{{produto.nome_produto}}</h1>
 
@@ -56,26 +59,34 @@
                 <p class="categoria-e-preco">ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
                 <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
 
-                <p v-if="quantidade_no_estoque > 0" class="estoque">
+                <p class="estoque" v-if="quantidade_no_estoque > 0">
                     Disponível em estoque
                 </p>
-                <p v-else class="estoque">
+                <p class="estoque" v-else>
                     Sem estoque
                 </p>
 
-                <p class="quantidade">Quantidade <span class="qntd-estoque">({{quantidade_no_estoque}} disponível)</span></p>
+                <p class="quantidade">
+                    Quantidade
+                    <span class="qntd-estoque">({{quantidade_no_estoque}} disponível)</span>
+                </p>
+
+                <div>
+                    <input type="number" class="input" min="1" :max="quantidade_no_estoque" v-model="quantidade">
+                </div>
 
                 <button class="btn-comprar btn">Comprar agora</button>
-                <button class="btn-carrinho btn" @click="adicionarProdutoCarrinho(produto.id_produto)">Adicionar ao carrinho</button>
-
+                <button class="btn-carrinho btn" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
 
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
 
+import { toast } from 'bulma-toast'
 
 export default {
     name: 'Produto',
@@ -91,7 +102,8 @@ export default {
             estrelas: "★",
             estrela_vazia: "☆",
             qntd_estrelas_do_produto: 0,
-            estrelas_restantes: 0
+            estrelas_restantes: 0,
+            quantidade: 1
         }
     },
 
@@ -111,16 +123,35 @@ export default {
 
         verificarAQuantidadeDeEstrelas(avaliacoes, qntd_comentario) {
             var quantidade = 0
+
             avaliacoes.forEach(element => {
                 quantidade += element.qntd_estrelas
             });
+
             this.qntd_estrelas_do_produto = Math.trunc(quantidade / qntd_comentario)
             this.estrelas_restantes = 5 - this.qntd_estrelas_do_produto
+
         },
 
-        adicionarProdutoCarrinho(id) {
-            this.$store.dispatch('incrementarCarrinho', id)
+        adicionarAoCarrinho() {
+            if (isNaN(this.quantidade) || this.quantidade < 1) {
+                this.quantidade = 1
+            }
+            const item = {
+                produto: this.produto,
+                quantidade: this.quantidade
+            }
+            this.$store.commit('ADICIONAR_AO_CARRINHO', item)
+            toast({
+                message: 'Produto Adicionar ao carrinho!',
+                type: 'is-success',
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: 'top-right',
+            })
         }
+
     },
 
     created() {
@@ -217,6 +248,11 @@ export default {
     font-size: 18px;
     border-radius: 10px;
     height: 50px;
+}
+
+.input {
+    max-width: 40px;
+    margin-top: 10px;
 }
 
 /* AVALIACOES */

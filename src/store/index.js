@@ -10,8 +10,9 @@ export default new Vuex.Store({
       loggedIn: false,
       data: null
     },
-    carrinho: 0,
-    idProdutosCarrinho: []
+    carrinho: {
+      items: [],
+    }
 
   },
 
@@ -31,23 +32,33 @@ export default new Vuex.Store({
       state.user.data = data;
     },
 
-    INCREMENTAR_CARRINHO(state, value) {
-      state.carrinho += 1
-      state.idProdutosCarrinho.push(value)
+    INICIALIZAR_STORAGE(state) {
+      if(localStorage.getItem('carrinho')) {
+        state.carrinho = JSON.parse(localStorage.getItem('carrinho'))
+
+      } else {
+        localStorage.setItem('carrinho', JSON.stringify(state.carrinho))
+
+      }
     },
 
-    DECREMENTAR_CARRINHO(state, value) {
-      state.carrinho -= 1
+    ADICIONAR_AO_CARRINHO(state, item) {
+      const exists = state.carrinho.items.filter(i => i.produto.id_produto === item.produto.id_produto)
 
-      let removerItem = value
-      let indice = state.idProdutosCarrinho.indexOf(removerItem)
-
-      while(indice >= 0) {
-        state.idProdutosCarrinho.splice(indice, 1)
-        indice = state.idProdutosCarrinho.indexOf(removerItem)
+      if (exists.length) {
+        exists[0].quantidade = parseInt(exists[0].quantidade) + parseInt(item.quantidade)
+        console.log('entrei')
+      } else {
+        state.carrinho.items.push(item)
+        console.log('não entrei')
       }
 
-    }
+      localStorage.setItem('carrinho', JSON.stringify(state.carrinho))
+    },
+
+    ZERAR_CARRINHO(state) {
+      state.carrinho = 0
+    },
 
   },
 
@@ -64,13 +75,9 @@ export default new Vuex.Store({
       }
     },
 
-    incrementarCarrinho(context, produto) {
-      context.commit('INCREMENTAR_CARRINHO', produto)
+    zerarCarrinho(context) {
+      context.commit('ZERAR_CARRINHO')
     },
-
-    decrementarCarrinho(context, produto) {
-      context.commit('DECREMENTAR_CARRINHO', produto)
-    }
 
   },
 
