@@ -6,9 +6,9 @@ import Carrinho from '../views/Carrinho.vue'
 
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-import Racing from '../components/Racing.vue'
-import Retro from '../components/Retro.vue'
-import Motorizada from '../components/Motorizada.vue'
+import Racing from '../views/Racing.vue'
+import Retro from '../views/Retro.vue'
+import Motorizada from '../views/Motorizada.vue'
 
 Vue.use(VueRouter)
 

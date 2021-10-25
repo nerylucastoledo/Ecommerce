@@ -4,8 +4,8 @@
         <h1 class="titulo-principal">CARRINHO</h1>
 
         <div class="container" v-if="produtos">
-
             <div class="item-carrinho" v-for="(produto, index) in produtos" :key="produto+index">
+
                 <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
                     <img class="carrinho-img" :src="produto.produto.imagem_produto" alt="Imagem produto">
                 </router-link>
@@ -30,9 +30,7 @@
             </div>
 
             <div>
-                <CalcularFrete>
-
-                </CalcularFrete>
+                <CalcularFrete :valorProdutos="valorProdutosTotal"></CalcularFrete>
             </div>
         </div>
 
@@ -52,6 +50,7 @@ export default {
     data() {
         return {
             produtos: [],
+            valorProdutosTotal: 0
         }
     },
 
@@ -60,6 +59,7 @@ export default {
             var itemsCarrinho = JSON.parse(localStorage.getItem('carrinho'))
 
             itemsCarrinho.items.forEach((produto) => {
+                this.valorProdutosTotal += produto.produto.valor_produto * produto.quantidade
                 this.produtos.push(produto)
             })
         },

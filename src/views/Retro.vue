@@ -1,20 +1,20 @@
 <template>
     <section class="lucasbiker-home">
         <div class="background"></div>
-        <ListRacing>
-            <h1 class="titulo-principal">RACING</h1>
-        </ListRacing>
+        <ListRetro>
+            <h1 class="titulo-principal">RETRÔ</h1>
+        </ListRetro>
     </section>
 </template>
 
 <script>
 
-import ListRacing from './ListRacing.vue'
+import ListRetro from '../components/ListRetro.vue'
 
 export default {
 
     components: {
-        ListRacing
+        ListRetro
     }
     
 }
@@ -32,7 +32,7 @@ export default {
 }
 
 .background {
-    background-image: url('../assets/racing.png');
+    background-image: url('../assets/retro-2.png');
 }
 
 .titulo-principal {

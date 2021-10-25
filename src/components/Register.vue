@@ -1,48 +1,31 @@
 <template>
   <section class="login">
+
         <h1 class="titulo-login">Crie sua conta</h1>
+
         <form action="#" @submit.prevent="submit">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Nome</label>
-                <input
-                  id="name"
-                  type="name"
-                  name="name"
-                  value
-                  required
-                  autofocus
-                  v-model="form.nome"
-                />
+            <label for="name">Nome</label>
+            <input  id="name" type="name" name="name" value required autofocus v-model="form.nome"/>
 
-                <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value
-                  required
-                  autofocus
-                  v-model="form.email"
-                />
+            <label for="email">E-mail</label>
+            <input id="email" type="email" name="email" value autocomplete="username" required autofocus v-model="form.email"/>
 
-                <label for="password" class="col-md-4 col-form-label text-md-right">Senha</label>
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  required
-                  v-model="form.password"
-                />
+            <label for="password">Senha</label>
+            <input id="password" type="password" name="password" autocomplete="current-password" required v-model="form.password"/>
 
-              <div>
-                <button type="submit" class="btn">Criar Conta</button>
-              </div>
-            </form>
-            <router-link to="/login" class="perdeu">Já tem uma conta? Faça login</router-link>
+          <div>
+            <button type="submit" class="btn">Criar Conta</button>
+          </div>
+        </form>
+
+        <router-link to="/login" class="perdeu">Já tem uma conta? Faça login</router-link>
+
     </section>
 </template>
 
 
 <script>
+
 import firebase from "firebase";
 
 export default {
@@ -60,12 +43,12 @@ export default {
 
   methods: {
     submit() {
-      firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.form.email, this.form.password)
+      firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password)
       .then(data => {
         firebase.auth().currentUser.updateProfile({displayName: this.form.nome})
+
         this.$store.dispatch("fetchUser", data)
+
         .then(() => {
           setTimeout(() => {
             this.$router.replace({ name: "Home" });

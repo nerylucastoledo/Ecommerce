@@ -4,8 +4,7 @@
 
             <div class="avaliacoes">
                 <div>
-
-                    <img :src="imagem" alt="Moto Motorizada">
+                    <img :src="produto.imagem_produto" alt="Moto Motorizada">
                     <h3 class="titulo-avaliacoes">Avaliações</h3>
 
                     <div v-if="avaliacoes">
@@ -38,45 +37,55 @@
 
             <div class="info-produto" v-if="produto">
 
-                <p class="categoria-e-preco">Nova</p>
-                <h1 class="nome-produto">{{produto.nome_produto}}</h1>
-
-                <span
-                    class="qntd-estrelas"
-                    v-for="(estrela, index) in qntd_estrelas_do_produto" 
-                    :key="estrela+index">
-                    {{estrelas}}
-                </span>
-
-                <span
-                    class="qntd-estrelas"
-                    v-for="estrela in estrelas_restantes" 
-                    :key="estrela+'estrela'">
-                    {{estrela_vazia}}
-                </span>
-
-                <h2 class="valor-produto">R${{produto.valor_produto}}</h2>
-                <p class="categoria-e-preco">ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
-                <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
-
-                <p class="estoque" v-if="quantidade_no_estoque > 0">
-                    Disponível em estoque
-                </p>
-                <p class="estoque" v-else>
-                    Sem estoque
-                </p>
-
-                <p class="quantidade">
-                    Quantidade
-                    <span class="qntd-estoque">({{quantidade_no_estoque}} disponível)</span>
-                </p>
-
                 <div>
-                    <input type="number" class="input" min="1" :max="quantidade_no_estoque" v-model="quantidade">
+                    <p class="categoria-e-preco">Nova</p>
+                    <h1 class="nome-produto">{{produto.nome_produto}}</h1>
+
+                    <span
+                        class="qntd-estrelas"
+                        v-for="(estrela, index) in qntd_estrelas_do_produto" 
+                        :key="estrela+index">
+                        {{estrelas}}
+                    </span>
+
+                    <span
+                        class="qntd-estrelas"
+                        v-for="estrela in estrelas_restantes" 
+                        :key="estrela+'estrela'">
+                        {{estrela_vazia}}
+                    </span>
                 </div>
 
-                <button class="btn-comprar btn">Comprar agora</button>
-                <button class="btn-carrinho btn" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
+                <div>
+                    <h2 class="valor-produto">R${{produto.valor_produto}}</h2>
+                    <p class="categoria-e-preco">ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
+                    <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
+                </div>
+
+                <div>
+                    <p class="estoque" v-if="produto.quantidade_estoque > 0">
+                        Disponível em estoque
+                    </p>
+                    <p class="estoque" v-else>
+                        Sem estoque
+                    </p>
+                </div>
+
+                <div>
+                    <p class="quantidade">
+                        Quantidade
+                        <span class="qntd-estoque">({{produto.quantidade_estoque}} disponível)</span>
+                    </p>
+                </div>
+
+                <div>
+                    <input type="number" class="input" min="1" :max="produto.quantidade_estoque" v-model="quantidade">
+                </div>
+
+               <div>
+                    <button class="btn-comprar btn">Comprar agora</button>
+                    <button class="btn-carrinho btn" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
+               </div>
 
             </div>
 
@@ -96,9 +105,7 @@ export default {
     data() {
         return {
             produto: null,
-            quantidade_no_estoque: 0,
             avaliacoes: null,
-            imagem: null,
             estrelas: "★",
             estrela_vazia: "☆",
             qntd_estrelas_do_produto: 0,
@@ -113,9 +120,7 @@ export default {
             .then(req => req.json())
             .then(res => {
                 this.produto = res[0]
-                this.quantidade_no_estoque = res[0].quantidade_estoque
                 this.avaliacoes = res[0].avaliacoes
-                this.imagem = res[0].imagem_produto
                 this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
                 
             })

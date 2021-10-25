@@ -14,7 +14,6 @@
       </ListRacing>
 
       <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
-    
     </section>
 
     <section class="lucasbiker-home">

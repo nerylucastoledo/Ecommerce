@@ -1,20 +1,20 @@
 <template>
     <section class="lucasbiker-home">
         <div class="background"></div>
-        <ListRetro>
-            <h1 class="titulo-principal">RETRÔ</h1>
-        </ListRetro>
+        <ListMotorizada>
+            <h1 class="titulo-principal">MOTORIZADA</h1>
+        </ListMotorizada>
     </section>
 </template>
 
 <script>
 
-import ListRetro from './ListRetro.vue'
+import ListMotorizada from '../components/ListMotorizada.vue'
 
 export default {
 
     components: {
-        ListRetro
+        ListMotorizada
     }
     
 }
@@ -26,13 +26,12 @@ export default {
   margin-top: 60px;
   margin-bottom: 60px;
 }
-
 .lucasbiker-home h1 {
     text-align: center;
 }
 
 .background {
-    background-image: url('../assets/retro-2.png');
+    background-image: url('../assets/motorizada-2.png');
 }
 
 .titulo-principal {
