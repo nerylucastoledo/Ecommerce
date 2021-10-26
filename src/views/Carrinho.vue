@@ -3,9 +3,8 @@
 
         <h1 class="titulo-principal">CARRINHO</h1>
 
-        <div class="container" v-if="produtos">
-            <div class="item-carrinho" v-for="(produto, index) in produtos" :key="produto+index">
-
+        <div class="container" v-if="carrinho.items">
+            <div class="item-carrinho" v-for="(produto, index) in carrinho.items" :key="produto+index">
                 <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
                     <img class="carrinho-img" :src="produto.produto.imagem_produto" alt="Imagem produto">
                 </router-link>
@@ -14,7 +13,6 @@
                     <h2 class="nome-produto">{{produto.produto.nome_produto}}</h2>
                     <p>Quantidade: <span class="quantidade-produto">{{produto.quantidade}}</span></p>
                 </div>
-
                 <div class="preco-unitario">
                     <h2>Preço unitário</h2>
                     <p>{{produto.produto.valor_produto | numeroPreco}}</p>
@@ -25,7 +23,7 @@
                     <p>{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
                 </div>
 
-                <p class="apagar-do-carrinho">X</p>
+                <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">X</p>
 
             </div>
 
@@ -33,7 +31,6 @@
                 <CalcularFrete :valorProdutos="valorProdutosTotal"></CalcularFrete>
             </div>
         </div>
-
     </section>
 </template>
 
@@ -49,25 +46,29 @@ export default {
 
     data() {
         return {
-            produtos: [],
-            valorProdutosTotal: 0
+            valorProdutosTotal: 0,
+            carrinho: {
+                items: []
+            }
         }
     },
 
     methods: {
-        buscarProdutos() {
-            var itemsCarrinho = JSON.parse(localStorage.getItem('carrinho'))
-
-            itemsCarrinho.items.forEach((produto) => {
-                this.valorProdutosTotal += produto.produto.valor_produto * produto.quantidade
-                this.produtos.push(produto)
-            })
+        atualizarCarrinho() {
+            localStorage.setItem('carrinho', JSON.stringify(this.$store.state.carrinho))
+        },
+        apagarItemCarrinho(item) {
+            this.carrinho.items = this.carrinho.items.filter(i => i.produto.id_produto !== item.produto.id_produto)
+            this.atualizarCarrinho()
         },
 
     },
 
     mounted() {
-        this.buscarProdutos()
+        this.carrinho = this.$store.state.carrinho
+        this.carrinho.items.forEach((item) => {
+            this.valorProdutosTotal += item.produto.valor_produto * item.quantidade
+        })
     }
 
 }
@@ -124,16 +125,6 @@ h2 {
 
 .carrinho-info-produto p:nth-child(2){
     margin-top: 125px;
-}
-
-.aumentar-quantidade, .diminuir-quantidade {
-    background-color: #CC2131;
-    font-size: 18px;
-    padding: 5px 10px;
-    margin-right: 20px;
-    cursor: pointer;
-    color: #fff;
-    text-align: center;
 }
 
 .preco-unitario p, .preco-total p {

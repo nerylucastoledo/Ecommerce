@@ -6,16 +6,16 @@
                 <label for="frete">CEP:</label>
             </div>
             <div>
-                <input type="text" name="frete" class="input-frete">
-                <button class="btn-frete">Ok</button>
+                <input type="text" name="frete" v-model="frete" class="input-frete">
+                <button class="btn-frete" @click="calcularFrete">Ok</button>
             </div>
         </div>
-        <div class="valor-frete">
+        <div class="valor-frete" v-if="valorFrete">
             <div>
                 <p class="texto-valor">Valor Frete:</p>
             </div>
             <div>
-                <p class="valor">R$ 24,99</p>
+                <p class="valor">{{valorFrete | numeroPreco}}</p>
             </div>
         </div>
         <div class="valor-frete">
@@ -31,17 +31,52 @@
                 <p class="texto-valor">Valor Final:</p>
             </div>
             <div>
-                <p class="valor">R$30.957,99</p>
+                <p class="valor">{{valorTotal | numeroPreco}}</p>
             </div>
+        </div>
+        <div>
+            <button class="btn" @click="comprar">Finalizar compra</button>
         </div>
     </section>
 </template>
 
 <script>
+
+
 export default {
 
-    props: ['valorProdutos']
-    
+    props: ['valorProdutos'],
+
+    data() {
+        return {
+            frete: null,
+            valorFrete: 0,
+            valorTotal: 0
+        }
+    },
+
+    methods: {
+
+        calcularFrete() {
+            this.valorFrete = 10
+            this.valorTotal += this.valorFrete
+        },
+
+        comprar() {
+            var carrinho = JSON.parse(localStorage.getItem('carrinho'))
+            localStorage.setItem('comprar', JSON.stringify(carrinho))
+        }
+
+    },
+    /*
+    http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=37553559&sCepDestino=${cepDestinho}&nVlPeso=10&nCdFormato=2&nVlComprimento=20&nVlAltura=200&nVlLargura=200&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=10&StrRetorno=xml&nIndicaCalculo=3
+    */
+    mounted() {
+       setTimeout(() => {
+           this.valorTotal = this.valorProdutos
+       }, 300)
+    }
+
 }
 </script>
 
@@ -78,7 +113,7 @@ export default {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     margin-bottom: 15px;
     border-radius: 10px;
-    max-width: 100px;
+    max-width: 120px;
 }
 
 input-frete:hover,
@@ -95,6 +130,7 @@ input:focus {
     border-radius: 5px;
     margin-left: 10px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .valor {
@@ -109,7 +145,6 @@ input:focus {
 }
 
 /*
-http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=70002900&sCepDestino=04547000&nVlPeso=10&nCdFormato=2&nVlComprimento=20&nVlAltura=200&nVlLargura=200&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=10&StrRetorno=xml&nIndicaCalculo=3
 */
 
 </style>

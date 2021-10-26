@@ -9,7 +9,7 @@
                 <img :src="bicicleta.imagem_produto" alt="Bike">
                 <h2 class="item-nome">{{bicicleta.nome_produto}}</h2>
                 <p class="item-valor-antigo">R$ {{bicicleta.preco_antigo}}</p>
-                <p class="item-valor">R$ {{bicicleta.valor_produto}}</p>
+                <p class="item-valor">{{bicicleta.valor_produto | numeroPreco}}</p>
                 <p class="item-parcelado">ou 6x de {{bicicleta.valor_produto / 6 | numeroPreco}}</p>
                 <router-link class="btn-comprar" :to="{name: 'produto', params: {id: bicicleta.id_produto}}">
                     <button class="btn-comprar">Comprar</button>

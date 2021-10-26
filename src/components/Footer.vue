@@ -89,4 +89,19 @@ footer section:nth-child(2) {
     font-style: italic;
 }
 
+@media (max-width: 800px) { 
+    .footer-info {
+        display: block;
+        text-align: center;
+    }
+
+    .footer-info div {
+        margin-bottom: 40px;
+    }
+
+    .footer-historia {
+        max-width: 100%;
+    }
+}
+
 </style>

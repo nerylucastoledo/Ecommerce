@@ -1,6 +1,6 @@
 <template>
     <div class="produto">
-        <div class="conteudo-produto">
+        <div class="conteudo-produto" v-if="loading">
 
             <div class="avaliacoes">
                 <div>
@@ -110,7 +110,8 @@ export default {
             estrela_vazia: "☆",
             qntd_estrelas_do_produto: 0,
             estrelas_restantes: 0,
-            quantidade: 1
+            quantidade: 1,
+            loading: 0
         }
     },
 
@@ -144,7 +145,7 @@ export default {
             }
             const item = {
                 produto: this.produto,
-                quantidade: this.quantidade
+                quantidade: parseInt(this.quantidade)
             }
             this.$store.commit('ADICIONAR_AO_CARRINHO', item)
             toast({
@@ -159,7 +160,10 @@ export default {
 
     },
 
-    created() {
+    mounted() {
+        setTimeout(() => {
+            this.loading = 1
+        }, 300)
         this.getProduto()
     }
 }

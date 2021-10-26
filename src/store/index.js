@@ -47,13 +47,15 @@ export default new Vuex.Store({
 
       if (exists.length) {
         exists[0].quantidade = parseInt(exists[0].quantidade) + parseInt(item.quantidade)
-        console.log('entrei')
       } else {
         state.carrinho.items.push(item)
-        console.log('não entrei')
       }
 
       localStorage.setItem('carrinho', JSON.stringify(state.carrinho))
+    },
+
+    REMOVER_DO_CARRINHO(state, item) {
+      state.carrinho.items = state.carrinho.items.filter(i => i.produto.id_produto !== item.produto.id_produto)
     },
 
     ZERAR_CARRINHO(state) {

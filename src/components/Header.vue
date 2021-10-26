@@ -14,36 +14,38 @@
 
             <div class="menu ativo">
 
-                <template v-if="user.loggedIn">
 
-                    <router-link class="pedidos" to="/pedidos">
-                        <span>Pedidos</span>
-                        <img src="@/assets/icon-pedidos.png" alt="Pedidos">
-                    </router-link>
+                <ul>
 
-                    <router-link class="carrinho" to="/carrinho">
-                        <span>Carrinho</span>
-                        <img src="@/assets/carrinho.png" alt="Carrinho">
-                        <span class="quantidade-carrinho">{{ carrinhoQuantidade }}</span>
-                    </router-link>
+                    <li v-if="user.loggedIn">
+                        <router-link class="pedidos" to="/concluir-pedido">
+                            <span>Pedidos</span>
+                            <font-awesome-icon icon="shopping-bag" size="2x"/>
+                        </router-link>
+                    </li>
 
-                    <span class="sair-login" @click="signOut">
-                        <span class="nome-usuario">Olá, {{user.data.displayName.split(' ')[0]}}</span>
-                        <img src="@/assets/icon-sair.png" alt="Sair">
-                    </span>
+                    <li v-if="user.loggedIn">
+                        <router-link class="carrinho" to="/carrinho">
+                            <span>Carrinho</span>
+                            <font-awesome-icon icon="shopping-cart" size="2x"/>
+                            <span class="quantidade-carrinho">{{ carrinhoQuantidade }}</span>
+                        </router-link>
+                    </li>
 
-                </template>
+                    <li v-if="user.loggedIn">
+                        <span class="sair-login" @click="signOut">
+                            <span class="nome-usuario">Olá, {{user.data.displayName.split(' ')[0]}}</span>
+                            <font-awesome-icon icon="sign-out-alt" size="2x"/>
+                        </span>
+                    </li>
 
-                <template v-else>
-                    <router-link to="register">
-                        <img src="@/assets/iconLogin.png" alt="Icon Login">
-                    </router-link>
+                    <li v-else>
+                        <router-link to="/register">
+                            <font-awesome-icon icon="user" size="2x"/>
+                        </router-link>
+                    </li>
 
-                    <router-link class="carrinho" to="/carrinho">
-                        <img src="@/assets/carrinho.png" alt="Carrinho">
-                        <span class="quantidade-carrinho">{{ carrinhoQuantidade }}</span>
-                    </router-link>
-                </template>
+                </ul>
 
             </div>
         </nav>
@@ -139,11 +141,6 @@ nav {
     margin-top: 10px;
 }
 
-.menu {
-    display: flex;
-    align-items: center;
-}
-
 .menu a {
     display: flex;
     align-items: center;
@@ -151,36 +148,24 @@ nav {
     color: #000000;
 }
 
-.menu img {
-    margin-right: 20px;
-}
-
 .carrinho {
     position: relative;
-}
-
-.pedidos img, .sair-login img {
-    width: 25px;
-    height: 25px;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .quantidade-carrinho {
     position: absolute;
-    top: 0px;
-    right: 5px;
+    top: -14px;
+    right: 0px;
     color: #fff;
-    background-color: #000;
-    border-radius: 50%;
-    padding: 3px;
     font-size: 14px;
+    font-weight: bold;
 }
 
 .nome-usuario {
     color: #000;
-}
-
-.sair-login img, .pedidos img, .carrinho img {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .sair-login {
@@ -192,7 +177,21 @@ nav {
     margin-left: 20px;
 }
 
-@media (max-width: 500px) {
+.pedidos span {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.menu ul li {
+    list-style: none;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 620px) {
 
     .ativo {
         display: none;
@@ -203,6 +202,11 @@ nav {
         right: 0px;
         top: 100px;
         background-color: #F3F2F2;
+        width: 100%;
+    }
+
+    .menu ul {
+        display: block;
     }
 
     .menu-mobile {
@@ -218,7 +222,9 @@ nav {
     }
 
     .menu a {
-        padding: 14px 36px;
+        padding: 15px 36px;
+        display: flex;
+        justify-content: center;
     }
 
     .menu a:hover {
@@ -232,6 +238,18 @@ nav {
     .quantidade-carrinho {
         position: relative;
         top: -20px;
+        color: #000;
+    }
+
+    .sair-login {
+        display: flex;
+        justify-content: center;
+        padding: 15px 0px;
+        margin-left: 0px;
+    }
+
+    .sair-login:hover {
+        background-color: #ddd;
     }
 
 }

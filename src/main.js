@@ -3,16 +3,22 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as firebase from 'firebase';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUser, faShoppingCart, faShoppingBag, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
+
+library.add([faUser, faShoppingCart, faShoppingBag, faSignOutAlt])
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.filter("numeroPreco", valor => {
   valor = Number(valor)
   if(!isNaN(valor)) {
     return valor.toLocaleString("pt-BR", {
-      style: 'currency', 
-      currency: 'BRL',
-      minimumFractionDigits: 3
+      style: "currency",
+      currency: "BRL"
     })
   } else {
     return ""

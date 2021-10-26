@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Produto from '../views/Produto.vue'
-import Carrinho from '../views/Carrinho.vue'
 
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import ConcluirPedido from '../components/ConcluirPedido.vue'
+
+import Produto from '../views/Produto.vue'
+import Carrinho from '../views/Carrinho.vue'
 import Racing from '../views/Racing.vue'
 import Retro from '../views/Retro.vue'
 import Motorizada from '../views/Motorizada.vue'
@@ -53,6 +55,11 @@ const routes = [
     path: '/carrinho',
     name: 'carrinho',
     component: Carrinho,
+  },
+  {
+    path: '/concluir-pedido',
+    name: 'concluirpedido',
+    component: ConcluirPedido,
   },
 ]
 
