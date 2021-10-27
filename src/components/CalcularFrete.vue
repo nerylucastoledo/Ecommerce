@@ -31,7 +31,7 @@
                 <p class="texto-valor">Valor Final:</p>
             </div>
             <div>
-                <p class="valor">{{valorTotal | numeroPreco}}</p>
+                <p class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
             </div>
         </div>
         <div>
@@ -51,7 +51,6 @@ export default {
         return {
             frete: null,
             valorFrete: 0,
-            valorTotal: 0
         }
     },
 
@@ -59,24 +58,19 @@ export default {
 
         calcularFrete() {
             this.valorFrete = 10
-            this.valorTotal += this.valorFrete
         },
 
         comprar() {
             var carrinho = JSON.parse(localStorage.getItem('carrinho'))
+            carrinho.valor_final = this.valorProdutos += this.valorFrete
             localStorage.setItem('comprar', JSON.stringify(carrinho))
+            this.$router.push("concluir-pedido");
         }
 
     },
     /*
     http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=37553559&sCepDestino=${cepDestinho}&nVlPeso=10&nCdFormato=2&nVlComprimento=20&nVlAltura=200&nVlLargura=200&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=10&StrRetorno=xml&nIndicaCalculo=3
     */
-    mounted() {
-       setTimeout(() => {
-           this.valorTotal = this.valorProdutos
-       }, 300)
-    }
-
 }
 </script>
 

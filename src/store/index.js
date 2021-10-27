@@ -12,7 +12,8 @@ export default new Vuex.Store({
     },
     carrinho: {
       items: [],
-    }
+    },
+    valorTotalDosProduto: 0
 
   },
 
@@ -59,7 +60,8 @@ export default new Vuex.Store({
     },
 
     ZERAR_CARRINHO(state) {
-      state.carrinho = 0
+      state.carrinho.items = []
+      localStorage.setItem('carrinho', [])
     },
 
   },
@@ -79,11 +81,6 @@ export default new Vuex.Store({
         
       }
     },
-
-    zerarCarrinho(context) {
-      context.commit('ZERAR_CARRINHO')
-    },
-
   },
 
   modules: {

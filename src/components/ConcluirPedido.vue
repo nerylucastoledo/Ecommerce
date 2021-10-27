@@ -46,36 +46,36 @@
             <div>
                 <div>
                     <label for="cep">Cep</label>
-                    <input id="cep" type="cep" cep="cep" required autofocus @keyup="puxarEndereco(formEndereco.cep)" v-model="formEndereco.cep"/>
+                    <input id="cep" type="cep" cep="cep" required autofocus @keyup="puxarEndereco(formCliente.cep)" v-model="formCliente.cep"/>
                 </div>
 
                 <div>
                     <label for="estado">Estado</label>
-                    <input id="estado" type="estado" name="estado" required v-model="formEndereco.estado"/>
+                    <input id="estado" type="estado" name="estado" required v-model="formCliente.estado"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="cidade" name="cidade" required v-model="formEndereco.cidade"/>
+                    <input id="cidade" type="cidade" name="cidade" required v-model="formCliente.cidade"/>
                 </div>
 
                 <div>
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="bairro" name="bairro" required v-model="formEndereco.bairro"/>
+                    <input id="bairro" type="bairro" name="bairro" required v-model="formCliente.bairro"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="rua">Rua</label>
-                    <input id="rua" type="rua" name="rua" required v-model="formEndereco.rua"/>
+                    <input id="rua" type="rua" name="rua" required v-model="formCliente.rua"/>
                 </div>
 
                 <div>
                     <label for="numero">Número</label>
-                    <input id="numero" type="numero" name="numero" required v-model="formEndereco.numero"/>
+                    <input id="numero" type="numero" name="numero" required v-model="formCliente.numero"/>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
         </form>
 
         <div class="formlario-entrega">
-            <form action="#" @submit.prevent="submit" class="form">
+            <form action="#" class="form">
 
                 <h1 class="titulo-formulario">Dados de pagamento</h1>
 
@@ -136,7 +136,7 @@
 
             <div class="resumo-pedido">
                 <h1 class="titulo">Resumo do pedido</h1>
-                <div class="container" v-if="compra.items">
+                <div v-if="compra.items">
                     <div class="item-carrinho" v-for="(produto, index) in compra.items" :key="produto+index">
                         <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
                             <img class="carrinho-img" :src="produto.produto.imagem_produto" alt="Imagem produto">
@@ -160,20 +160,33 @@
                 </div>
                 
                 <div>
-                    <button type="submit" class="btn btn-pedido">Confirmar compra</button>
+                    <p class="valor-final">Valor Final + Frete: <span>{{compra.valor_final | numeroPreco}}</span></p>
+                    <button type="submit" class="btn btn-pedido" @click.prevent="confirmarPedido">Confirmar compra</button>
                 </div>
 
             </div>
 
         </div>
-        
+
+       <PedidoFeito v-if="pedidoFeito">
+            <p>PARABÉNS!! Seu pedido foi feito. ;)</p>
+            <br>
+            <p>Agora é so aguardar.</p>
+       </PedidoFeito>/> 
 
     </section>
 </template>
 
 <script>
+
+import PedidoFeito from './PedidoFeito.vue'
+
 export default {
     name: 'concluirpedido',
+
+    components: {
+        PedidoFeito
+    },
 
     data() {
         return {
@@ -184,14 +197,11 @@ export default {
                 cpf: "",
                 telefone: "",
                 idade: "",
-            },
-            formEndereco: {
                 cep: "",
                 estado: "",
                 cidade: "",
                 bairro: "",
                 rua: "",
-                telefone: "",
             },
             formEntregaPagamento: {
                 formaEntrega: "",
@@ -201,7 +211,8 @@ export default {
                 dataVencimento: "",
                 codigoSeguranca: "",
             },
-            compra: null
+            compra: null,
+            pedidoFeito: null
         };
     },
 
@@ -212,19 +223,30 @@ export default {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(req => req.json())
                 .then(res => {
-                    console.log(res)
-                    this.formEndereco.estado = res.uf
-                    this.formEndereco.cidade = res.localidade
-                    this.formEndereco.bairro = res.bairro
-                    this.formEndereco.rua = res.logradouro
+                    this.formCliente.estado = res.uf
+                    this.formCliente.cidade = res.localidade
+                    this.formCliente.bairro = res.bairro
+                    this.formCliente.rua = res.logradouro
                 })
             }
         },
 
-        submit(enderecoCliente) {
+        submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
             document.querySelector('.formlario-entrega').style.display = 'block'
-            console.log(enderecoCliente)
+            console.log(this.formCliente)
+        },
+
+        confirmarPedido() {
+            console.log(this.formCliente)
+            console.log(this.formEntregaPagamento)
+            this.pedidoFeito = true;
+            this.$store.commit('ZERAR_CARRINHO')
+            setTimeout(() => {
+                this.pedidoFeito = false;
+                this.$router.push("/");
+            }, 1000);
+            
         },
 
         resumoDoPedido() {
@@ -353,5 +375,11 @@ h2 {
     margin-top: 130px;
 }
 
+.valor-final {
+    display: block;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: right;
+}
 
 </style>
