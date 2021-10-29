@@ -31,18 +31,7 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-* {
-  padding: 0px;
-  margin: 0px;
-  text-decoration: none;
-  font-family: 'Montserrat';
-}
-
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0px 20px;
-}
+/* GERAL */
 
 #app {
   display: flex;
@@ -54,69 +43,138 @@ export default {
   flex: 1;
 }
 
-.btn-comprar {
-  background-color: #CC2131;
-  width: 180px;
-  height: 50px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  color: #fff;
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat'
 }
 
-.btn-comprar:hover {
-  transition: .3s;
-  transform: scale(1.1);
+body, ul, li, h1, h2, p {
+  padding: 0px;
+  margin: 0px;
 }
 
-label {
-  margin-bottom: 5px;
+ul {
+  list-style: none;
 }
 
-input, textarea {
-  border-radius: 4px;
-  border: 1px solid white;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
-  transition: all 0.3s;
-  font-size: 1rem;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  margin-bottom: 15px;
-  width: 100%;
+a {
+  text-decoration: none;
 }
 
-input:hover, input:focus, textarea:hover, textarea:focus {
-  outline: none;
-  box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
-  border-color: #CC2131;
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0px 20px;
 }
 
-.btn {
-  display: block;
-  padding: 10px 30px;
-  background: #CC2131;
-  border-radius: 4px;
-  color: #fff;
-  text-align: center;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
-  transition: all 0.3s;
-  border: none;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  cursor: pointer;
-}
-
+/* CARD ITEMS */
 .titulo {
-  text-align: center;
-  margin-bottom: 60px;
+    font-size: 42px;
+    font-style: italic;
+    color: #FFBA00;
+    margin-bottom: 60px;
 }
 
-.background {
-  height: 650px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.titulo::before {
+    display: inline-block;
+    content: "";
+    width: 100px;
+    height: 2px;
+    background-color: #FFBA00;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-right: 20px;
+}
+
+.item-bicicleta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.item {
+    border-radius: 4px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.zoom {
+    overflow: hidden;
+    max-width: 400px;
+    position: relative;
+}
+
+.zoom img {
+    width: 90%;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    height: 250px;
+}
+
+.zoom:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.nome-bicicleta {
+    font-size: 30px;
+}
+
+.preco-antigo-bicicleta {
+    margin: 10px 0px 10px;
+    font-size: 16px;
+    color: #908f8f;
+    text-decoration: line-through;
+}
+
+.valor-bicicleta {
+    color: #FFBA00;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.parcela-bicicleta {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.comprar-bicicleta {
+    background-color: #FFBA00;
+    width: 220px;
+    border: none;
+    color: #fff;
+    padding: 10px 0px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.comprar-bicicleta:hover {
+    transition: .3s;
+    transform: scale(1.1);
+    color: #222;
+}
+
+.desconto {
+    position: absolute;
+    color: #fff;
+    top: 20px;
+    left: 19px;
+    border-radius: 4px;
+    padding: 5px;
+    z-index: 1000;
+    background-color: #FFBA00;
 }
 
 </style>

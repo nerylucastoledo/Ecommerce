@@ -1,41 +1,44 @@
 <template>
-    <div class="info-carrossel">
+    <div class="carrossel">
 
-      <div class="carrosel-inicio">
+      <div class="carrossel-inicio">
         <router-link to="/racing"><img src="../assets/imagem-principal.png" alt="Imagem Principal"></router-link>
       </div>
 
-      <div class="carrosel-inicio">
+      <div class="carrossel-inicio">
         <router-link to="/motorizada"><img src="../assets/motorizada.png" alt="Imagem Principal"></router-link>
       </div>
 
-      <div class="carrosel-inicio">
+      <div class="carrossel-inicio">
         <router-link to="/retro"><img src="../assets/retro.png" alt="Imagem Principal"></router-link>
       </div>
 
-      <div class="info-empresa">
-        <div class="container">
+      <div class="container">
 
-          <div class="info-empresa-items">
+        <div class="info-ecommerce">
 
-            <div>
-              <img src="@/assets/icon-caminhao.png" alt="Caminhao entrega">
-              <p>Entregamos para todo o Brasil.</p>
-            </div>
-
-            <div>
-              <img src="@/assets/icon-cartao.png" alt="Cartao">
-              <p>Parcelamos em 6x sem juros.</p>
-            </div>
-
-            <div>
-              <img id="img-caloi" src="@/assets/icon-caloi.png" alt="Caloi">
-              <p>Nosso parceiro oficial</p>
+          <div>
+            <font-awesome-icon icon="truck" size="3x"/>
+            <p>Entregamos para todo o Brasil.</p>
           </div>
-  
+
+          <div>
+            <font-awesome-icon icon="credit-card" size="3x"/>
+            <p>Parcelamos em 12x sem juros.</p>
+          </div>
+
+          <div>
+            <font-awesome-icon icon="headset" size="3x"/>
+            <p>Suporte 24 horas.</p>
+          </div>
+
+          <div>
+            <font-awesome-icon icon="money-bill-wave" size="3x"/>
+            <p>Pagamento seguro</p>
           </div>
 
         </div>
+
       </div>
 
     </div>
@@ -54,10 +57,10 @@ export default {
   },
 
   methods: {
-    carroselImagem(n) {
+    carrosselImagem(n) {
       this.slideIndex += n
 
-      const imagensHome = document.querySelectorAll('.carrosel-inicio')
+      const imagensHome = document.querySelectorAll('.carrossel-inicio')
 
       if(imagensHome.length > 0) {
         if(this.slideIndex == -1) {
@@ -97,11 +100,11 @@ export default {
   
   mounted() {
 
-    this.carroselImagem(0)
+    this.carrosselImagem(0)
 
       setInterval(() => {
         if(this.$route.name == 'Home') {
-          this.carroselImagem(1)
+          this.carrosselImagem(1)
         } else {
           this.slideIndex = 0
         }
@@ -116,18 +119,43 @@ export default {
 
 /*SLIDE */
 
-.carrosel-inicio {
+.carrossel {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+
+.carrossel-inicio {
   display: none;
   cursor: pointer;
 }
 
-.info-carrossel {
-  position: relative;
+.carrossel-inicio img{
+  width: 100%;
+  max-height: 700px;
 }
 
-.info-carrossel img{
-  width: 100%;
-  max-height: 600px;
+/* INFO ECOMMERCE */
+.info-ecommerce {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
+  padding: 20px;
+}
+
+.info-ecommerce p {
+  margin-top: 10px;
+  color: #222;
+}
+
+.info-ecommerce {
+  text-align: center;
+  color: #FFBA00;
+}
+
+.info-ecommerce div:hover {
+  color: #222;
+  transition: .3s;
 }
 
 </style>

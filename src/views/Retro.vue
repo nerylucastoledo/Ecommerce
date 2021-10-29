@@ -1,8 +1,8 @@
 <template>
-    <section class="lucasbiker-home">
-        <div class="background"></div>
+    <section>
+        <div></div>
         <ListRetro>
-            <h1 class="titulo-principal">RETRÔ</h1>
+            <h1>RETRÔ</h1>
         </ListRetro>
     </section>
 </template>
@@ -21,22 +21,5 @@ export default {
 </script>
 
 <style scoped>
-
-.lucasbiker-home {
-  margin-top: 60px;
-  margin-bottom: 60px;
-}
-
-.lucasbiker-home h1 {
-    text-align: center;
-}
-
-.background {
-    background-image: url('../assets/retro-2.png');
-}
-
-.titulo-principal {
-    margin-bottom: 0px;
-}
 
 </style>

@@ -1,28 +1,26 @@
 <template>
-    <div class="produto">
-        <div class="conteudo-produto" v-if="loading">
+    <div>
+        <div v-if="loading">
 
-            <div class="avaliacoes">
+            <div>
                 <div>
-                    <img :src="produto.imagem_produto" alt="Moto Motorizada">
-                    <h3 class="titulo-avaliacoes">Avaliações</h3>
+                    <img :src="produto.imagem_produto">
+                    <h3>Avaliações</h3>
 
                     <div v-if="avaliacoes">
                         <div 
-                            class="avaliacao" 
                             v-for="(avaliacao, index) in avaliacoes" 
                             :key="avaliacao+index">
                             
                             <span
-                                class="qntd-estrelas-comentario"
                                 v-for="(estrela, index) in avaliacao.qntd_estrelas" 
                                 :key="estrela+index">
                                 {{estrelas}}
                             </span>
 
-                            <div class="comentario">
-                                <p class="nome-avaliador">{{avaliacao.nome_avaliador}}</p>
-                                <p class="conteudo-comentario">{{avaliacao.comentario}}</p>
+                            <div>
+                                <p>{{avaliacao.nome_avaliador}}</p>
+                                <p>{{avaliacao.comentario}}</p>
                             </div>
 
                         </div>
@@ -35,21 +33,19 @@
                 </div>
             </div>
 
-            <div class="info-produto" v-if="produto">
+            <div v-if="produto">
 
                 <div>
-                    <p class="categoria-e-preco">Nova</p>
-                    <h1 class="nome-produto">{{produto.nome_produto}}</h1>
+                    <p>Nova</p>
+                    <h1>{{produto.nome_produto}}</h1>
 
                     <span
-                        class="qntd-estrelas"
                         v-for="(estrela, index) in qntd_estrelas_do_produto" 
                         :key="estrela+index">
                         {{estrelas}}
                     </span>
 
                     <span
-                        class="qntd-estrelas"
                         v-for="estrela in estrelas_restantes" 
                         :key="estrela+'estrela'">
                         {{estrela_vazia}}
@@ -57,16 +53,16 @@
                 </div>
 
                 <div>
-                    <h2 class="valor-produto">R${{produto.valor_produto}}</h2>
-                    <p class="categoria-e-preco">ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
-                    <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
+                    <h2>R${{produto.valor_produto}}</h2>
+                    <p>ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
+                    <p>Cor: {{produto.cor_produto}}</p>
                 </div>
 
                 <div>
-                    <p class="estoque" v-if="produto.quantidade_estoque > 0">
+                    <p v-if="produto.quantidade_estoque > 0">
                         Disponível em estoque
                     </p>
-                    <p class="estoque" v-else>
+                    <p v-else>
                         Sem estoque
                     </p>
                 </div>
@@ -94,8 +90,6 @@
 </template>
 
 <script>
-
-import { toast } from 'bulma-toast'
 
 export default {
     name: 'Produto',
@@ -148,14 +142,6 @@ export default {
                 quantidade: parseInt(this.quantidade)
             }
             this.$store.commit('ADICIONAR_AO_CARRINHO', item)
-            toast({
-                message: 'Produto Adicionar ao carrinho!',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'top-right',
-            })
         }
 
     },
@@ -170,134 +156,5 @@ export default {
 </script>
 
 <style scoped>
-
-.produto {
-    margin-top: 160px;
-    background-color: #F3F2F2;
-    padding: 20px 10px;
-    margin-bottom: 60px;
-}
-
-.conteudo-produto img {
-    width: 100%;
-    max-height: 300px;
-    border-radius: 5px;
-}
-
-.conteudo-produto {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-/* INFORMACOES DO PRODUTO */
-
-.info-produto {
-    background-color: #F5EFEF;
-    box-sizing: border-box;
-    padding: 0px 20px;
-    width: 600px;
-    margin-left: 10px;
-}
-
-.categoria-e-preco {
-    font-size: 16px;
-    font-style: italic;
-    color: #A69999;
-}
-
-.nome-produto {
-    font-size: 30px;
-    color: #000;
-
-}
-
-.qntd-estrelas {
-    color: #CC2131;
-    font-size: 32px;
-    margin-right: -10px;
-}
-
-.valor-produto {
-    margin-top: 20px;
-    font-size: 30px;
-}
-
-.cor-produto {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.estoque {
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.qntd-estoque {
-    color: #747070;
-    font-weight: bold;
-}
-
-.quantidade {
-    color: #000;
-    font-weight: bold;
-}
-
-.btn-comprar  {
-    margin-top: 40px;
-    font-size: 18px;
-    border-radius: 10px;
-}
-
-.btn-carrinho {
-    background-color: #D16972;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    border-radius: 10px;
-    height: 50px;
-}
-
-.input {
-    max-width: 40px;
-    margin-top: 10px;
-}
-
-/* AVALIACOES */
-
-.avaliacoes {
-    max-width: 600px;
-}
-
-.titulo-avaliacoes {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    text-align: center;
-    text-transform: uppercase;
-    font-style: italic;
-    font-weight: bold;
-}
-
-.qntd-estrelas-comentario {
-    float: right;
-    color: #CC2131;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.comentario {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 10px 10px 15px;
-    margin-bottom: 20px;
-    font-weight: 550;
-}
-
-.nome-avaliador {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 </style>

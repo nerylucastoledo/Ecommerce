@@ -22,20 +22,4 @@ export default {
 
 <style scoped>
 
-.lucasbiker-home {
-  margin-top: 60px;
-  margin-bottom: 60px;
-}
-.lucasbiker-home h1 {
-    text-align: center;
-}
-
-.background {
-    background-image: url('../assets/motorizada-2.png');
-}
-
-.titulo-principal {
-    margin-bottom: 0px;
-}
-
 </style>
