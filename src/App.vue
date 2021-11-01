@@ -71,8 +71,8 @@ a {
 .titulo {
     font-size: 42px;
     font-style: italic;
-    color: #FFBA00;
-    margin-bottom: 60px;
+    color: #222;
+    margin-bottom: 20px;
 }
 
 .titulo::before {
@@ -88,7 +88,7 @@ a {
 
 .item-bicicleta {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
@@ -99,6 +99,9 @@ a {
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
     box-sizing: border-box;
     padding: 10px;
+    border-radius: 4px;
+    margin-top: 40px;
+    flex: 1;
 }
 
 .zoom {
@@ -108,7 +111,6 @@ a {
 }
 
 .zoom img {
-    width: 90%;
     display: block;
     margin: 0 auto 20px;
     border-radius: 4px;
@@ -169,12 +171,61 @@ a {
 .desconto {
     position: absolute;
     color: #fff;
-    top: 20px;
-    left: 19px;
+    top: 0px;
+    left: 0px;
     border-radius: 4px;
     padding: 5px;
-    z-index: 1000;
+    z-index: 2;
     background-color: #FFBA00;
+}
+
+.btn-produtos {
+    background-color: transparent;
+    margin: 60px auto 0;
+    display: block;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    color: #222;
+    padding: 15px 0px;
+    font-size: 18px;
+    cursor: pointer;
+    max-width: 240px;
+    border: 1px solid #FFBA00;
+}
+
+.btn-produtos:hover {
+  transition: .3s;
+  background-color: #FFBA00;
+  color: #fff;
+}
+
+.imagem-item-home {
+    position: relative;
+    overflow: hidden;
+}
+
+.texto-imagem-home {
+    position: absolute;
+    top: 160px;
+    left: 80px;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0px 0px 5px black;
+    max-width: 500px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#imagem-card-categoria {
+    object-fit: cover;
+    width: 100%;
+    height: 350px;
+    filter: brightness(60%);
+    margin-bottom: 60px;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    border-radius: 4px;
 }
 
 </style>

@@ -1,40 +1,55 @@
 <template>
-  <div class="home">
+  <section class="home">
     
     <Carrossel/>
 
-    <section>
+    <div>
       <UltimosLancamentos/>
-    </section>
+    </div>
 
-    <section class="racing">
+    <div class="racing">
       <ListRacing>
         <h1 class="titulo">RACING</h1>
-        <img src="../assets/racing.png" alt="Racing">
+        <div class="imagem-item-home">
+          <router-link to="/racing">
+            <img id="imagem-card-categoria" src="../assets/racing-2.png" alt="Racing">
+            <p class="texto-imagem-home">Venha viver experiências únicas com nossas racing.</p>
+          </router-link>
+        </div>
       </ListRacing>
 
       <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
-    </section>
+    </div>
 
-    <section class="retro">
-      <ListRetro>
+    <div class="retro">
+      <listRetro>
         <h1 class="titulo">RETRÔ</h1>
-        <img src="../assets/retro-2.png" alt="Retrô">
-      </ListRetro>
+        <div class="imagem-item-home">
+          <router-link to="/retro">
+            <img id="imagem-card-categoria" src="../assets/retro-foto.jpg" alt="Bicileta Retrô">
+            <p class="texto-imagem-home">As retrô nunca irão sair de moda.</p>
+          </router-link>
+        </div>
+      </listRetro>
 
       <router-link class="btn-produtos" to="/retro">Ver produtos</router-link>
-    </section>
+    </div>
 
-    <section class="motorizada">
-      <ListMotorizada>
+    <div class="motorizada">
+      <listMotorizada>
         <h1 class="titulo">MOTORIZADA</h1>
-        <img src="../assets/motorizada-2.png" alt="Motorizada">
-      </ListMotorizada>
+        <div class="imagem-item-home">
+          <router-link to="/motorizada">
+            <img id="imagem-card-categoria" src="../assets/motorizada-foto.jpg" alt="Bicileta Motorizada">
+            <p class="texto-imagem-home">Se você gosta de velocidade, aqui você irá encontrar a melhor.</p>
+          </router-link>
+        </div>
+      </listMotorizada>
 
       <router-link class="btn-produtos" to="/motorizada">Ver produtos</router-link>
-    </section>
+    </div>
 
-  </div>
+  </section>
 </template>
 
 <script>
@@ -65,5 +80,6 @@ export default {
 .racing, .retro, .motorizada {
   margin-top: 60px;
 }
+
 
 </style>

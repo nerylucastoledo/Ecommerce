@@ -1,29 +1,49 @@
 <template>
     <footer>
         <section>
-            <div class="container footer-info">
-                <div class="footer-historia">
-                    <h2 class="titulo-footer">NOSSA HISTÓRIA</h2>
-                    <p>Quando iniciamos a LucasBiker queriamos apenas um produto que adoraríamos utilizar. Eramos apaixonados por pedalar e também por fazer as coisas com as nossas próprias mãos. Assim surgiu um sonho na garagem da nossa casa.</p>
-                </div>
 
-                <div class="footer-contato">
-                    <h2 class="titulo-footer">CONTATOS</h2>
-                    <p>+55 (35)9 9742-0423</p>
-                    <p>lucasnerytoledo@hotmail.com</p>
-                    <p>Rua Tabaranas, 125 - Pouso Alegre, MG</p>
+            <div class="inserir-email">
+                <div class="container">
+                    <h1>Quer ficar sabendo das nossas novidades?</h1>
+                    <p>Insira seu melhor e-mail para receber promoções e muito mais.</p>
+                    <form class="inscrever" action="#" @submit.prevent="submit">
+                        <input id="email" type="email" name="email" autocomplete="email" required autofocus v-model="form.email"/>
+                        <button type="submit" class="btn-increver">Inscrever</button>
+                    </form>
                 </div>
+            </div>
 
-                <div  class="footer-sociais">
-                    <h2 class="titulo-footer">REDES SOCIAIS</h2>
-                    <img src="@/assets/icon-facebook.png" alt="Icon Facebook">
-                    <img src="@/assets/icon-instagram.png" alt="Icon Instagram">
-                    <img src="@/assets/icon-twitter.png" alt="Icon Twitter">
+            <div class="footer-info">
+                <div class="container">
+                    <div class="footer-historia">
+                        <h2 class="titulo-footer">NOSSA HISTÓRIA</h2>
+                        <p>Quando iniciamos a LucasBiker queriamos apenas um produto que adoraríamos utilizar. Eramos apaixonados por pedalar e também por fazer as coisas com as nossas próprias mãos. Assim surgiu um sonho na garagem da nossa casa.</p>
+                    </div>
+
+                    <div class="footer-contato">
+                        <h2 class="titulo-footer">CONTATOS</h2>
+                        <p>+55 (35)9 9742-0423</p>
+                        <p>lucasnerytoledo@hotmail.com</p>
+                        <p>Rua Tabaranas, 125 - Pouso Alegre, MG</p>
+                    </div>
+
+                    <div  class="footer-sociais">
+                        <h2 class="titulo-footer">REDES SOCIAIS</h2>
+                        <a target= "_blank" href="https://www.facebook.com/LucasNeryToledo/">
+                            <img src="@/assets/facebook.png" alt="Icon Facebook">
+                        </a>
+                        <a target= "_blank" href="https://www.instagram.com/lucas_nery6/">
+                            <img src="@/assets/instagram.png" alt="Icon Instagram">
+                        </a>
+                        <a target= "_blank" href="https://api.whatsapp.com/send?phone=5535997420423">
+                            <img src="@/assets/whatsapp.png" alt="Icon Whatsapp">
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section>
+        <section class="direitos">
             <p>Lucas Nery 2021 - Alguns Direitos Reservados.</p>
         </section>
     </footer>
@@ -31,7 +51,15 @@
 
 <script>
 export default {
-    name: 'Footer'
+    name: 'Footer',
+
+      data() {
+        return {
+            form: {
+                email: ""
+            }
+        }
+    },
 }
 </script>
 
@@ -39,69 +67,110 @@ export default {
 
 footer {
     position: relative;
-    top: 0px;
 }
 
-footer > section {
-    background-color: #F3F2F2;
-    padding: 20px 0px;
+/* INSERIR EMAIL */
+.inserir-email {
+  margin-top: 60px;
+  background-color: #222;
+  padding-bottom: 20px;
 }
 
-footer section:nth-child(2) {
-    background-color: #CC2131;
-    padding: 20px 0px;
+.inserir-email h1 {
+  color: #fff;
+  font-size: 34px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.inserir-email p {
+  color: #fff;
+  font-size: 18px;
+}
+
+.inscrever {
+  display: flex;
+  align-items: flex-end;
+}
+
+.inscrever input {
+  width: 600px;
+  margin-top: 40px;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: transparent;
+}
+
+.btn-increver {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    background-color: #FFBA00;
+    height: 100%;
+    font-size: 18px;
+    cursor: pointer;
     color: #fff;
-    text-align: center;
-    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
 }
+
+.btn-increver:hover {
+  transition: .3s;
+  transform: scale(1.1);
+}
+
+/* footer historia, contato e redes sociais */
 
 .footer-info {
+    background-color: #FFBA00;
+    padding: 0 0 40px;
+}
+
+.footer-info > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-.footer-historia {
-    max-width: 33%;
-}
-
-.footer-historia p {
-    margin-top: 20px;
-    font-size: 16px;
-}
-
-.footer-contato h2 {
-    margin-bottom: 20px;
-} 
-
-.footer-contato p {
-    font-size: 16px;
-    margin: 10px 0px;
-}
-
-.footer-sociais img{
-    width: 40px;
-    height: 40px;
-    margin: 20px 10px 0px;
+.footer-info > div div {
+    margin-top: 40px;
 }
 
 .titulo-footer {
-    color: #CC2131;
-    font-style: italic;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 32px;
 }
 
-@media (max-width: 800px) { 
-    .footer-info {
-        display: block;
-        text-align: center;
-    }
+.footer-historia {
+    max-width: 40%;
+}
 
-    .footer-info div {
-        margin-bottom: 40px;
-    }
+.footer-info p {
+    color: #fff;
+    margin-top: 10px;
+}
 
-    .footer-historia {
-        max-width: 100%;
-    }
+.footer-sociais img {
+    width: 40px;
+    margin: 10px 20px 0;
+}
+
+/* DIREITOS */
+.direitos {
+    background-color: #FFBA00;
+    padding: 20px 0 40px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 </style>
