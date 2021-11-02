@@ -1,8 +1,8 @@
 <template>
-    <section>
+    <section class="bicicletas-pagina">
         <div></div>
         <ListRetro>
-            <h1>RETRÔ</h1>
+            <h1 class="titulo">RETRÔ</h1>
         </ListRetro>
     </section>
 </template>

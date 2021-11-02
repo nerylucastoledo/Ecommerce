@@ -1,8 +1,8 @@
 <template>
-    <section class="lucasbiker-home">
+    <section class="bicicletas-pagina">
         <div class="background"></div>
         <ListMotorizada>
-            <h1 class="titulo-principal">MOTORIZADA</h1>
+            <h1 class="titulo">MOTORIZADA</h1>
         </ListMotorizada>
     </section>
 </template>

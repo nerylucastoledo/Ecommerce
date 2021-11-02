@@ -173,4 +173,30 @@ footer {
     font-size: 18px;
 }
 
+@media (max-width: 830px) { 
+    .footer-historia {
+        display: none;
+    }
+    .titulo-footer {
+        text-align: center;
+    }
+    .footer-info p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 440px) {
+    .inscrever {
+        display: block;
+    }
+    .inscrever input {
+        max-width: 100%;
+    }
+    .btn-increver {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
 </style>

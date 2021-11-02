@@ -14,11 +14,11 @@
             <input id="password" type="password" name="password" autocomplete="current-password" required v-model="form.password"/>
 
           <div>
-            <button type="submit" class="btn">Criar Conta</button>
+            <button type="submit" class="btn btn-login">Criar Conta</button>
           </div>
         </form>
 
-        <router-link to="/login" class="perdeu">Já tem uma conta? Faça login</router-link>
+        <router-link to="/login" class="acessar-conta">Já tem uma conta? Faça login</router-link>
 
     </section>
 </template>
@@ -66,40 +66,57 @@ export default {
 <style>
 
 .login {
-    max-width: 500px;
-    margin: 160px auto 0;
-    padding: 0 20px;
-    margin-bottom: 60px;
+  max-width: 600px;
+  margin: 160px auto 0;
+  padding: 0 20px;
+  margin-bottom: 60px;
 }
 
 .titulo-login {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: #CC2131;
+  text-align: center;
+  font-size: 42px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #FFBA00;
 }
 
 form {
-    display: grid;
+  display: grid;
+}
+
+form input{
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
+  transition: all 0.3s;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  width: 100%;
+}
+form input:hover, form input:focus {
+    outline: none;
+    box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
+    border-color: #FFBA00;
 }
 
 .btn {
-    width: 100%;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.perdeu {
-    color: #CC2131;
-    display: block;
-    text-align: center;
-    margin: 20px 0px;
+.acessar-conta {
+  color: #FFBA00;
+  display: block;
+  text-align: center;
+  margin: 20px 0px;
 }
 
-.perdeu:hover {
-    text-decoration: underline;
+.acessar-conta:hover {
+  text-decoration: underline;
 }
 
 </style>

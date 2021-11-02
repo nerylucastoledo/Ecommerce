@@ -158,4 +158,25 @@ export default {
   transition: .3s;
 }
 
+@media (max-width: 700px) {
+  .info-ecommerce {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .info-ecommerce div:nth-child(3), .info-ecommerce div:nth-child(4) {
+    margin-top: 20px;
+  }
+
+  .info-ecommerce p {
+    font-size: 14px;
+  }
+  .carrossel-inicio img{
+    margin-top: 20px;
+    max-width: 100%;
+    height: 200px;
+  }
+}
+
+
 </style>

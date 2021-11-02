@@ -118,6 +118,8 @@ a {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     height: 250px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .zoom:hover img {
@@ -226,6 +228,34 @@ a {
     -moz-transition: all 0.3s;
     -webkit-transition: all 0.3s;
     border-radius: 4px;
+}
+
+/* PAGINA CATEGORIA DAS BICICLETAS */
+.bicicletas-pagina {
+    margin-top: 160px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .texto-imagem-home {
+    left: 20px;
+  }
+}
+
+@media (max-width: 440px) {
+    #imagem-card-categoria {
+      height: 150px;
+    }
+    .texto-imagem-home {
+      top: 40px;
+      font-size: 16px;
+    }
+    .zoom img {
+      height: 200px;
+    }
+    .titulo::before {
+      width: 100%;
+    }
 }
 
 </style>

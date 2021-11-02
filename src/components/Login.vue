@@ -13,9 +13,11 @@
             <input id="password" type="password" name="password" autocomplete="current-password" required v-model="form.password"/>
 
             <div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn btn-login">Login</button>
             </div>
         </form>
+
+        <router-link to="/register" class="acessar-conta">Não tem conta? Crie uma</router-link>
 
     </div>
 </template>

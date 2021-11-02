@@ -1,8 +1,8 @@
 <template>
-    <section>
+    <section class="bicicletas-pagina">
         <div></div>
         <ListRacing>
-            <h1>RACING</h1>
+            <h1 class="titulo">RACING</h1>
         </ListRacing>
     </section>
 </template>
@@ -21,6 +21,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>

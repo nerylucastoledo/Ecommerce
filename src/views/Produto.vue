@@ -1,26 +1,28 @@
 <template>
-    <div>
-        <div v-if="loading">
+    <div class="container">
+        <div v-if="loading" class="produto">
 
             <div>
                 <div>
                     <img :src="produto.imagem_produto">
-                    <h3>Avaliações</h3>
+                    <h1 class="titulo-avaliacao">Avaliações</h1>
 
-                    <div v-if="avaliacoes">
+                    <div v-if="avaliacoes" class="avaliacoes">
                         <div 
                             v-for="(avaliacao, index) in avaliacoes" 
                             :key="avaliacao+index">
-                            
-                            <span
-                                v-for="(estrela, index) in avaliacao.qntd_estrelas" 
-                                :key="estrela+index">
+
+                            <span 
+                                v-for="estrela, index in avaliacao.qntd_estrelas" 
+                                :key="index"
+                                class="qntd-estrelas">
                                 {{estrelas}}
                             </span>
+                        
 
                             <div>
-                                <p>{{avaliacao.nome_avaliador}}</p>
-                                <p>{{avaliacao.comentario}}</p>
+                                <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
+                                <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
                             </div>
 
                         </div>
@@ -36,45 +38,47 @@
             <div v-if="produto">
 
                 <div>
-                    <p>Nova</p>
-                    <h1>{{produto.nome_produto}}</h1>
+                    <p class="uso-produto">Nova</p>
+                    <h1 class="nome-produto">{{produto.nome_produto}}</h1>
 
                     <span
                         v-for="(estrela, index) in qntd_estrelas_do_produto" 
-                        :key="estrela+index">
+                        :key="estrela+index"
+                        class="estrelas-produto">
                         {{estrelas}}
                     </span>
 
                     <span
                         v-for="estrela in estrelas_restantes" 
-                        :key="estrela+'estrela'">
+                        :key="estrela+'estrela'"
+                        class="estrelas-produto">
                         {{estrela_vazia}}
                     </span>
                 </div>
 
                 <div>
-                    <h2>R${{produto.valor_produto}}</h2>
-                    <p>ou 6x de {{produto.valor_produto / 6 | numeroPreco}}</p>
-                    <p>Cor: {{produto.cor_produto}}</p>
+                    <h2 class="valor-bicicleta">{{produto.valor_produto | numeroPreco}}</h2>
+                    <p class="parcela-bicicleta">ou 12x de {{produto.valor_produto / 12 | numeroPreco}}</p>
+                    <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
                 </div>
 
                 <div>
-                    <p v-if="produto.quantidade_estoque > 0">
+                    <p v-if="produto.quantidade_estoque > 0" class="estoque">
                         Disponível em estoque
                     </p>
-                    <p v-else>
+                    <p v-else class="estoque">
                         Sem estoque
                     </p>
                 </div>
 
                 <div>
-                    <p class="quantidade">
+                    <p class="estoque">
                         Quantidade
                         <span class="qntd-estoque">({{produto.quantidade_estoque}} disponível)</span>
                     </p>
                 </div>
 
-                <div>
+                <div class="input-quantidade">
                     <input type="number" class="input" min="1" :max="produto.quantidade_estoque" v-model="quantidade">
                 </div>
 
@@ -156,5 +160,85 @@ export default {
 </script>
 
 <style scoped>
+
+.produto {
+    margin-top: 160px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.produto img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.avaliacoes > div {
+    box-shadow: 0 2px rgba(30, 60, 90, 0.1);
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.qntd-estrelas {
+    color: #FFBA00;
+    float: right;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.titulo-avaliacao {
+    text-align: center;
+    margin: 40px 0px;
+    color: #FFBA00;
+}
+
+.comentario-avaliador {
+    margin-top: 10px;
+    max-width: 90%;
+}
+
+.uso-produto {
+    color: #908f8f;
+    margin-bottom: 10px;
+}
+
+.nome-produto {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.estrelas-produto {
+    font-weight: bold;
+    font-size: 24px;
+    color: #FFBA00;
+}
+
+.valor-bicicleta {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.cor-produto {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.estoque {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.qntd-estoque {
+    font-weight: bold;
+    font-size: 18px;
+    color: #908f8f;
+}
+
+.input-quantidade {
+    margin: 20px 0;
+}
 
 </style>

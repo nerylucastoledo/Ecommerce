@@ -15,15 +15,15 @@
             <div class="menu-alt">
                 <ul class="menu-meio">
                     <li>
-                        <router-link to="/concluir-pedido">Racing</router-link>
+                        <router-link to="/racing">Racing</router-link>
                     </li>
 
                     <li>
-                        <router-link to="/concluir-pedido">Retrô</router-link>
+                        <router-link to="/retro">Retrô</router-link>
                     </li>
 
                     <li>
-                        <router-link to="/concluir-pedido">Motorizada</router-link>
+                        <router-link to="/motorizada">Motorizada</router-link>
                     </li>
                 </ul>
             </div>
@@ -234,7 +234,7 @@ header {
     .menu {
         position: absolute;
         right: 0px;
-        top: 124px;
+        top: 120px;
         background-color: #FFBA00;
         width: 100%;
     }
@@ -309,6 +309,12 @@ header {
         border-bottom-color: #222;
     }
 
+}
+
+@media (max-width: 440px) {
+    .menu-meio li a {
+        font-size: 16px;
+    }
 }
 
 </style>
