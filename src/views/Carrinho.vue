@@ -103,14 +103,14 @@ export default {
     padding: 10px 0px;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position: relative;
     margin-bottom: 60px;
 }
 
 .carrinho-item img {
-    width: 100%;
-    max-height: 250px;
+    max-width: 100%;
+    max-height: 150px;
     object-fit: cover;
 }
 
@@ -131,12 +131,13 @@ export default {
     position: absolute;
     bottom: 20px;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .valor-produto, .preco-total {
-    font-weight: bold;
     font-size: 18px;
     margin-left: 20px;
+    color: #222;
 }
 
 </style>

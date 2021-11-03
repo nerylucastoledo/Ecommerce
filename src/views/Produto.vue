@@ -57,7 +57,7 @@
                 </div>
 
                <div>
-                    <button class="comprar-bicicleta">Comprar agora</button>
+                    <button class="comprar-bicicleta" @click="comprarProduto">Comprar agora</button>
                     <button class="adicionar-carrinho-bicicleta comprar-bicicleta" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
                </div>
 
@@ -109,7 +109,8 @@ export default {
             qntd_estrelas_do_produto: 0,
             estrelas_restantes: 0,
             quantidade: 1,
-            loading: 0
+            loading: 0,
+            valor_final: 0
         }
     },
 
@@ -119,6 +120,7 @@ export default {
             .then(req => req.json())
             .then(res => {
                 this.produto = res[0]
+                this.valor_final = res[0].valor_produto
                 this.avaliacoes = res[0].avaliacoes
                 this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
                 
@@ -146,6 +148,19 @@ export default {
                 quantidade: parseInt(this.quantidade)
             }
             this.$store.commit('ADICIONAR_AO_CARRINHO', item)
+        },
+
+        comprarProduto() {
+            const produtoComprar = {
+                items: [{
+                    produto: this.produto,
+                    quantidade: 1
+                }],
+                valor_final: this.valor_final
+            }
+
+            localStorage.setItem('comprar', JSON.stringify(produtoComprar))
+            this.$router.push({name: 'concluirpedido'})
         }
 
     },

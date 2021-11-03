@@ -35,7 +35,7 @@
             </div>
         </div>
         <div>
-            <button class="btn" @click="comprar">Finalizar compra</button>
+            <button class="comprar-bicicleta btn-finalizar" @click="comprar">Finalizar compra</button>
         </div>
     </section>
 </template>
@@ -57,7 +57,7 @@ export default {
     methods: {
 
         calcularFrete() {
-            this.valorFrete = 10
+            this.valorFrete = 100
         },
 
         comprar() {
@@ -82,7 +82,7 @@ export default {
     padding: 20px;
     float: right;
     margin-bottom: 60px;
-    width: 300px;
+    width: 350px;
 }
 
 .frete, .valor-final, .valor-frete, .valor-produtos {
@@ -104,26 +104,19 @@ export default {
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
     transition: all 0.3s;
     font-size: 1rem;
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat';
     margin-bottom: 15px;
     border-radius: 10px;
-    max-width: 120px;
-}
-
-input-frete:hover,
-input:focus {
-    outline: none;
-    box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
-    border-color: #87f;
+    max-width: 150px;
 }
 
 .btn-frete {
-    background-color: #CC2131;
+    background-color: #FFBA00;
     border: none;
     color: #fff;
     border-radius: 5px;
     margin-left: 10px;
-    padding: 10px;
+    padding: 15px;
     cursor: pointer;
 }
 
@@ -138,7 +131,8 @@ input:focus {
     font-size: 18px;
 }
 
-/*
-*/
+.btn-finalizar {
+    float: right;
+}
 
 </style>

@@ -85,7 +85,7 @@
 
         </form>
 
-        <div class="formlario-entrega">
+        <div class="formulario-entrega">
             <form action="#" class="form">
 
                 <h1 class="titulo-formulario">Dados de pagamento</h1>
@@ -172,7 +172,7 @@
             <p>PARABÉNS!! Seu pedido foi feito. ;)</p>
             <br>
             <p>Agora é so aguardar.</p>
-       </PedidoFeito>/> 
+       </PedidoFeito>
 
     </section>
 </template>
@@ -233,7 +233,7 @@ export default {
 
         submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
-            document.querySelector('.formlario-entrega').style.display = 'block'
+            document.querySelector('.formulario-entrega').style.display = 'block'
             console.log(this.formCliente)
         },
 
@@ -307,7 +307,7 @@ export default {
     font-size: 18px;
 }
 
-.formlario-entrega {
+.formulario-entrega {
     display: none;
 }
 
@@ -315,6 +315,12 @@ export default {
     margin-right: 0px;
     margin-top: 40px;
     padding: 20px;
+    background-color: #FFBA00;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 /* RESUMO DO PEDIDO */
