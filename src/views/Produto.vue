@@ -1,41 +1,14 @@
 <template>
-    <div class="container">
-        <div v-if="loading" class="produto">
+    <div class="conteudo-produto">
+        <div v-if="loading" class="container produto">
 
             <div>
                 <div>
                     <img :src="produto.imagem_produto">
-                    <h1 class="titulo-avaliacao">Avaliações</h1>
-
-                    <div v-if="avaliacoes" class="avaliacoes">
-                        <div 
-                            v-for="(avaliacao, index) in avaliacoes" 
-                            :key="avaliacao+index">
-
-                            <span 
-                                v-for="estrela, index in avaliacao.qntd_estrelas" 
-                                :key="index"
-                                class="qntd-estrelas">
-                                {{estrelas}}
-                            </span>
-                        
-
-                            <div>
-                                <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
-                                <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div v-else>
-                        <p>Nenhuma avaliação disponível.</p>
-                    </div>
-
                 </div>
             </div>
 
-            <div v-if="produto">
+            <div v-if="produto" class="info-produto">
 
                 <div>
                     <p class="uso-produto">Nova</p>
@@ -79,14 +52,41 @@
                 </div>
 
                 <div class="input-quantidade">
-                    <input type="number" class="input" min="1" :max="produto.quantidade_estoque" v-model="quantidade">
+                    <label for="qnt-comprar">Comprar: </label>
+                    <input type="number" class="input" id="qnt-comprar" name="qnt-comprar" min="1" :max="produto.quantidade_estoque" v-model="quantidade">
                 </div>
 
                <div>
-                    <button class="btn-comprar btn">Comprar agora</button>
-                    <button class="btn-carrinho btn" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
+                    <button class="comprar-bicicleta">Comprar agora</button>
+                    <button class="adicionar-carrinho-bicicleta comprar-bicicleta" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
                </div>
 
+            </div>
+
+            <div v-if="avaliacoes" class="avaliacoes">
+                <h1 class="titulo-avaliacao">Avaliações</h1>
+                <div 
+                    v-for="(avaliacao, index) in avaliacoes" 
+                    :key="avaliacao+index">
+
+                    <span 
+                        v-for="estrela, index in avaliacao.qntd_estrelas" 
+                        :key="index"
+                        class="qntd-estrelas">
+                        {{estrelas}}
+                    </span>
+                
+
+                    <div>
+                        <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
+                        <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div v-else>
+                <p>Nenhuma avaliação disponível.</p>
             </div>
 
         </div>
@@ -161,17 +161,37 @@ export default {
 
 <style scoped>
 
+.conteudo-produto {
+    background-color: rgba(0,0,0,.1);
+    padding-top: 100px;
+    padding-bottom: 60px;
+    margin-bottom: -60px;
+}
+
 .produto {
-    margin-top: 160px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: #fff;
+    padding-top: 20px;
+}
+
+.produto > div:nth-child(2) {
+    padding: 10px 30px;
+    border: 1px solid rgba(0,0,0,.1);
+    max-height: 550px;
 }
 
 .produto img {
+    display: block;
+    width: 95%;
     height: 500px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.avaliacoes {
+    padding-bottom: 20px;
 }
 
 .avaliacoes > div {
@@ -238,7 +258,52 @@ export default {
 }
 
 .input-quantidade {
+    font-size: 18px;
+}
+
+.input-quantidade input{
     margin: 20px 0;
+    border: 1px solid #FFBA00;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comprar-bicicleta {
+    width: 100%;
+    padding: 15px 0;
+}
+
+.comprar-bicicleta:hover {
+    transform: none;
+}
+
+.adicionar-carrinho-bicicleta {
+    background-color: #e7bb42;
+}
+
+@media (max-width: 1200px) {
+    .produto {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .produto img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .info-produto {
+        margin-top: 60px;
+    }
+
+    .comprar-bicicleta {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 80%;
+    }
 }
 
 </style>

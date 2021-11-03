@@ -1,26 +1,26 @@
 <template>
     <section class="carrinho">
 
-        <h1 class="titulo-principal">CARRINHO</h1>
+        <h1 class="titulo-carrinho">CARRINHO</h1>
 
         <div class="container" v-if="carrinho.items.length > 0">
-            <div class="item-carrinho" v-for="(produto, index) in carrinho.items" :key="produto+index">
+            <div class="carrinho-item" v-for="(produto, index) in carrinho.items" :key="produto+index">
                 <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
-                    <img class="carrinho-img" :src="produto.produto.imagem_produto" alt="Imagem produto">
+                    <img :src="produto.produto.imagem_produto" alt="Imagem produto">
                 </router-link>
 
-                <div class="carrinho-info-produto">
+                <div>
                     <h2 class="nome-produto">{{produto.produto.nome_produto}}</h2>
-                    <p>Quantidade: <span class="quantidade-produto">{{produto.quantidade}}</span></p>
+                    <p class="quantidade">Quantidade: <strong>{{produto.quantidade}}</strong></p>
                 </div>
-                <div class="preco-unitario">
+                <div>
                     <h2>Preço unitário</h2>
-                    <p>{{produto.produto.valor_produto | numeroPreco}}</p>
+                    <p class="valor-produto">{{produto.produto.valor_produto | numeroPreco}}</p>
                 </div>
 
-                <div class="preco-total">
+                <div>
                     <h2>Preço total</h2>
-                    <p>{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
+                    <p class="preco-total">{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
                 </div>
 
                 <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">X</p>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div v-else>
-            <p class="nenhum-item">Nenhum item no carrinho. :(</p>
+            <p>Nenhum item no carrinho. :(</p>
         </div>
     </section>
 </template>
@@ -86,5 +86,57 @@ export default {
 </script>
 
 <style scoped>
+
+.carrinho {
+    margin-top: 160px;
+}
+
+.titulo-carrinho {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.carrinho-item {
+    display: grid;
+    grid-gap: 20px;
+    padding: 10px 0px;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.carrinho-item img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.apagar-do-carrinho {
+    position: absolute;
+    right: 5px;
+    z-index: 2;
+    font-size: 34px;
+    color: crimson;
+    cursor: pointer;
+}
+
+.nome-produto {
+    color: #FFBA00;
+}
+
+.quantidade, .valor-produto, .preco-total {
+    position: absolute;
+    bottom: 20px;
+    font-size: 18px;
+}
+
+.valor-produto, .preco-total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 20px;
+}
 
 </style>
