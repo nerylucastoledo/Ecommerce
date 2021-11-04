@@ -202,6 +202,7 @@ export default {
                 cidade: "",
                 bairro: "",
                 rua: "",
+                numero: "",
             },
             formEntregaPagamento: {
                 formaEntrega: "",
@@ -234,12 +235,32 @@ export default {
         submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
             document.querySelector('.formulario-entrega').style.display = 'block'
-            console.log(this.formCliente)
         },
 
         confirmarPedido() {
-            console.log(this.formCliente)
-            console.log(this.formEntregaPagamento)
+            const formData = new FormData()
+            
+
+            const produtos = JSON.parse(localStorage.getItem('comprar'))
+            produtos.items.forEach((produto) => {
+                formData.append('cpf_comprador', this.formCliente.cpf)
+                formData.append('cep_comprador', this.formCliente.cep)
+                formData.append('cidade_comprador', this.formCliente.cidade)
+                formData.append('bairro_comprador', this.formCliente.bairro)
+                formData.append('rua_comprador', this.formCliente.rua)
+                formData.append('numero_rua_comprador', this.formCliente.numero)
+                formData.append('valor_pago', produto.produto.valor_produto * produto.quantidade)
+                formData.append('qntd_parcela', 2)
+                formData.append('quantidade', produto.quantidade)
+                formData.append('id_produto_comprado', produto.produto.id_produto)
+
+                fetch('https://resteapicommercelucas.herokuapp.com/venda/', {
+                    method: 'POST',
+                    body: formData
+                })
+            })
+
+
             this.pedidoFeito = true;
             this.$store.commit('ZERAR_CARRINHO')
             setTimeout(() => {
