@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import ConcluirPedido from '../components/ConcluirPedido.vue'
+import EsquecerSenha from '../components/EsquecerSenha.vue'
 
 import Produto from '../views/Produto.vue'
 import Carrinho from '../views/Carrinho.vue'
@@ -60,6 +61,11 @@ const routes = [
     path: '/concluir-pedido',
     name: 'concluirpedido',
     component: ConcluirPedido,
+  },
+  {
+    path: '/esqueci-senha',
+    name: 'esquecisenha',
+    component: EsquecerSenha,
   },
 ]
 

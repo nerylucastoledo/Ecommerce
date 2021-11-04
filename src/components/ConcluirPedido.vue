@@ -257,6 +257,7 @@ export default {
 
     created() {
         this.resumoDoPedido()
+        document.title =  'Concluir Pedido - LucasBiker'
     }
 }
 </script>

@@ -18,6 +18,7 @@
         </form>
 
         <router-link to="/register" class="acessar-conta">Não tem conta? Crie uma</router-link>
+        <router-link to="/esqueci-senha" class="acessar-conta">Esqueceu a senha?</router-link>
 
     </div>
 </template>

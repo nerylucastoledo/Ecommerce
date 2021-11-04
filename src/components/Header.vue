@@ -50,7 +50,7 @@
                     </li>
 
                     <li v-else>
-                        <router-link to="/register">
+                        <router-link to="/login">
                             <button class="btn-login">Entrar <font-awesome-icon icon="user" size="3px"/></button>
                         </router-link>
                     </li>

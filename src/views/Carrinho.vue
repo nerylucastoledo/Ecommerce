@@ -32,7 +32,7 @@
             </div>
         </div>
         <div v-else>
-            <p>Nenhum item no carrinho. :(</p>
+            <p class="nenhum-item">Carrinho vazio! :(</p>
         </div>
     </section>
 </template>
@@ -80,6 +80,7 @@ export default {
     mounted() {
         this.carrinho = this.$store.state.carrinho
         this.atualizarValores()
+        document.title =  'Carrinho - LucasBiker'
     }
 
 }
@@ -138,6 +139,12 @@ export default {
     font-size: 18px;
     margin-left: 20px;
     color: #222;
+}
+
+.nenhum-item {
+    text-align: center;
+    font-size: 24px;
+    color: #FFBA00;
 }
 
 </style>

@@ -15,6 +15,10 @@ export default {
 
     components: {
         ListRetro
+    },
+
+    created() {
+        document.title =  'Retrô - LucasBiker'
     }
     
 }

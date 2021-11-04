@@ -15,6 +15,10 @@ export default {
 
     components: {
         ListMotorizada
+    },
+
+    created() {
+        document.title =  'Motorizada - LucasBiker'
     }
     
 }

@@ -22,7 +22,7 @@
     </div>
 
     <div class="retro">
-      <listRetro>
+      <ListRetro>
         <h1 class="titulo">RETRÔ</h1>
         <div class="imagem-item-home">
           <router-link to="/retro">
@@ -30,13 +30,13 @@
             <p class="texto-imagem-home">As retrô nunca irão sair de moda.</p>
           </router-link>
         </div>
-      </listRetro>
+      </ListRetro>
 
       <router-link class="btn-produtos" to="/retro">Ver produtos</router-link>
     </div>
 
     <div class="motorizada">
-      <listMotorizada>
+      <ListMotorizada>
         <h1 class="titulo">MOTORIZADA</h1>
         <div class="imagem-item-home">
           <router-link to="/motorizada">
@@ -44,7 +44,7 @@
             <p class="texto-imagem-home">Se você gosta de velocidade, aqui você irá encontrar a melhor.</p>
           </router-link>
         </div>
-      </listMotorizada>
+      </ListMotorizada>
 
       <router-link class="btn-produtos" to="/motorizada">Ver produtos</router-link>
     </div>
@@ -70,6 +70,10 @@ export default {
     ListMotorizada,
     Carrossel
   },
+
+  created() {
+    document.title =  'Home - LucasBiker'
+  }
 
 }
 

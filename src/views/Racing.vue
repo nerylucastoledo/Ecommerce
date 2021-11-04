@@ -15,6 +15,10 @@ export default {
 
     components: {
         ListRacing
+    },
+
+    created() {
+        document.title =  'Racing - LucasBiker'
     }
     
 }
