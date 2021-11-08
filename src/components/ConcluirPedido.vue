@@ -8,7 +8,7 @@
             <div>
                 <div>
                     <label for="name">Nome completo</label>
-                    <input id="name" type="name" name="name" required autofocus v-model="formCliente.name"/>
+                    <input id="name" type="text" name="name" required autofocus v-model="formCliente.name"/>
                 </div>
 
                 <div>
@@ -25,19 +25,19 @@
 
                 <div>
                     <label for="cpf">Cpf</label>
-                    <input id="cpf" type="cpf" name="cpf" required v-model="formCliente.cpf"/>
+                    <input id="cpf" type="text" name="cpf" required v-model="formCliente.cpf"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="telefone">Telefone</label>
-                    <input id="telefone" type="telefone" name="telefone" required v-model="formCliente.telefone"/>
+                    <input id="telefone" type="number" name="telefone" required v-model="formCliente.telefone"/>
                 </div>
 
                 <div>
                     <label for="idade">Idade</label>
-                    <input id="idade" type="idade" name="idade" required v-model="formCliente.idade"/>
+                    <input id="idade" type="number" name="idade" required v-model="formCliente.idade"/>
                 </div>
             </div>
 
@@ -46,36 +46,36 @@
             <div>
                 <div>
                     <label for="cep">Cep</label>
-                    <input id="cep" type="cep" cep="cep" required autofocus @keyup="puxarEndereco(formCliente.cep)" v-model="formCliente.cep"/>
+                    <input id="cep" type="text" cep="cep" required autofocus @keyup="puxarEndereco(formCliente.cep)" v-model="formCliente.cep"/>
                 </div>
 
                 <div>
                     <label for="estado">Estado</label>
-                    <input id="estado" type="estado" name="estado" required v-model="formCliente.estado"/>
+                    <input id="estado" type="text" name="estado" required v-model="formCliente.estado"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="cidade" name="cidade" required v-model="formCliente.cidade"/>
+                    <input id="cidade" type="text" name="cidade" required v-model="formCliente.cidade"/>
                 </div>
 
                 <div>
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="bairro" name="bairro" required v-model="formCliente.bairro"/>
+                    <input id="bairro" type="text" name="bairro" required v-model="formCliente.bairro"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="rua">Rua</label>
-                    <input id="rua" type="rua" name="rua" required v-model="formCliente.rua"/>
+                    <input id="rua" type="text" name="rua" required v-model="formCliente.rua"/>
                 </div>
 
                 <div>
                     <label for="numero">Número</label>
-                    <input id="numero" type="numero" name="numero" required v-model="formCliente.numero"/>
+                    <input id="numero" type="number" name="numero" required v-model="formCliente.numero"/>
                 </div>
             </div>
 
@@ -238,25 +238,39 @@ export default {
         },
 
         confirmarPedido() {
-            const formData = new FormData()
-            
+            //const formData = new FormData()
 
             const produtos = JSON.parse(localStorage.getItem('comprar'))
             produtos.items.forEach((produto) => {
-                formData.append('cpf_comprador', this.formCliente.cpf)
+
+                var cpfFormatado = this.formatarCpf(this.formCliente.cpf)
+
+                const body = {
+                    "cpf_comprador": cpfFormatado,
+                    "cep_comprador": this.formCliente.cep,
+                    "cidade_comprador": this.formCliente.cidade,
+                    "bairro_comprador": this.formCliente.bairro,
+                    "rua_comprador": this.formCliente.rua,
+                    "numero_rua_comprador": parseInt(this.formCliente.numero),
+                    "valor_pago": (produto.produto.valor_produto * produto.quantidade),
+                    "qntd_parcela": 2,
+                    "quantidade": produto.quantidade,
+                    "id_produto_comprado": produto.produto.id_produto
+                }
+                /*formData.append('cpf_comprador', cpfFormatado)
                 formData.append('cep_comprador', this.formCliente.cep)
                 formData.append('cidade_comprador', this.formCliente.cidade)
                 formData.append('bairro_comprador', this.formCliente.bairro)
                 formData.append('rua_comprador', this.formCliente.rua)
                 formData.append('numero_rua_comprador', this.formCliente.numero)
-                formData.append('valor_pago', produto.produto.valor_produto * produto.quantidade)
+                formData.append('valor_pago', (produto.produto.valor_produto * produto.quantidade))
                 formData.append('qntd_parcela', 2)
                 formData.append('quantidade', produto.quantidade)
-                formData.append('id_produto_comprado', produto.produto.id_produto)
-
+                formData.append('id_produto_comprado', produto.produto.id_produto)*/
+                console.log(body)
                 fetch('https://resteapicommercelucas.herokuapp.com/venda/', {
                     method: 'POST',
-                    body: formData
+                    body: body
                 })
             })
 
@@ -270,14 +284,14 @@ export default {
             
         },
 
-        resumoDoPedido() {
-            var pedido = JSON.parse(localStorage.getItem('comprar'))
-            this.compra = pedido
-        }
+        formatarCpf(cpf) {
+            var cpfFormatado = cpf.replaceAll('.', '').replaceAll('-', '')
+            return cpfFormatado
+        },
     },
 
     created() {
-        this.resumoDoPedido()
+        this.compra = JSON.parse(localStorage.getItem('comprar'))
         document.title =  'Concluir Pedido - LucasBiker'
     }
 }
