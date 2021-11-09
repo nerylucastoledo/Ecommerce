@@ -1,6 +1,6 @@
 <template>
     <section class="conteudo-frete">
-        <!---CONTINUAR DAQUI--->
+        
         <div class="frete">
             <div>
                 <label for="frete">CEP:</label>
