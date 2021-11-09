@@ -31,6 +31,12 @@
             <div class="menu ativo">
                 <ul>
                     <li v-if="user.loggedIn">
+                        <router-link to="/meus-pedidos">
+                            <font-awesome-icon icon="truck-moving" size="2x"/>
+                        </router-link>
+                    </li>
+
+                    <li v-if="user.loggedIn">
                         <router-link to="/concluir-pedido">
                             <font-awesome-icon icon="shopping-bag" size="2x"/>
                         </router-link>
@@ -215,7 +221,7 @@ header {
     color: #FFBA00 !important;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     header {
         height: 80px;
@@ -266,7 +272,7 @@ header {
     }
 
     .menu a {
-        padding: 15px 36px;
+        padding: 15px 0px;
         display: flex;
         justify-content: center;
     }

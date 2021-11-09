@@ -116,7 +116,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch(`https://resteapicommercelucas.herokuapp.com/produto/?id=${this.id}`)
+            fetch(`https://restapiecomerce.herokuapp.com/produto/?id=${this.id}`)
             .then(req => req.json())
             .then(res => {
                 this.produto = res[0]

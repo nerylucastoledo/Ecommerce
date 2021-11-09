@@ -3,11 +3,11 @@
     
     <Carrossel/>
 
-    <div>
+    <div key="ultimos-lancamentos">
       <UltimosLancamentos/>
     </div>
 
-    <div class="racing">
+    <div class="racing" key="racing">
       <ListRacing>
         <h1 class="titulo">RACING</h1>
         <div class="imagem-item-home">
@@ -21,7 +21,7 @@
       <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
     </div>
 
-    <div class="retro">
+    <div class="retro" key="retro">
       <ListRetro>
         <h1 class="titulo">RETRÔ</h1>
         <div class="imagem-item-home">
@@ -35,7 +35,7 @@
       <router-link class="btn-produtos" to="/retro">Ver produtos</router-link>
     </div>
 
-    <div class="motorizada">
+    <div class="motorizada" key="motorizada">
       <ListMotorizada>
         <h1 class="titulo">MOTORIZADA</h1>
         <div class="imagem-item-home">
@@ -48,8 +48,8 @@
 
       <router-link class="btn-produtos" to="/motorizada">Ver produtos</router-link>
     </div>
-
   </section>
+  
 </template>
 
 <script>

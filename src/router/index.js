@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
-import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
-import ConcluirPedido from '../components/ConcluirPedido.vue'
-import EsquecerSenha from '../components/EsquecerSenha.vue'
-
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import ConcluirPedido from '../views/ConcluirPedido.vue'
+import EsquecerSenha from '../views/EsquecerSenha.vue'
+import MeusPedidos from '../views/MeusPedidos.vue'
 import Produto from '../views/Produto.vue'
 import Carrinho from '../views/Carrinho.vue'
 import Racing from '../views/Racing.vue'
@@ -66,6 +66,11 @@ const routes = [
     path: '/esqueci-senha',
     name: 'esquecisenha',
     component: EsquecerSenha,
+  },
+  {
+    path: '/meus-pedidos',
+    name: 'meuspedidos',
+    component: MeusPedidos,
   },
 ]
 

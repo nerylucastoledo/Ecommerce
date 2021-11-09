@@ -67,6 +67,12 @@ a {
   padding: 0px 20px;
 }
 
+.titulo-pages {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
 /* CARD ITEMS */
 .titulo {
     font-size: 42px;
@@ -234,6 +240,15 @@ a {
 .bicicletas-pagina {
     margin-top: 160px;
     margin-bottom: 20px;
+}
+
+/* TRANSICAO */
+.v-enter, .v-leave-to {
+  opacity: 0;
+}
+
+.v-enter-active, .v-leave-active {
+  transition:  all 0.3s;
 }
 
 @media (max-width: 700px) {

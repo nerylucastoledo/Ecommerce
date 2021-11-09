@@ -39,7 +39,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Motorizada')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Motorizada')
             .then(req => req.json())
             .then(res => {
                 this.listaMotorizada = res

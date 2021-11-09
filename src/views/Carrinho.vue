@@ -1,7 +1,7 @@
 <template>
     <section class="carrinho">
 
-        <h1 class="titulo-carrinho">CARRINHO</h1>
+        <h1 class="titulo-pages">CARRINHO</h1>
 
         <div class="container" v-if="carrinho.items.length > 0">
             <div class="carrinho-item" v-for="(produto, index) in carrinho.items" :key="produto+index">
@@ -86,16 +86,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .carrinho {
     margin-top: 160px;
-}
-
-.titulo-carrinho {
-    font-size: 42px;
-    text-align: center;
-    margin-bottom: 60px;
 }
 
 .carrinho-item {

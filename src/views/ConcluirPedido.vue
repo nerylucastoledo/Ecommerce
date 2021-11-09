@@ -8,11 +8,11 @@
             <div>
                 <div>
                     <label for="name">Nome completo</label>
-                    <input id="name" type="name" name="name" required autofocus v-model="formCliente.name"/>
+                    <input id="name" type="text" name="name" required autofocus v-model="formCliente.name"/>
                 </div>
 
                 <div>
-                    <label for="dataNascimento">Data de Nascimento</label>
+                    <label for="dataNascimento">Nascimento</label>
                     <input id="dataNascimento" type="date" name="dataNascimento" required v-model="formCliente.dataNascimento"/>
                 </div>
             </div>
@@ -25,19 +25,19 @@
 
                 <div>
                     <label for="cpf">Cpf</label>
-                    <input id="cpf" type="cpf" name="cpf" required v-model="formCliente.cpf"/>
+                    <input id="cpf" type="text" name="cpf" required v-model="formCliente.cpf"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="telefone">Telefone</label>
-                    <input id="telefone" type="telefone" name="telefone" required v-model="formCliente.telefone"/>
+                    <input id="telefone" type="number" name="telefone" required v-model="formCliente.telefone"/>
                 </div>
 
                 <div>
                     <label for="idade">Idade</label>
-                    <input id="idade" type="idade" name="idade" required v-model="formCliente.idade"/>
+                    <input id="idade" type="number" name="idade" required v-model="formCliente.idade"/>
                 </div>
             </div>
 
@@ -46,36 +46,36 @@
             <div>
                 <div>
                     <label for="cep">Cep</label>
-                    <input id="cep" type="cep" cep="cep" required autofocus @keyup="puxarEndereco(formCliente.cep)" v-model="formCliente.cep"/>
+                    <input id="cep" type="text" cep="cep" required autofocus @keyup="puxarEndereco(formCliente.cep)" v-model="formCliente.cep"/>
                 </div>
 
                 <div>
                     <label for="estado">Estado</label>
-                    <input id="estado" type="estado" name="estado" required v-model="formCliente.estado"/>
+                    <input id="estado" type="text" name="estado" required v-model="formCliente.estado"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="cidade" name="cidade" required v-model="formCliente.cidade"/>
+                    <input id="cidade" type="text" name="cidade" required v-model="formCliente.cidade"/>
                 </div>
 
                 <div>
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="bairro" name="bairro" required v-model="formCliente.bairro"/>
+                    <input id="bairro" type="text" name="bairro" required v-model="formCliente.bairro"/>
                 </div>
             </div>
 
             <div>
                 <div>
                     <label for="rua">Rua</label>
-                    <input id="rua" type="rua" name="rua" required v-model="formCliente.rua"/>
+                    <input id="rua" type="text" name="rua" required v-model="formCliente.rua"/>
                 </div>
 
                 <div>
                     <label for="numero">Número</label>
-                    <input id="numero" type="numero" name="numero" required v-model="formCliente.numero"/>
+                    <input id="numero" type="number" name="numero" required v-model="formCliente.numero"/>
                 </div>
             </div>
 
@@ -178,16 +178,12 @@
 </template>
 
 <script>
-
-import PedidoFeito from './PedidoFeito.vue'
-
+import PedidoFeito from '../components/PedidoFeito.vue'
 export default {
     name: 'concluirpedido',
-
     components: {
         PedidoFeito
     },
-
     data() {
         return {
             formCliente: {
@@ -216,9 +212,7 @@ export default {
             pedidoFeito: null
         };
     },
-
     methods: {
-
         puxarEndereco(cep) {
             if(cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
@@ -231,18 +225,16 @@ export default {
                 })
             }
         },
-
         submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
             document.querySelector('.formulario-entrega').style.display = 'block'
         },
-
         confirmarPedido() {
             const formData = new FormData()
-            
 
             const produtos = JSON.parse(localStorage.getItem('comprar'))
             produtos.items.forEach((produto) => {
+
                 formData.append('cpf_comprador', this.formCliente.cpf)
                 formData.append('cep_comprador', this.formCliente.cep)
                 formData.append('cidade_comprador', this.formCliente.cidade)
@@ -254,13 +246,11 @@ export default {
                 formData.append('quantidade', produto.quantidade)
                 formData.append('id_produto_comprado', produto.produto.id_produto)
 
-                fetch('https://resteapicommercelucas.herokuapp.com/venda/', {
+                fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',
                     body: formData
                 })
             })
-
-
             this.pedidoFeito = true;
             this.$store.commit('ZERAR_CARRINHO')
             setTimeout(() => {
@@ -269,70 +259,52 @@ export default {
             }, 1000);
             
         },
-
-        resumoDoPedido() {
-            var pedido = JSON.parse(localStorage.getItem('comprar'))
-            this.compra = pedido
-        }
     },
-
     created() {
-        this.resumoDoPedido()
+        this.compra = JSON.parse(localStorage.getItem('comprar'))
         document.title =  'Concluir Pedido - LucasBiker'
     }
 }
 </script>
 
 <style scoped>
-
 .titulo {
     font-size: 42px;
     margin-bottom: 0px;
 }
-
 .concluir-pedido {
     margin-top: 160px;
 }
-
 .titulo-formulario {
     margin-bottom: 40px;
     margin-top: 60px;
 }
-
 .form {
     margin-bottom: 60px;
 }
-
 .form label {
     font-size: 18px;
 }
-
 .form > div {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-
 .form > div div {
     width: 45%;
 }
-
 .entrega-pagamento {
     margin-bottom: 20px;
 }
-
 .entrega-pagamento div label {
     display: block;
 }
-
 .entrega-pagamento select {
     font-size: 18px;
 }
-
 .formulario-entrega {
     display: none;
 }
-
 .btn-pedido {
     margin-right: 0px;
     margin-top: 40px;
@@ -344,21 +316,16 @@ export default {
     font-size: 18px;
     cursor: pointer;
 }
-
 /* RESUMO DO PEDIDO */
-
 .resumo-pedido {
     margin-bottom: 60px;
 }
-
 .resumo-pedido h1 {
     margin-bottom: 40px;
 }
-
 .nome-produto {
     text-align: initial;
 }
-
 .item-carrinho {
     margin-bottom: 30px;
     display: grid;
@@ -368,46 +335,37 @@ export default {
     text-align: center;
     background-color: #F3F2F2;
 }
-
 .carrinho-img {
     height: 200px;
     width: 350px;
 }
-
 .carrinho-info-produto {
     margin-left: 20px;
 }
-
 h2 {
     font-size: 30px;
 }
-
 .quantidade-produto {
     color: #ada9a9;
 }
-
 .carrinho-info-produto p{
     font-size: 18px;
     color: #000;
     margin-top: 20px;
 }
-
 .carrinho-info-produto p:nth-child(2){
     margin-top: 125px;
 }
-
 .preco-unitario p, .preco-total p {
     color: #747070;
     font-weight: bold;
     font-size: 18px;
     margin-top: 130px;
 }
-
 .valor-final {
     display: block;
     font-weight: bold;
     font-size: 24px;
     text-align: right;
 }
-
 </style>

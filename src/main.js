@@ -4,12 +4,12 @@ import router from './router'
 import store from './store'
 import * as firebase from 'firebase';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faShoppingCart, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faShoppingCart, faTruckMoving, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
-library.add([faUser, faShoppingCart, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave])
+library.add([faUser, faShoppingCart, faTruckMoving, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave])
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

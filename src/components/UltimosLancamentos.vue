@@ -39,21 +39,21 @@ export default {
 
     methods: {
         getProdutoRacing() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Racing')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Racing')
             .then(req => req.json())
             .then(res => {
                 this.listaLancamentos.push(res.reverse()[0])
             })
         },
         getProdutoRetro() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Retro')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Retro')
             .then(req => req.json())
             .then(res => {
                 this.listaLancamentos.push(res.reverse()[0])
             })
         },
         getProdutoMotorizada() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Motorizada')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Motorizada')
             .then(req => req.json())
             .then(res => {
                 this.listaLancamentos.push(res.reverse()[0])

@@ -40,7 +40,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Racing')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Racing')
             .then(req => req.json())
             .then(res => {
                 this.listaRacing = res

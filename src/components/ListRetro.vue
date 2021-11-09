@@ -39,7 +39,7 @@ export default {
 
     methods: {
         getProduto() {
-            fetch('https://resteapicommercelucas.herokuapp.com/produto/?categoria=Retro')
+            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Retro')
             .then(req => req.json())
             .then(res => {
                 this.listRetro = res
