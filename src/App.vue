@@ -1,10 +1,14 @@
 <template>
   <div id="app">
+
     <Header/>
+
     <main id="main">
       <router-view/>
     </main>
+
     <Footer/>
+
   </div>
 </template>
 
@@ -240,15 +244,6 @@ a {
 .bicicletas-pagina {
     margin-top: 160px;
     margin-bottom: 20px;
-}
-
-/* TRANSICAO */
-.v-enter, .v-leave-to {
-  opacity: 0;
-}
-
-.v-enter-active, .v-leave-active {
-  transition:  all 0.3s;
 }
 
 @media (max-width: 700px) {

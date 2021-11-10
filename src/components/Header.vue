@@ -1,9 +1,12 @@
 <template>
     <header>
-
         <nav class="container header-principal">
             <router-link to="/">
-                <img id="logo" src="@/assets/logo-bike.png" alt="LucasBiker">
+                <img 
+                    id="logo" 
+                    src="@/assets/logo-bike.png" 
+                    alt="LucasBiker"
+                >
             </router-link>
 
             <div class="menu-mobile" @click="abrirMenu">
@@ -29,33 +32,35 @@
             </div>
 
             <div class="menu ativo">
-                <ul>
-                    <li v-if="user.loggedIn">
+                <ul v-if="user.loggedIn">
+                    <li>
                         <router-link to="/meus-pedidos">
                             <font-awesome-icon icon="truck-moving" size="2x"/>
                         </router-link>
                     </li>
 
-                    <li v-if="user.loggedIn">
+                    <li>
                         <router-link to="/concluir-pedido">
                             <font-awesome-icon icon="shopping-bag" size="2x"/>
                         </router-link>
                     </li>
 
-                    <li v-if="user.loggedIn" class="carrinho-header">
+                    <li class="carrinho-header">
                         <router-link to="/carrinho">
                             <font-awesome-icon icon="shopping-cart" size="2x"/>
                             <span>{{ carrinhoQuantidade }}</span>
                         </router-link>
                     </li>
 
-                    <li v-if="user.loggedIn">
+                    <li>
                         <span class="sair-login-mobile" @click="signOut">
                             <font-awesome-icon icon="sign-out-alt" size="2x"/>
                         </span>
                     </li>
+                </ul>
 
-                    <li v-else>
+                <ul v-else>
+                    <li>
                         <router-link to="/login">
                             <button class="btn-login">Entrar <font-awesome-icon icon="user" size="3px"/></button>
                         </router-link>
@@ -63,7 +68,6 @@
                 </ul>
             </div>
         </nav>
-
     </header>
 </template>
 

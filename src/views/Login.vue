@@ -1,26 +1,42 @@
 <template>
-  <div class="login">
+  <section class="login">
+    
+    <h1 class="titulo-login">Login</h1>
 
-        <h1 class="titulo-login">Login</h1>
+    <p class="erro-usuario" v-if="error">{{error}}</p>
 
-        <p class="erro-usuario" v-if="error">{{error}}</p>
+    <form action="#" @submit.prevent="submit">
+      <label for="current-email">Email</label>
+      <input 
+        id="current-email" 
+        type="email" 
+        name="email" 
+        autocomplete="username" 
+        required 
+        autofocus 
+        v-model="form.email"
+      >
 
-        <form action="#" @submit.prevent="submit">
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" autocomplete="username" required autofocus v-model="form.email"/>
+      <label for="password">Password</label>
+      <input 
+        id="password" 
+        type="password" 
+        name="password" 
+        autocomplete="current-password" 
+        required 
+        v-model="form.password"
+      >
 
-            <label for="password">Password</label>
-            <input id="password" type="password" name="password" autocomplete="current-password" required v-model="form.password"/>
+      <div>
+          <button class="btn btn-login" type="submit">Login</button>
+      </div>
+    </form>
 
-            <div>
-                <button type="submit" class="btn btn-login">Login</button>
-            </div>
-        </form>
+    <router-link class="acessar-conta" to="/register">Não tem conta? Crie uma</router-link>
 
-        <router-link to="/register" class="acessar-conta">Não tem conta? Crie uma</router-link>
-        <router-link to="/esqueci-senha" class="acessar-conta">Esqueceu a senha?</router-link>
+    <router-link class="acessar-conta" to="/esqueci-senha">Esqueceu a senha?</router-link>
 
-    </div>
+  </section>
 </template>
 
 <script>

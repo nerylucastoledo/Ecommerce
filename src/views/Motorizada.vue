@@ -1,6 +1,5 @@
 <template>
     <section class="bicicletas-pagina">
-        <div class="background"></div>
         <ListMotorizada>
             <h1 class="titulo">MOTORIZADA</h1>
         </ListMotorizada>

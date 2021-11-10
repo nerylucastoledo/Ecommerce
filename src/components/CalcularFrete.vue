@@ -1,39 +1,35 @@
 <template>
     <section class="conteudo-frete">
         
-        <div class="frete">
+        <div>
             <div>
                 <label for="frete">CEP:</label>
             </div>
+
             <div>
                 <input type="text" name="frete" v-model="frete" class="input-frete">
                 <button class="btn-frete" @click="calcularFrete">Ok</button>
             </div>
         </div>
-        <div class="valor-frete" v-if="valorFrete">
-            <div>
-                <p class="texto-valor">Valor Frete:</p>
-            </div>
-            <div>
-                <p class="valor">{{valorFrete | numeroPreco}}</p>
-            </div>
+
+        <div v-if="valorFrete">
+            <p class="texto-valor">Valor Frete:</p>
+
+            <p class="valor">{{valorFrete | numeroPreco}}</p>
         </div>
-        <div class="valor-frete">
-            <div>
-                <p class="texto-valor">Valor Produtos:</p>
-            </div>
-            <div>
-                <p class="valor">{{valorProdutos | numeroPreco}}</p>
-            </div>
+
+        <div>
+            <p class="texto-valor">Valor Produtos:</p>
+
+            <p class="valor">{{valorProdutos | numeroPreco}}</p>
         </div>
-        <div class="valor-final">
-            <div>
-                <p class="texto-valor">Valor Final:</p>
-            </div>
-            <div>
-                <p class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
-            </div>
+
+        <div>
+            <p class="texto-valor">Valor Final:</p>
+            
+            <p class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
         </div>
+
         <div>
             <button class="comprar-bicicleta btn-finalizar" @click="comprar">Finalizar compra</button>
         </div>
@@ -85,7 +81,7 @@ export default {
     width: 350px;
 }
 
-.frete, .valor-final, .valor-frete, .valor-produtos {
+.conteudo-frete > div {
     display: flex;
     justify-content: space-between;
     align-items: center;

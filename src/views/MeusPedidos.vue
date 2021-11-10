@@ -1,39 +1,58 @@
 <template>
     <section class="meus-pedidos">
-
+        
         <h1 class="titulo-pages">Meus Pedidos</h1>
 
         <div class="container" v-if="pedidos">
-            
-            <div class="produto-item" v-for="(produto, index) in produtos" :key="produto+index">
+            <div 
+                class="produto-item"
+                v-for="(produto, index) in produtos" 
+                :key="produto+index"
+            >
                 <div class="produto-info">
                     <router-link :to="{ name: 'produto', params: { id: produto.id_produto }}">
                         <img :src="produto.imagem_produto" alt="Imagem produto">
                     </router-link>
+                    
                     <div>
                         <h2>{{produto.nome_produto}}</h2>
-                        <p>Valor pago: <strong>{{pedidos[index].valor_pago | numeroPreco}}</strong></p>
-                        
+
+                        <p>
+                            Valor pago: 
+                            <strong>{{pedidos[index].valor_pago | numeroPreco}}</strong>
+                        </p>
                     </div>
                 </div>
 
                 <div class="produto-entrega">
                     <p class="dia-pra-chegar">Chegará até o dia 14/09</p>
+
                     <p class="status-pedido">
                         Status:
-                        <span class="pedido-realizado" v-if="pedidoFeito"><strong>Pedido realizado</strong></span>
-                        <span class="processamento" v-else-if="processamento"><strong>Em processamento</strong></span>
-                        <span class="entregue" v-else-if="entregue"><strong>Entregue</strong></span>
-                        <span class="cancelado" v-else><strong>Cancelado</strong></span>
+                        <span class="pedido-realizado" v-if="pedidoFeito">
+                            <strong>Pedido realizado</strong>
+                        </span>
+
+                        <span class="processamento" v-else-if="processamento">
+                            <strong>Em processamento</strong>
+                        </span>
+
+                        <span class="entregue" v-else-if="entregue">
+                            <strong>Entregue</strong>
+                        </span>
+
+                        <span class="cancelado" v-else>
+                            <strong>Cancelado</strong>
+                        </span>
                     </p>
                 </div>
             </div>
-
         </div>
+
         <div v-else>
             <p class="nenhum-item">Carrinho vazio! :(</p>
         </div>
-
+        
     </section>
 </template>
 
@@ -92,6 +111,7 @@ export default {
     padding: 20px;
     margin-bottom: 30px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     position: relative;

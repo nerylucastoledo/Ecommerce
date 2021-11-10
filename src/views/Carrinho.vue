@@ -4,36 +4,46 @@
         <h1 class="titulo-pages">CARRINHO</h1>
 
         <div class="container" v-if="carrinho.items.length > 0">
-            <div class="carrinho-item" v-for="(produto, index) in carrinho.items" :key="produto+index">
-                <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
-                    <img :src="produto.produto.imagem_produto" alt="Imagem produto">
+            <div 
+                class="carrinho-item" 
+                v-for="({produto}, index) in carrinho.items" 
+                :key="produto+index"
+            >
+                <router-link :to="{ name: 'produto', params: { id: produto.id_produto }}">
+                    <img :src="produto.imagem_produto" alt="Imagem produto">
                 </router-link>
-
                 <div>
-                    <h2 class="nome-produto">{{produto.produto.nome_produto}}</h2>
-                    <p class="quantidade">Quantidade: <strong>{{produto.quantidade}}</strong></p>
+                    <h2 class="nome-produto">{{produto.nome_produto}}</h2>
+                    <p class="quantidade">
+                        Quantidade: 
+                        <strong>{{carrinho.items[index].quantidade}}</strong>
+                    </p>
                 </div>
+                
                 <div>
                     <h2>Preço unitário</h2>
-                    <p class="valor-produto">{{produto.produto.valor_produto | numeroPreco}}</p>
+
+                    <p class="valor-produto">{{produto.valor_produto | numeroPreco}}</p>
                 </div>
 
                 <div>
                     <h2>Preço total</h2>
-                    <p class="preco-total">{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
+
+                    <p class="preco-total">{{produto.valor_produto * carrinho.items[index].quantidade | numeroPreco}}</p>
                 </div>
 
                 <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">X</p>
-
             </div>
 
             <div>
                 <CalcularFrete :valorProdutos="valorProdutosTotal"></CalcularFrete>
             </div>
         </div>
+
         <div v-else>
             <p class="nenhum-item">Carrinho vazio! :(</p>
         </div>
+
     </section>
 </template>
 
@@ -64,7 +74,7 @@ export default {
         },
 
         apagarItemCarrinho(item) {
-            this.carrinho.items = this.carrinho.items.filter(i => i.produto.id_produto !== item.produto.id_produto)
+            this.carrinho.items = this.carrinho.items.filter(i => i.produto.id_produto !== item.id_produto)
             this.atualizarCarrinho()
         },
 
@@ -141,7 +151,7 @@ export default {
     color: #FFBA00;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 840px) {
     .carrinho-item {
         grid-template-columns: 1fr 1fr;
     }

@@ -13,8 +13,6 @@ export default new Vuex.Store({
     carrinho: {
       items: [],
     },
-    valorTotalDosProduto: 0
-
   },
 
   getters: {
@@ -53,10 +51,6 @@ export default new Vuex.Store({
       }
 
       localStorage.setItem('carrinho', JSON.stringify(state.carrinho))
-    },
-
-    REMOVER_DO_CARRINHO(state, item) {
-      state.carrinho.items = state.carrinho.items.filter(i => i.produto.id_produto !== item.produto.id_produto)
     },
 
     ZERAR_CARRINHO(state) {
