@@ -260,6 +260,7 @@ export default {
             
         },
     },
+
     created() {
         this.compra = JSON.parse(localStorage.getItem('comprar'))
         document.title =  'Concluir Pedido - LucasBiker'

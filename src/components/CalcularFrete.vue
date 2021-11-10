@@ -100,7 +100,7 @@ export default {
 .input-frete {
     border-radius: 4px;
     border: 1px solid white;
-    padding: 10px;
+    padding: 8px;
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
     transition: all 0.3s;
     font-size: 1rem;
@@ -133,6 +133,20 @@ export default {
 
 .btn-finalizar {
     float: right;
+}
+
+@media (max-width: 530px) {
+    .conteudo-frete {
+        max-width: 100%;
+    }
+
+    .texto-valor {
+        font-size: 18px;
+    }
+
+    .input-frete {
+        max-width: 120px;
+    }
 }
 
 </style>

@@ -78,7 +78,6 @@ a {
     font-size: 42px;
     font-style: italic;
     color: #222;
-    margin-bottom: 20px;
 }
 
 .titulo::before {
@@ -215,7 +214,7 @@ a {
 
 .texto-imagem-home {
     position: absolute;
-    top: 160px;
+    top: 200px;
     left: 80px;
     font-size: 24px;
     color: #fff;
@@ -230,10 +229,11 @@ a {
     width: 100%;
     height: 350px;
     filter: brightness(60%);
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     -moz-transition: all 0.3s;
     -webkit-transition: all 0.3s;
     border-radius: 4px;
+    margin-top: 60px;
 }
 
 /* PAGINA CATEGORIA DAS BICICLETAS */
@@ -262,7 +262,9 @@ a {
       height: 150px;
     }
     .texto-imagem-home {
-      top: 40px;
+      top: 120px;
+      left: 10px;
+      right: 10px;
       font-size: 16px;
     }
     .zoom img {
@@ -270,6 +272,9 @@ a {
     }
     .titulo::before {
       width: 100%;
+    }
+    .titulo {
+      font-size: 32px;
     }
 }
 

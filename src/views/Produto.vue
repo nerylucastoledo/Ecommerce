@@ -319,6 +319,30 @@ export default {
         margin-left: auto;
         max-width: 80%;
     }
+
+    .produto > div:nth-child(2) {
+        max-height: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .produto img {
+        width: 100%;
+        object-fit: cover;
+        height: 250px;
+    }
+}
+
+@media (max-width: 440px) {
+    .produto img {
+        width: 100%;
+        object-fit: cover;
+        height: 200px;
+    }
+
+    .comprar-bicicleta {
+        font-size: 14px;
+    }
 }
 
 </style>

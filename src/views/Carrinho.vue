@@ -141,4 +141,72 @@ export default {
     color: #FFBA00;
 }
 
+@media (max-width: 780px) {
+    .carrinho-item {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .carrinho-item img {
+        width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    .quantidade, .valor-produto, .preco-total {
+        position: relative;
+        bottom: 0px;
+    }
+
+    .quantidade {
+        margin-top: 20px;
+    }
+
+    .valor-produto, .preco-total {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+}
+
+@media (max-width: 530px) {
+    .carrinho-item {
+        display: block;
+        padding-bottom: 25px;
+        font-size: 18px;
+    }
+
+    .carrinho-item div:nth-child(2) h2 {
+        font-size: 34px;
+    }
+
+    .carrinho-item div:nth-child(3) h2, .carrinho-item div:nth-child(4) h2 {
+        font-size: 18px;
+    }
+
+    .carrinho-item  img {
+        margin-bottom: 20px;
+    }
+
+    .carrinho-item div:nth-child(3), .carrinho-item div:nth-child(4) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0px;
+    }
+
+    .apagar-do-carrinho {
+        position: absolute;
+        right: 5px;
+        top: 10px;
+    }
+
+    .valor-produto, .preco-total {
+        bottom: 10px;
+    }
+
+    .quantidade{
+        font-size: 24px;
+    }
+}
+
 </style>
