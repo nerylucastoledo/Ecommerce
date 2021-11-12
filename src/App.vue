@@ -73,6 +73,10 @@ a {
     margin-bottom: 60px;
 }
 
+.loading {
+  margin-top: 260px;
+}
+
 /* CARD ITEMS */
 .titulo {
     font-size: 42px;
@@ -111,7 +115,7 @@ a {
 
 .zoom {
     overflow: hidden;
-    max-width: 400px;
+    max-width: 350px;
     position: relative;
 }
 

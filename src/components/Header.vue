@@ -29,7 +29,7 @@
             </div>
 
             <div class="menu ativo">
-                <ul>
+                <ul @click="abrirMenu">
                     <li v-if="user.loggedIn">
                         <router-link to="/meus-pedidos">
                             <font-awesome-icon icon="truck-moving" size="2x"/>

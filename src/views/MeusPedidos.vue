@@ -53,8 +53,8 @@ export default {
     },
     
     methods: {
-        produtosComprados() {
-            fetch(`https://restapiecomerce.herokuapp.com/venda/?cpf=111.965.416-55`)
+        async produtosComprados(email) {
+            await fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${email}`)
             .then(req => req.json())
             .then(res => {
                 res.forEach(item => {
@@ -74,7 +74,11 @@ export default {
     },
 
     created() {
-        this.produtosComprados()
+        var email_usuario = ''
+        setTimeout(() => {
+            email_usuario = this.$store.state.user.data.email
+            this.produtosComprados(email_usuario)
+        }, 500)
     }
 
 }
@@ -151,6 +155,45 @@ export default {
 
 .cancelado {
     color: coral;
+}
+
+@media (max-width: 880px) {
+
+    .produto-item {
+        display: block;
+    }
+
+    .produto-item .produto-info {
+        display: block;
+    }
+
+    .produto-item img {
+        width: 100%;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+
+    .produto-info h2 {
+        margin-left: 0px;
+        text-align: center;
+        margin: 20px 0px;
+    }
+
+    .titulo-pages {
+        font-size: 32px;
+    }
+
+    p {
+        margin-left: 0px;
+    }
+
+    .produto-info p {
+        position: inherit;
+        text-align: center;
+        margin: 30px 0px;
+    }
 }
 
 </style>

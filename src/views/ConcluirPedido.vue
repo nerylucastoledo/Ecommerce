@@ -245,6 +245,7 @@ export default {
                 formData.append('qntd_parcela', 2)
                 formData.append('quantidade', produto.quantidade)
                 formData.append('id_produto_comprado', produto.produto.id_produto)
+                formData.append('email_comprador', this.$store.state.user.data.email)
 
                 fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',
@@ -369,4 +370,15 @@ h2 {
     font-size: 24px;
     text-align: right;
 }
+
+@media (max-width: 440px) {
+    .form > div {
+        display: block;
+    }
+
+    .form > div div {
+        width: 100%;
+    }
+}
+
 </style>
