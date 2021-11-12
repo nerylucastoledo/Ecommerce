@@ -1,96 +1,126 @@
 <template>
-    <div class="conteudo-produto">
-        <div v-if="loading" class="container produto">
-
-            <div>
+    <section class="conteudo-produto">
+        <div class="container" v-if="!loading">
+            <div class="produto" v-if="produto">
                 <div>
-                    <img :src="produto.imagem_produto">
-                </div>
-            </div>
-
-            <div v-if="produto" class="info-produto">
-
-                <div>
-                    <p class="uso-produto">Nova</p>
-                    <h1 class="nome-produto">{{produto.nome_produto}}</h1>
-
-                    <span
-                        v-for="(estrela, index) in qntd_estrelas_do_produto" 
-                        :key="estrela+index"
-                        class="estrelas-produto">
-                        {{estrelas}}
-                    </span>
-
-                    <span
-                        v-for="estrela in estrelas_restantes" 
-                        :key="estrela+'estrela'"
-                        class="estrelas-produto">
-                        {{estrela_vazia}}
-                    </span>
-                </div>
-
-                <div>
-                    <h2 class="valor-bicicleta">{{produto.valor_produto | numeroPreco}}</h2>
-                    <p class="parcela-bicicleta">ou 12x de {{produto.valor_produto / 12 | numeroPreco}}</p>
-                    <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
-                </div>
-
-                <div>
-                    <p v-if="produto.quantidade_estoque > 0" class="estoque">
-                        Disponível em estoque
-                    </p>
-                    <p v-else class="estoque">
-                        Sem estoque
-                    </p>
-                </div>
-
-                <div>
-                    <p class="estoque">
-                        Quantidade
-                        <span class="qntd-estoque">({{produto.quantidade_estoque}} disponível)</span>
-                    </p>
-                </div>
-
-                <div class="input-quantidade">
-                    <label for="qnt-comprar">Comprar: </label>
-                    <input type="number" class="input" id="qnt-comprar" name="qnt-comprar" min="1" :max="produto.quantidade_estoque" v-model="quantidade">
-                </div>
-
-               <div>
-                    <button class="comprar-bicicleta" @click="comprarProduto">Comprar agora</button>
-                    <button class="adicionar-carrinho-bicicleta comprar-bicicleta" @click="adicionarAoCarrinho()">Adicionar ao carrinho</button>
-               </div>
-
-            </div>
-
-            <div v-if="avaliacoes" class="avaliacoes">
-                <h1 class="titulo-avaliacao">Avaliações</h1>
-                <div 
-                    v-for="(avaliacao, index) in avaliacoes" 
-                    :key="avaliacao+index">
-
-                    <span 
-                        v-for="estrela, index in avaliacao.qntd_estrelas" 
-                        :key="index"
-                        class="qntd-estrelas">
-                        {{estrelas}}
-                    </span>
-                
-
                     <div>
-                        <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
-                        <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
+                        <img :src="produto.imagem_produto" :alt="produto.nome_produto">
+                    </div>
+                </div>
+
+                <div class="info-produto">
+                    <div>
+                        <h1 class="nome-produto">{{produto.nome_produto}}</h1>
+
+                        <p class="uso-produto">Nova</p>
+
+                        <span
+                            class="estrelas-produto" 
+                            v-for="(estrela, index) in qntd_estrelas_do_produto" 
+                            :key="estrela+index" 
+                        >
+                            {{estrelas_preenchidas}}
+                        </span>
+
+                        <span
+                            class="estrelas-produto" 
+                            v-for="estrela in estrelas_restantes"  
+                            :key="estrela+'estrela'" 
+                        >
+                            {{estrela_vazia}}
+                        </span>
                     </div>
 
+                    <div>
+                        <h2 class="valor-bicicleta">{{produto.valor_produto | numeroPreco}}</h2>
+
+                        <p class="parcela-bicicleta">ou 12x de {{valorParcelado | numeroPreco}}</p>
+
+                        <p class="cor-produto">Cor: {{produto.cor_produto}}</p>
+                    </div>
+
+                    <div>
+                        <p class="estoque" v-if="produto.quantidade_estoque > 0">
+                            Disponível em estoque
+                        </p>
+                        
+                        <p class="estoque" v-else>
+                            Sem estoque
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            <strong>Quantidade </strong>
+
+                            <span class="qntd-estoque">({{produto.quantidade_estoque}} disponível)</span>
+                        </p>
+                    </div>
+
+                    <div class="input-quantidade">
+                        <label for="qnt-comprar">Comprar: </label>
+
+                        <input
+                            class="input"
+                            id="qnt-comprar"
+                            type="number"
+                            name="qnt-comprar"
+                            min="1" 
+                            v-model="quantidade"
+                            :max="produto.quantidade_estoque"
+                        >
+                    </div>
+
+                    <div>
+                        <button 
+                            class="comprar-bicicleta" 
+                            @click="comprarProduto"
+                        >
+                            Comprar agora
+                        </button>
+
+                        <button 
+                            class="adicionar-carrinho-bicicleta comprar-bicicleta" 
+                            @click="adicionarAoCarrinho()"
+                        >
+                            Adicionar ao carrinho
+                        </button>
+                    </div>
+                </div>
+
+                <div class="avaliacoes" v-if="avaliacoes">
+                    <h1 class="titulo-avaliacao">Avaliações</h1>
+
+                    <div 
+                        v-for="(avaliacao, index) in avaliacoes" 
+                        :key="avaliacao+index"
+                    >
+                        <span 
+                            class="qntd-estrelas" 
+                            v-for="(estrela, index) in avaliacao.qntd_estrelas" 
+                            :key="index"
+                        >
+                            {{estrelas_preenchidas}}
+                        </span>
+                    
+                        <div>
+                            <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
+                            <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else>
+                    <p>Nenhuma avaliação disponível.</p>
                 </div>
             </div>
 
             <div v-else>
-                <p>Nenhuma avaliação disponível.</p>
+                <p>Nenhum produto encontrado!</p>
             </div>
 
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -104,13 +134,19 @@ export default {
         return {
             produto: null,
             avaliacoes: null,
-            estrelas: "★",
+            estrelas_preenchidas: "★",
             estrela_vazia: "☆",
             qntd_estrelas_do_produto: 0,
             estrelas_restantes: 0,
             quantidade: 1,
-            loading: 0,
+            loading: 1,
             valor_final: 0
+        }
+    },
+
+    computed: {
+        valorParcelado() {
+            return this.produto.valor_produto / 12
         }
     },
 
@@ -122,7 +158,9 @@ export default {
                 this.produto = res[0]
                 this.valor_final = res[0].valor_produto
                 this.avaliacoes = res[0].avaliacoes
+
                 this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
+
                 document.title = `${res[0].nome_produto} - LucasBiker`
             })
         },
@@ -143,10 +181,12 @@ export default {
             if (isNaN(this.quantidade) || this.quantidade < 1) {
                 this.quantidade = 1
             }
+            
             const item = {
                 produto: this.produto,
                 quantidade: parseInt(this.quantidade)
             }
+
             this.$store.commit('ADICIONAR_AO_CARRINHO', item)
         },
 
@@ -160,6 +200,7 @@ export default {
             }
 
             localStorage.setItem('comprar', JSON.stringify(produtoComprar))
+
             this.$router.push({name: 'concluirpedido'})
         }
 
@@ -167,8 +208,9 @@ export default {
 
     mounted() {
         setTimeout(() => {
-            this.loading = 1
+            this.loading = 0
         }, 300)
+
         this.getProduto()
     }
 }
@@ -188,7 +230,7 @@ export default {
     display: grid;
     grid-template-columns: 2fr 1fr;
     background-color: #fff;
-    padding-top: 20px;
+    padding: 20px 20px 0;
 }
 
 .produto > div:nth-child(2) {

@@ -1,48 +1,53 @@
 <template>
-    <div class="carrossel">
-
-      <div class="carrossel-inicio">
-        <router-link to="/racing"><img src="../assets/imagem-principal.png" alt="Imagem Principal"></router-link>
-      </div>
-
-      <div class="carrossel-inicio">
-        <router-link to="/motorizada"><img src="../assets/motorizada.png" alt="Imagem Principal"></router-link>
-      </div>
-
-      <div class="carrossel-inicio">
-        <router-link to="/retro"><img src="../assets/retro.png" alt="Imagem Principal"></router-link>
-      </div>
-
-      <div class="container">
-
-        <div class="info-ecommerce">
-
-          <div>
-            <font-awesome-icon icon="truck" size="3x"/>
-            <p>Entregamos para todo o Brasil.</p>
-          </div>
-
-          <div>
-            <font-awesome-icon icon="credit-card" size="3x"/>
-            <p>Parcelamos em 12x sem juros.</p>
-          </div>
-
-          <div>
-            <font-awesome-icon icon="headset" size="3x"/>
-            <p>Suporte 24 horas.</p>
-          </div>
-
-          <div>
-            <font-awesome-icon icon="money-bill-wave" size="3x"/>
-            <p>Pagamento seguro</p>
-          </div>
-
-        </div>
-
-      </div>
-
+  <section class="carrossel">
+    
+    <div class="carrossel-inicio">
+      <router-link to="/racing">
+        <img src="../assets/imagem-principal.png" alt="Imagem Principal">
+      </router-link>
     </div>
 
+    <div class="carrossel-inicio">
+      <router-link to="/motorizada">
+        <img src="../assets/motorizada.png" alt="Imagem Principal">
+      </router-link>
+    </div>
+
+    <div class="carrossel-inicio">
+      <router-link to="/retro">
+        <img src="../assets/retro.png" alt="Imagem Principal">
+      </router-link>
+    </div>
+
+    <div class="container">
+      <div class="info-ecommerce">
+        <div>
+          <font-awesome-icon icon="truck" size="3x"/>
+
+          <p>Entregamos para todo o Brasil.</p>
+        </div>
+
+        <div>
+          <font-awesome-icon icon="credit-card" size="3x"/>
+
+          <p>Parcelamos em 12x sem juros.</p>
+        </div>
+
+        <div>
+          <font-awesome-icon icon="headset" size="3x"/>
+
+          <p>Suporte 24 horas.</p>
+        </div>
+
+        <div>
+          <font-awesome-icon icon="money-bill-wave" size="3x"/>
+
+          <p>Pagamento seguro</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
 </template>
 
 <script>

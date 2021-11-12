@@ -1,6 +1,5 @@
 <template>
     <section class="bicicletas-pagina">
-        <div></div>
         <ListRetro>
             <h1 class="titulo">RETRÔ</h1>
         </ListRetro>

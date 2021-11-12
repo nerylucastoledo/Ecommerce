@@ -6,7 +6,6 @@
       </div>
 
   </section>
-  
 </template>
 
 <script>

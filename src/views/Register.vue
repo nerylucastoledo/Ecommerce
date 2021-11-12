@@ -1,28 +1,47 @@
 <template>
   <section class="login">
+    
+      <h1 class="titulo-login">Crie sua conta</h1>
 
-        <h1 class="titulo-login">Crie sua conta</h1>
+      <form action="#" @submit.prevent="submit">
+        <label for="name">Nome</label>
+        <input 
+          id="name" 
+          type="name" 
+          name="name" 
+          required 
+          autofocus
+          v-model="form.nome"
+        >
 
-        <form action="#" @submit.prevent="submit">
-            <label for="name">Nome</label>
-            <input  id="name" type="name" name="name" value required autofocus v-model="form.nome"/>
+        <label for="email">E-mail</label>
+        <input 
+          id="email" 
+          type="email" 
+          name="email" 
+          autocomplete="username" 
+          required 
+          autofocus 
+          v-model="form.email"
+        >
 
-            <label for="email">E-mail</label>
-            <input id="email" type="email" name="email" value autocomplete="username" required autofocus v-model="form.email"/>
+        <label for="password">Senha</label>
+        <input 
+          id="password" 
+          type="password" 
+          name="password" 
+          autocomplete="current-password" 
+          required 
+          v-model="form.password"
+        >
 
-            <label for="password">Senha</label>
-            <input id="password" type="password" name="password" autocomplete="current-password" required v-model="form.password"/>
+        <input class="btn btn-login" type="submit" value="Criar Conta">
+      </form>
 
-          <div>
-            <button type="submit" class="btn btn-login">Criar Conta</button>
-          </div>
-        </form>
-
-        <router-link to="/login" class="acessar-conta">Já tem uma conta? Faça login</router-link>
+      <router-link to="/login" class="acessar-conta">Já tem uma conta? Faça login</router-link>
 
     </section>
 </template>
-
 
 <script>
 
@@ -45,6 +64,7 @@ export default {
     submit() {
       firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password)
       .then(data => {
+
         firebase.auth().currentUser.updateProfile({displayName: this.form.nome})
 
         this.$store.dispatch("fetchUser", data)

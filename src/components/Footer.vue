@@ -1,13 +1,23 @@
 <template>
     <footer>
         <section>
-
             <div class="inserir-email">
                 <div class="container">
                     <h1>Quer ficar sabendo das nossas novidades?</h1>
+
                     <p>Insira seu melhor e-mail para receber promoções e muito mais.</p>
+
                     <form class="inscrever" action="#" @submit.prevent="submit">
-                        <input id="email" type="email" name="email" autocomplete="email" required autofocus v-model="form.email"/>
+                        <input 
+                            id="email" 
+                            type="email" 
+                            name="email" 
+                            autocomplete="email" 
+                            required 
+                            autofocus 
+                            v-model="form.email"
+                        >
+
                         <button type="submit" class="btn-increver">Inscrever</button>
                     </form>
                 </div>
@@ -17,25 +27,33 @@
                 <div class="container">
                     <div class="footer-historia">
                         <h2 class="titulo-footer">NOSSA HISTÓRIA</h2>
+
                         <p>Quando iniciamos a LucasBiker queriamos apenas um produto que adoraríamos utilizar. Eramos apaixonados por pedalar e também por fazer as coisas com as nossas próprias mãos. Assim surgiu um sonho na garagem da nossa casa.</p>
                     </div>
 
                     <div class="footer-contato">
                         <h2 class="titulo-footer">CONTATOS</h2>
+
                         <p>+55 (35)9 9742-0423</p>
+
                         <p>lucasnerytoledo@hotmail.com</p>
+
                         <p>Rua Tabaranas, 125 - Pouso Alegre, MG</p>
+
                     </div>
 
                     <div  class="footer-sociais">
                         <h2 class="titulo-footer">REDES SOCIAIS</h2>
-                        <a target= "_blank" href="https://www.facebook.com/LucasNeryToledo/">
+
+                        <a target= "_blank" :href="facebok">
                             <img src="@/assets/facebook.png" alt="Icon Facebook">
                         </a>
-                        <a target= "_blank" href="https://www.instagram.com/lucas_nery6/">
+
+                        <a target= "_blank" :href="instagram">
                             <img src="@/assets/instagram.png" alt="Icon Instagram">
                         </a>
-                        <a target= "_blank" href="https://api.whatsapp.com/send?phone=5535997420423">
+
+                        <a target= "_blank" :href="whatsapp">
                             <img src="@/assets/whatsapp.png" alt="Icon Whatsapp">
                         </a>
                     </div>
@@ -57,7 +75,10 @@ export default {
         return {
             form: {
                 email: ""
-            }
+            },
+            facebok: "https://www.facebook.com/LucasNeryToledo/",
+            instagram: "https://www.instagram.com/lucas_nery6/",
+            whatsapp: "https://api.whatsapp.com/send?phone=5535997420423"
         }
     },
 }

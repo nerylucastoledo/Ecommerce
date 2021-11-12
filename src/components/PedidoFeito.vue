@@ -1,9 +1,9 @@
 <template>
-    <div class="modal">
+    <section class="modal">
       <div>
         <slot></slot>
       </div>
-    </div>
+    </section>
 </template>
 
 <style>
