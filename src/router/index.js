@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import ListHome from '../views/ListHome.vue'
 
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
@@ -12,14 +12,20 @@ import Carrinho from '../views/Carrinho.vue'
 import Racing from '../views/Racing.vue'
 import Retro from '../views/Retro.vue'
 import Motorizada from '../views/Motorizada.vue'
+import Dashboard from '../views/Dashboard.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
     path: '/',
     name: 'Home',
-    component: Home
+    component: ListHome
   },
   {
     path: '/login',

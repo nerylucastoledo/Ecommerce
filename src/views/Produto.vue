@@ -158,8 +158,9 @@ export default {
                 this.produto = res[0]
                 this.valor_final = res[0].valor_produto
                 this.avaliacoes = res[0].avaliacoes
-
-                this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
+                if(res[0].avaliacoes.length) {
+                    this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
+                }
 
                 document.title = `${res[0].nome_produto} - LucasBiker`
             })

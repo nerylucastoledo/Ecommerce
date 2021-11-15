@@ -4,12 +4,48 @@ import router from './router'
 import store from './store'
 import * as firebase from 'firebase';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faShoppingCart, faTruckMoving, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faUser, 
+  faShoppingCart, 
+  faTimes, 
+  faCheck, 
+  faChartBar, 
+  faMoneyBillAlt, 
+  faCubes, 
+  faTruckMoving, 
+  faShoppingBag, 
+  faSignOutAlt, 
+  faTruck, 
+  faCreditCard, 
+  faHeadset, 
+  faMoneyBillWave,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueApexCharts from 'vue-apexcharts'
+
+Vue.component('apexchart', VueApexCharts)
+Vue.use(VueApexCharts)
 
 Vue.config.productionTip = false
 
-library.add([faUser, faShoppingCart, faTruckMoving, faShoppingBag, faSignOutAlt, faTruck, faCreditCard, faHeadset, faMoneyBillWave])
+library.add([
+  faUser, 
+  faCubes, 
+  faCheck, 
+  faTimes, 
+  faChartBar, 
+  faMoneyBillAlt, 
+  faShoppingCart, 
+  faTruckMoving, 
+  faShoppingBag, 
+  faSignOutAlt, 
+  faTruck, 
+  faCreditCard, 
+  faHeadset, 
+  faMoneyBillWave,
+  faSearch
+])
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
