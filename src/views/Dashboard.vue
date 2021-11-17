@@ -136,16 +136,13 @@ export default {
                     width: 1,
                     colors: ['#fff']
                 },
-                title: {
-                    text: 'Porcentagem de vendas'
-                },
                 xaxis: {
                     categories: ['Hoje'],
                 },
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return val + "%"
+                            return val + "x"
                         }
                     }
                 },
@@ -163,17 +160,32 @@ export default {
             .then(res => {
                 this.vendas = res
                 this.vendasDoDia(res)
+                this.vendasDaSemana(res)
+                this.vendasDoMes(res)
             })
         },
 
         vendasDoDia(quantidade) {
+            let date = new Date()
+            date = date.toISOString().slice(0,10)
+
             quantidade.forEach((venda) => {
-                var series_body = {
-                    name: `${venda.cidade_comprador}`,
-                    data: [2]
+                if(venda.data_venda === date) {
+                    var series_body = {
+                        name: `${venda.cidade_comprador}`,
+                        data: [venda.quantidade]
+                    }
+                    this.series.push(series_body)
                 }
-                this.series.push(series_body)
             })
+        },
+
+        vendasDaSemana(quantidade) {
+            console.log(quantidade)
+        },
+
+        vendasDoMes(quantidade) {
+            console.log(quantidade)
         }
     },
 

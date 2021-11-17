@@ -364,10 +364,11 @@ export default {
         },
         confirmarPedido() {
             const formData = new FormData()
+            let date = new Date()
 
             const produtos = JSON.parse(localStorage.getItem('comprar'))
             produtos.items.forEach((produto) => {
-
+                
                 formData.append('cpf_comprador', this.formCliente.cpf)
                 formData.append('cep_comprador', this.formCliente.cep)
                 formData.append('cidade_comprador', this.formCliente.cidade)
@@ -379,6 +380,8 @@ export default {
                 formData.append('quantidade', produto.quantidade)
                 formData.append('id_produto_comprado', produto.produto.id_produto)
                 formData.append('email_comprador', this.$store.state.user.data.email)
+                formData.append('data_venda', date.toISOString().slice(0,10))
+                formData.append('status_venda', 'Processamento')
 
                 fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',
