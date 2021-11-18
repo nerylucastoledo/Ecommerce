@@ -92,13 +92,21 @@
                             <td>{{venda.nome_produto}}</td>
                             <td>{{venda.cidade_comprador}}</td>
                             <td>{{venda.valor_pago | numeroPreco}}</td>
-                            <td class="status">Pedido Realizado</td>
-                            <td>
-                                <button class="confirmar-venda">
+                            <td class="confirmado" v-if="venda.status_venda === 'Confirmado'">{{venda.status_venda}}</td>
+                            <td class="recusado" v-else-if="venda.status_venda === 'Recusado'">{{venda.status_venda}}</td>
+                            <td class="processamento" v-else-if="venda.status_venda === 'Processamento'">{{venda.status_venda}}</td>
+                            <td class="entregue" v-else-if="venda.status_venda === 'Entregue'">Entregue</td>
+                            <td v-if="venda.status_venda === 'Processamento'">
+                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
                                     <font-awesome-icon icon="check" size="1x"/>
                                 </button>
-                                <button class="recusar-venda">
+                                <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
                                     <font-awesome-icon icon="times" size="1x"/>
+                                </button>
+                            </td>
+                            <td v-else-if="venda.status_venda !== 'Processamento' && venda.status_venda !== 'Entregue'">
+                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
+                                    <font-awesome-icon icon="truck-moving" size="1x"/>
                                 </button>
                             </td>
                         </tr>
@@ -163,6 +171,33 @@ export default {
     },
 
     methods: {
+        atualizarStatus(linha, status) {
+            const formData = new FormData()
+
+            linha.status_venda = status
+
+            formData.append('cpf_comprador', linha.cpf_comprador)
+            formData.append('cep_comprador', linha.cep_comprador)
+            formData.append('cidade_comprador', linha.cidade_comprador)
+            formData.append('bairro_comprador', linha.bairro_comprador)
+            formData.append('rua_comprador', linha.rua_comprador)
+            formData.append('numero_rua_comprador', linha.numero_rua_comprador)
+            formData.append('valor_pago', linha.valor_pago)
+            formData.append('qntd_parcela', linha.qntd_parcela)
+            formData.append('quantidade', linha.quantidade)
+            formData.append('id_produto_comprado', linha.id_produto_comprado)
+            formData.append('email_comprador', linha.email_comprador)
+            formData.append('data_venda', linha.data_venda)
+            formData.append('status_venda', status)
+            formData.append('nome_produto', linha.nome_produto)
+            formData.append('id_compra', linha.id_compra)
+
+            fetch(`https://restapiecomerce.herokuapp.com/venda/${linha.id_compra}/`, {
+                method: 'PUT',
+                body: formData
+            })
+        },
+
         pegarVendasFeitas() {
             fetch('https://restapiecomerce.herokuapp.com/venda/')
             .then(req => req.json())
@@ -399,10 +434,21 @@ td, th {
   padding: 10px;
 }
 
-.status {
-    background-color: #e8f9ef;
-    color: #56d388;
+.confirmado, .processamento, .recusado {
+    color: rgb(247, 239, 239);
     border-radius: 4px;
+}
+
+.confirmado {
+    background-color: #a4ecc2;
+}
+
+.processamento {
+    background-color: rgb(103, 151, 170)
+}
+
+.recusado {
+    background-color: coral;;
 }
 
 .ordem {

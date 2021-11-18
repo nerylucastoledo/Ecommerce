@@ -39,12 +39,6 @@
                         </router-link>
                     </li>
 
-                    <li>
-                        <router-link to="/concluir-pedido">
-                            <font-awesome-icon icon="shopping-bag" size="2x"/>
-                        </router-link>
-                    </li>
-
                     <li class="carrinho-header">
                         <router-link to="/carrinho">
                             <font-awesome-icon icon="shopping-cart" size="2x"/>

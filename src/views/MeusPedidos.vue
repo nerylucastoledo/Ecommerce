@@ -2,8 +2,7 @@
     <section class="meus-pedidos">
         
         <h1 class="titulo-pages">Meus Pedidos</h1>
-
-        <div class="container" v-if="pedidos">
+        <div class="container" v-if="pedidos.length">   
             <div 
                 class="produto-item"
                 v-for="(produto, index) in produtos" 
@@ -25,23 +24,25 @@
                 </div>
 
                 <div class="produto-entrega">
-                    <p class="dia-pra-chegar">Chegará até o dia 14/09</p>
+                    <p class="dia-pra-chegar" v-if="pedidos[index].status_venda !== 'Entregue'">Chegará até o dia 14/09</p>
+
 
                     <p class="status-pedido">
                         Status:
-                        <span class="pedido-realizado" v-if="pedidoFeito">
-                            <strong>Pedido realizado</strong>
-                        </span>
 
-                        <span class="processamento" v-else-if="processamento">
+                        <span class="processamento" v-if="pedidos[index].status_venda === 'Processamento'">
                             <strong>Em processamento</strong>
                         </span>
 
-                        <span class="entregue" v-else-if="entregue">
+                        <span class="confirmado" v-if="pedidos[index].status_venda === 'Confirmado'">
+                            <strong>Confirmado</strong>
+                        </span>
+
+                        <span class="entregue" v-else-if="pedidos[index].status_venda === 'Entregue'">
                             <strong>Entregue</strong>
                         </span>
 
-                        <span class="cancelado" v-else>
+                        <span class="cancelado" v-if="pedidos[index].status_venda === 'Recusado'">
                             <strong>Cancelado</strong>
                         </span>
                     </p>
@@ -62,7 +63,7 @@ export default {
 
     data() {
         return {
-            pedidos: null,
+            pedidos: [],
             produtos: [],
             pedidoFeito: true,
             processamento: false,
@@ -97,7 +98,7 @@ export default {
         setTimeout(() => {
             email_usuario = this.$store.state.user.data.email
             this.produtosComprados(email_usuario)
-        }, 500)
+        }, 400)
     }
 
 }
@@ -161,16 +162,16 @@ export default {
     font-size: 18px;
 }
 
-.pedido-realizado {
-    color: rgb(103, 151, 170)
-}
-
 .entregue {
     color: rgb(166, 218, 125)
 }
 
+.confirmado {
+    color: rgb(56, 207, 187)
+}
+
 .processamento {
-    color: rgb(190, 178, 3);
+    color: rgb(103, 151, 170)
 }
 
 .cancelado {
