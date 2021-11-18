@@ -2,7 +2,7 @@
     <div>
         <slot></slot>
         <div id="chart">
-            <apexchart type="bar" height="200" :options="chartOptions" :series="seriesMes"></apexchart>
+            <apexchart type="bar" height="150" :options="chartOptions" :series="series"></apexchart>
         </div>
 
     </div>
@@ -12,7 +12,8 @@
 export default {
     
     props: [
-        'seriesMes'
+        'series',
+        'teste'
     ],
 
     data() {
@@ -33,7 +34,7 @@ export default {
                     colors: ['#fff']
                 },
                 xaxis: {
-                    categories: ['Mês'],
+                    categories: [this.teste],
                 },
                 tooltip: {
                     y: {
@@ -47,6 +48,6 @@ export default {
                 },
             },
         }
-    }
+    },
 }
 </script>
