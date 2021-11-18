@@ -382,6 +382,7 @@ export default {
                 formData.append('email_comprador', this.$store.state.user.data.email)
                 formData.append('data_venda', date.toISOString().slice(0,10))
                 formData.append('status_venda', 'Processamento')
+                formData.append('nome_produto', produto.produto.nome_produto)
 
                 fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',

@@ -31,17 +31,17 @@
             <div class="dados">
                 <div>
                     <h2>Hoje</h2>
-                    <p>{{3999 | numeroPreco}}</p>
+                    <p>{{valor_vendas_hoje | numeroPreco}}</p>
                 </div>
 
                 <div>
                     <h2>Essa semana</h2>
-                    <p>{{12998 | numeroPreco}}</p>
+                    <p>{{valor_vendas_semana | numeroPreco}}</p>
                 </div>
 
                 <div>
                     <h2>Esse mês</h2>
-                    <p>{{32898 | numeroPreco}}</p>
+                    <p>{{valor_vendas_mes | numeroPreco}}</p>
                 </div>
             </div>
 
@@ -68,6 +68,7 @@
                         <tr>
                             <th>Ordem da venda</th>
                             <th>Comprador</th>
+                            <th>Produto</th>
                             <th>Cidade</th>
                             <th>Total</th>
                             <th>Status</th>
@@ -76,6 +77,7 @@
                         <tr v-for="(venda, index) in vendas" :key=" venda+index">
                             <td class="ordem">{{venda.id_compra}}</td>
                             <td>Lucas Nery</td>
+                            <td>{{venda.nome_produto}}</td>
                             <td>{{venda.cidade_comprador}}</td>
                             <td>{{venda.valor_pago | numeroPreco}}</td>
                             <td class="status">Pedido Realizado</td>
@@ -93,19 +95,23 @@
 
                 <div class="metas">
                     <div class="dia">
-                        <h2>Vendas do dia</h2>
-                        <div id="chart">
-                            <apexchart type="bar" height="200" :options="chartOptions" :series="series"></apexchart>
-                        </div>
+                        <DashboardDia :seriesDia="series_dia">
+                            <h2>% Vendas do dia</h2>
+                        </DashboardDia>
                     </div>
 
                     <div class="semana">
-                        <h2>Meta para a semana</h2>
+                        <DashboardSemana :seriesSemana="seriesSemana">
+                            <h2>% Vendas da semana</h2>
+                        </DashboardSemana>
                     </div>
 
                     <div class="mes">
-                        <h2>Meta para o mês</h2>
+                        <DashboardMes :seriesMes="seriesMes">
+                            <h2>% Vendas do mês</h2>
+                        </DashboardMes>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -114,42 +120,31 @@
 </template>
 
 <script>
+
+import DashboardDia from '../components/DashboardDia.vue'
+import DashboardSemana from '../components/DashboardSemana.vue'
+import DashboardMes from '../components/DashboardMes.vue'
+
+
 export default {
+
+    components: {
+        DashboardDia,
+        DashboardSemana,
+        DashboardMes
+    },
     
     data() {
         return {
             vendas: null,
+            valor_vendas_hoje: 0,
+            valor_vendas_semana: 0,
+            valor_vendas_mes: 0,
             filtro_status: "",
-            series: [],
-            chartOptions: {
-                chart: {
-                type: 'bar',
-                stacked: true,
-                stackType: '100%'
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: true,
-                    },
-                },
-                stroke: {
-                    width: 1,
-                    colors: ['#fff']
-                },
-                xaxis: {
-                    categories: ['Hoje'],
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + "x"
-                        }
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-            },
+            date: new Date(),
+            series_dia: [],
+            seriesSemana: [],
+            seriesMes: []
         }
     },
 
@@ -166,27 +161,81 @@ export default {
         },
 
         vendasDoDia(quantidade) {
-            let date = new Date()
-            date = date.toISOString().slice(0,10)
+            var date = this.date.toISOString().slice(0,10)
 
             quantidade.forEach((venda) => {
                 if(venda.data_venda === date) {
-                    var series_body = {
-                        name: `${venda.cidade_comprador}`,
-                        data: [venda.quantidade]
+                    const exists = this.series_dia.filter(elemento => elemento.name === venda.nome_produto)
+                
+                    if(exists.length) {
+                        exists[0].data[0] = exists[0].data[0] + 1
+                    } else {
+                        var series_body = {
+                            name: `${venda.nome_produto}`,
+                            data: [venda.quantidade]
+                        }
+                        this.series_dia.push(series_body)
                     }
-                    this.series.push(series_body)
+
+                    this.valor_vendas_hoje += venda.valor_pago
+
                 }
+
             })
         },
 
         vendasDaSemana(quantidade) {
-            console.log(quantidade)
+            var date = this.date.toString().slice(8,10)
+
+            quantidade.forEach((venda) => {
+
+                var data_venda = venda.data_venda.slice(8, 10)
+
+                if(parseInt(date) - parseInt(data_venda) <= 7) {
+                    const exists = this.seriesSemana.filter(elemento => elemento.name === venda.nome_produto)
+
+                    if(exists.length) {
+                        exists[0].data[0] = exists[0].data[0] + 1
+                    } else {
+                        var series_body = {
+                            name: `${venda.nome_produto}`,
+                            data: [venda.quantidade]
+                        }
+                        this.seriesSemana.push(series_body)
+                    }
+
+                    this.valor_vendas_semana += venda.valor_pago
+
+                }
+            })
         },
 
         vendasDoMes(quantidade) {
-            console.log(quantidade)
-        }
+            var date = this.date.getMonth()
+
+            quantidade.forEach((venda) => {
+
+                var data_venda = venda.data_venda.slice(5, 7)
+
+                if((date + 1) - parseInt(data_venda) <= 30) {
+                    const exists = this.seriesMes.filter(elemento => elemento.name === venda.nome_produto)
+
+                    if(exists.length) {
+                        exists[0].data[0] = exists[0].data[0] + 1
+                    } else {
+                        var series_body = {
+                            name: `${venda.nome_produto}`,
+                            data: [venda.quantidade]
+                        }
+                        this.seriesMes.push(series_body)
+                    }
+
+                    this.valor_vendas_mes += venda.valor_pago
+
+                }
+            })
+        },
+        
     },
 
     created() {
