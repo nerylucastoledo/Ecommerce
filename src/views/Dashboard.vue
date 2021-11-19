@@ -1,28 +1,7 @@
 <template>
     <section class="dashboard">
         <div class="sidebar">
-            <ul>
-                <li>
-                    <span>
-                        <font-awesome-icon icon="cubes" size="1x"/>
-                    </span>
-                    <p>Painel</p>
-                </li>
-
-                <li>
-                    <span>
-                        <font-awesome-icon icon="money-bill-alt" size="1x"/>
-                    </span>
-                    <p>Vendas</p>
-                </li>
-
-                <li>
-                    <span>
-                        <font-awesome-icon icon="chart-bar" size="1x"/>
-                    </span>
-                    <p>Gráficos</p>
-                </li>
-            </ul>
+            <BarraLateral/>
         </div>
 
         <div class="dashboard-content">
@@ -136,12 +115,14 @@
 <script>
 
 import DashboardPorcentagem from '../components/DashboardPorcentagem.vue'
+import BarraLateral from '../components/BarraLateral.vue'
 
 
 export default {
 
     components: {
-        DashboardPorcentagem
+        DashboardPorcentagem,
+        BarraLateral
     },
     
     data() {
@@ -300,31 +281,6 @@ export default {
 .dashboard-content h1 {
     text-align: center;
     font-size: 42px;
-}
-
-.sidebar {
-    margin-top: 100px;
-    background-color: #fff;
-    width: 200px;
-    text-align: center;
-    margin-right: 40px;
-}
-
-.sidebar li {
-    font-size: 18px;
-    padding: 15px 0px;
-    border-radius: 10px;
-}
-
-.sidebar p {
-    display: inline-block;
-    margin-left: 10px;
-}
-
-.sidebar li:hover {
-    background-color: #f5f7fb;
-    transition: .3s;
-    color: #FFBA00;
 }
 
 .dashboard-content {

@@ -13,6 +13,7 @@ import Racing from '../views/Racing.vue'
 import Retro from '../views/Retro.vue'
 import Motorizada from '../views/Motorizada.vue'
 import Dashboard from '../views/Dashboard.vue'
+import CadastrarItem from '../views/CadastrarItem.vue'
 
 Vue.use(VueRouter)
 
@@ -77,6 +78,11 @@ const routes = [
     path: '/meus-pedidos',
     name: 'meuspedidos',
     component: MeusPedidos,
+  },
+  {
+    path: '/cadastrar-item',
+    name: 'CadastrarItem',
+    component: CadastrarItem
   },
 ]
 
