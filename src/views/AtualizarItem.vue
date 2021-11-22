@@ -4,7 +4,7 @@
             <BarraLateral/>
         </div>
         
-        <div v-if="todos_produtos" class="container atualizar-items">
+        <div v-if="todos_produtos" class="atualizar-items container">
             <div v-for="produto in todos_produtos" :key="produto.id_produto">
                 <div class="item" @click="atualizarBicicleta(produto)">
                     <img :src="produto.imagem_produto" :alt="produto.nome_produto + 'imagem'">
@@ -13,64 +13,40 @@
             </div>
         </div>
 
+        <div class="modal-form formulario">
+            <FormItem/>
+        </div>
+
     </section>
 </template>
 
 <script>
 
 import BarraLateral from '../components/BarraLateral.vue'
+import FormItem from '../components/FormItem.vue'
 
 export default {
 
     components: {
-        BarraLateral
+        BarraLateral,
+        FormItem
     },
 
     data() {
         return {
             todos_produtos: null,
-            form: {
-                categoria: null,
-                nome_produto: null,
-                cor_produto: null,
-                quantidade_estoque: null,
-                valor_produto: null,
-                preco_antigo: null,
-                imagem_produto: null,
-                avaliacoes: []
-            }
+            alterado: null
         }
     },
 
     methods: {
-        atualizarBicicleta() {
-            const file = this.$refs.imagem_produto.files[0];
-            const form = new FormData();
-
-            form.append("categoria", this.form.categoria);
-            form.append("nome_produto", this.form.nome_produto);
-            form.append("cor_produto", this.form.cor_produto);
-            form.append("quantidade_estoque", this.form.quantidade_estoque);
-            form.append("valor_produto", parseInt(this.form.valor_produto));
-            form.append("preco_antigo", parseInt(this.form.preco_antigo));
-            form.append("avaliacoes", JSON.stringify(this.form.avaliacoes));
-            form.append("imagem_produto", file);
-
-            fetch('https://restapiecomerce.herokuapp.com/produto/', {
-                method: 'POST',
-                body: form
-            }).then(() => {
-                this.$router.push({name: 'Dashboard'})
-            })
-        },
-
         pegarTodasBicicletas() {
             fetch('https://restapiecomerce.herokuapp.com/produto/')
             .then(req => req.json())
             .then(res => {
                 this.todos_produtos = res
             })
-        }
+        },
     },
 
     created() {
@@ -83,9 +59,10 @@ export default {
 <style scoped>
 
 .atualizar-items {
+    margin: 100px 0 60px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .atualizar-items > div {
@@ -101,6 +78,11 @@ export default {
 
 .item {
     cursor: pointer;
+}
+
+.modal-form {
+    display: none;
+    z-index: 1;
 }
 
 </style>
