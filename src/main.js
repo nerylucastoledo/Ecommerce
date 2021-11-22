@@ -19,7 +19,8 @@ import {
   faCreditCard, 
   faHeadset, 
   faMoneyBillWave,
-  faSearch
+  faSearch,
+  faPen
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueApexCharts from 'vue-apexcharts'
@@ -44,7 +45,8 @@ library.add([
   faCreditCard, 
   faHeadset, 
   faMoneyBillWave,
-  faSearch
+  faSearch,
+  faPen
 ])
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

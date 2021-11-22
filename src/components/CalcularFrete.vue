@@ -8,7 +8,7 @@
 
             <div>
                 <input type="text" name="frete" v-model="frete" class="input-frete">
-                <button class="btn-frete" @click="calcularFrete">Ok</button>
+                <button class="btn-frete" @click="calcularFrete(frete)">Ok</button>
             </div>
         </div>
 
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 
 export default {
 

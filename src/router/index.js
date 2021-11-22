@@ -14,6 +14,7 @@ import Retro from '../views/Retro.vue'
 import Motorizada from '../views/Motorizada.vue'
 import Dashboard from '../views/Dashboard.vue'
 import CadastrarItem from '../views/CadastrarItem.vue'
+import AtualizarItem from '../views/AtualizarItem.vue'
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,11 @@ const routes = [
     path: '/cadastrar-item',
     name: 'CadastrarItem',
     component: CadastrarItem
+  },
+  {
+    path: '/atualizar-item',
+    name: 'AtualizarItem',
+    component: AtualizarItem
   },
 ]
 

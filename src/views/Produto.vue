@@ -88,30 +88,32 @@
                     </div>
                 </div>
 
-                <div class="avaliacoes" v-if="avaliacoes">
+                <div class="avaliacoes">
                     <h1 class="titulo-avaliacao">Avaliações</h1>
 
-                    <div 
-                        v-for="(avaliacao, index) in avaliacoes" 
-                        :key="avaliacao+index"
-                    >
-                        <span 
-                            class="qntd-estrelas" 
-                            v-for="(estrela, index) in avaliacao.qntd_estrelas" 
-                            :key="index"
+                    <div v-if="avaliacoes.length">
+                        <div 
+                            v-for="(avaliacao, index) in avaliacoes" 
+                            :key="avaliacao+index"
                         >
-                            {{estrelas_preenchidas}}
-                        </span>
-                    
-                        <div>
-                            <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
-                            <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
+                            <span 
+                                class="qntd-estrelas" 
+                                v-for="(estrela, index) in avaliacao.qntd_estrelas" 
+                                :key="index"
+                            >
+                                {{estrelas_preenchidas}}
+                            </span>
+                        
+                            <div>
+                                <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
+                                <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div v-else>
-                    <p>Nenhuma avaliação disponível.</p>
+                    <div v-else>
+                        <p class="nenhuma-avaliacao">Nenhuma avaliação ainda</p>
+                    </div>
                 </div>
             </div>
 
@@ -253,7 +255,6 @@ export default {
 }
 
 .avaliacoes > div {
-    box-shadow: 0 2px rgba(30, 60, 90, 0.1);
     border-radius: 4px;
     padding: 5px;
     margin-bottom: 30px;
@@ -272,9 +273,23 @@ export default {
     color: #FFBA00;
 }
 
+.nenhuma-avaliacao {
+    text-align: center;
+}
+
 .comentario-avaliador {
     margin-top: 10px;
     max-width: 90%;
+    margin-bottom: 30px;
+}
+
+.comentario-avaliador::after {
+    content: "";
+    display: block;
+    box-shadow: 0 2px rgb(30 60 90 / 10%);
+    width: 100%;
+    height: 1px;
+    margin-top: 10px;
 }
 
 .uso-produto {
