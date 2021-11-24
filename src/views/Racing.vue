@@ -1,19 +1,19 @@
 <template>
     <section class="bicicletas-pagina">
-        <ListRacing>
+        <ListItem lista="Racing">
             <h1 class="titulo">RACING</h1>
-        </ListRacing>
+        </ListItem>
     </section>
 </template>
 
 <script>
 
-import ListRacing from '../components/ListRacing.vue'
+import ListItem from '../components/ListItem.vue'
 
 export default {
 
     components: {
-        ListRacing
+        ListItem
     },
 
     created() {

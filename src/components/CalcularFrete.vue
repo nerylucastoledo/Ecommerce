@@ -1,5 +1,18 @@
 <template>
     <section class="conteudo-frete">
+
+
+        <div>
+            <div>
+                <label for="cupom">Cupom:</label>
+            </div>
+
+            <div>
+                <input type="text" name="cupom" v-model="cupom" class="input-frete">
+                <button class="btn-frete" @click="calcularCupom(cupom)">Ok</button>
+            </div>
+
+        </div>
         
         <div>
             <div>
@@ -10,12 +23,19 @@
                 <input type="text" name="frete" v-model="frete" class="input-frete">
                 <button class="btn-frete" @click="calcularFrete(frete)">Ok</button>
             </div>
+
+        </div>
+
+        <div v-if="valorCupom">
+            <p class="texto-valor">Desconto:</p>
+
+            <p class="valor">- {{valorCupom}}%</p>
         </div>
 
         <div v-if="valorFrete">
             <p class="texto-valor">Valor Frete:</p>
 
-            <p class="valor">{{valorFrete | numeroPreco}}</p>
+            <p class="valor">+ {{valorFrete | numeroPreco}}</p>
         </div>
 
         <div>
@@ -27,7 +47,8 @@
         <div>
             <p class="texto-valor">Valor Final:</p>
             
-            <p class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
+            <p v-if="valorCupom" class="valor">{{valorProdutos - (valorProdutos / valorCupom) + valorFrete | numeroPreco}}</p>
+            <p v-else class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
         </div>
 
         <div>
@@ -46,18 +67,26 @@ export default {
         return {
             frete: null,
             valorFrete: 0,
+            cupom: null,
+            valorCupom: 0,
         }
     },
 
     methods: {
 
         calcularFrete() {
-            this.valorFrete = 100
+            this.valorFrete = 46,99
+        },
+
+        calcularCupom(text_cupom) {
+            if(text_cupom.toLowerCase() === 'bike10') {
+                this.valorCupom = 10
+            }
         },
 
         comprar() {
             var carrinho = JSON.parse(localStorage.getItem('carrinho'))
-            carrinho.valor_final = this.valorProdutos += this.valorFrete
+            carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
             localStorage.setItem('comprar', JSON.stringify(carrinho))
             this.$router.push("concluir-pedido");
         }

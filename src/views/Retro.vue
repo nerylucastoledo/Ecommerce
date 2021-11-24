@@ -1,19 +1,19 @@
 <template>
     <section class="bicicletas-pagina">
-        <ListRetro>
-            <h1 class="titulo">RETRÔ</h1>
-        </ListRetro>
+        <ListItem lista="Retro">
+            <h1 class="titulo">Retrô</h1>
+        </ListItem>
     </section>
 </template>
 
 <script>
 
-import ListRetro from '../components/ListRetro.vue'
+import ListItem from '../components/ListItem.vue'
 
 export default {
 
     components: {
-        ListRetro
+        ListItem
     },
 
     created() {

@@ -29,7 +29,7 @@
                 <div>
                     <h2>Preço total</h2>
 
-                    <p class="preco-total">{{produto.valor_produto * carrinho.items[index].quantidade | numeroPreco}}</p>
+                    <p class="preco-total preco-total-carrinho">{{produto.valor_produto * carrinho.items[index].quantidade | numeroPreco}}</p>
                 </div>
 
                 <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">X</p>
@@ -132,7 +132,7 @@ export default {
     color: #FFBA00;
 }
 
-.quantidade, .valor-produto, .preco-total {
+.quantidade, .valor-produto, .preco-total-carrinho {
     position: absolute;
     bottom: 20px;
     font-size: 18px;

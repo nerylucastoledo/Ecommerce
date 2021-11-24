@@ -384,7 +384,7 @@ export default {
                 formData.append('status_venda', 'Processamento')
                 formData.append('nome_produto', produto.produto.nome_produto)
 
-                fetch('http://127.0.0.1:8000/venda/', {
+                fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',
                     body: formData
                 })

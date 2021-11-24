@@ -1,19 +1,19 @@
 <template>
     <section class="bicicletas-pagina">
-        <ListMotorizada>
-            <h1 class="titulo">MOTORIZADA</h1>
-        </ListMotorizada>
+        <ListItem lista="Motorizada">
+            <h1 class="titulo">Motorizada</h1>
+        </ListItem>
     </section>
 </template>
 
 <script>
 
-import ListMotorizada from '../components/ListMotorizada.vue'
+import ListItem from '../components/ListItem.vue'
 
 export default {
 
     components: {
-        ListMotorizada
+        ListItem
     },
 
     created() {

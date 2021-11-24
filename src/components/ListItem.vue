@@ -4,9 +4,9 @@
 
             <slot></slot>
 
-            <div class="item-bicicleta" v-if="listaMotorizada">
+            <div class="item-bicicleta" v-if="listaProdutos">
                 <div 
-                    v-for="(bicicleta, index) in listaMotorizada" 
+                    v-for="(bicicleta, index) in listaProdutos" 
                     :key="bicicleta+index"
                 >
                     <div class="item">
@@ -39,18 +39,22 @@
 <script>
 export default {
 
+    props: [
+        "lista"
+    ],
+
     data() {
         return {
-            listaMotorizada: null
+            listaProdutos: null
         }
     },
 
     methods: {
         getProduto() {
-            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Motorizada')
+            fetch(`https://restapiecomerce.herokuapp.com/produto/?categoria=${this.lista}`)
             .then(req => req.json())
             .then(res => {
-                this.listaMotorizada = res
+                this.listaProdutos = res
             })
         }
     },

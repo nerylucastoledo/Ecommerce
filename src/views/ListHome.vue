@@ -13,7 +13,7 @@
         </div>
 
         <div class="racing" key="racing">
-            <ListRacing>
+            <ListItem lista="Racing">
                 <h1 class="titulo">RACING</h1>
                 <div class="imagem-item-home">
                     <router-link to="/racing">
@@ -21,13 +21,13 @@
                         <p class="texto-imagem-home">Venha viver experiências únicas com nossas racing.</p>
                     </router-link>
                 </div>
-            </ListRacing>
+            </ListItem>
 
             <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
             </div>
 
         <div class="retro" key="retro">
-            <ListRetro>
+            <ListItem lista="Retro">
                 <h1 class="titulo">RETRÔ</h1>
                 <div class="imagem-item-home">
                     <router-link to="/retro">
@@ -35,13 +35,13 @@
                         <p class="texto-imagem-home">As retrô nunca irão sair de moda.</p>
                     </router-link>
                 </div>
-            </ListRetro>
+            </ListItem>
 
         <router-link class="btn-produtos" to="/retro">Ver produtos</router-link>
         </div>
 
         <div class="motorizada" key="motorizada">
-            <ListMotorizada>
+            <ListItem lista="Motorizada">
                 <h1 class="titulo">MOTORIZADA</h1>
                 <div class="imagem-item-home">
                     <router-link to="/motorizada">
@@ -49,7 +49,7 @@
                         <p class="texto-imagem-home">Se você gosta de velocidade, aqui você irá encontrar a melhor.</p>
                     </router-link>
                 </div>
-            </ListMotorizada>
+            </ListItem>
 
             <router-link class="btn-produtos" to="/motorizada">Ver produtos</router-link>
         </div>
@@ -61,10 +61,8 @@
 <script>
 
 import Carrossel from '../components/Carrossel.vue'
-import ListRacing from '../components/ListRacing.vue'
 import UltimosLancamentos from '../components/UltimosLancamentos.vue'
-import ListRetro from '../components/ListRetro.vue'
-import ListMotorizada from '../components/ListMotorizada.vue'
+import ListItem from '../components/ListItem.vue'
 import Loading from '../components/Loading.vue'
 
 export default {
@@ -77,10 +75,8 @@ export default {
   },
 
   components: {
-    ListRacing,
     UltimosLancamentos,
-    ListRetro,
-    ListMotorizada,
+    ListItem,
     Carrossel,
     Loading
   },
