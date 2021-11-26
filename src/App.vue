@@ -260,21 +260,26 @@ a {
     #imagem-card-categoria {
       height: 150px;
     }
+
     .texto-imagem-home {
       top: 120px;
       left: 10px;
       right: 10px;
       font-size: 16px;
     }
+
     .zoom img {
       height: 200px;
     }
+
     .titulo::before {
       width: 100%;
     }
+
     .titulo {
-      font-size: 32px;
+      font-size: 2rem;
     }
+
 }
 
 </style>

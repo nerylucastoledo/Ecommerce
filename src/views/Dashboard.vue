@@ -67,7 +67,7 @@
 
                         <tr v-for="(venda, index) in vendas" :key=" venda+index">
                             <td class="ordem">{{venda.id_compra}}</td>
-                            <td>Lucas Nery</td>
+                            <td>{{venda.nome_comprador}}</td>
                             <td>{{venda.nome_produto}}</td>
                             <td>{{venda.cidade_comprador}}</td>
                             <td>{{venda.valor_pago | numeroPreco}}</td>

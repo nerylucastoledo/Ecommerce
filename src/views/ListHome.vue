@@ -1,14 +1,14 @@
 <template>
   <section>
-    
+
     <div v-if="loading">
         <Loading/>
     </div>
 
     <div v-else>
-        <Carrossel/>
+        <ContentInicial/>
 
-        <div key="ultimos-lancamentos">
+        <div key="ultimos-lancamentos" id="ultimos-lancamentos">
             <UltimosLancamentos/>
         </div>
 
@@ -24,7 +24,7 @@
             </ListItem>
 
             <router-link class="btn-produtos" to="/racing">Ver produtos</router-link>
-            </div>
+        </div>
 
         <div class="retro" key="retro">
             <ListItem lista="Retro">
@@ -60,7 +60,7 @@
 
 <script>
 
-import Carrossel from '../components/Carrossel.vue'
+import ContentInicial from '../components/ContentInicial.vue'
 import UltimosLancamentos from '../components/UltimosLancamentos.vue'
 import ListItem from '../components/ListItem.vue'
 import Loading from '../components/Loading.vue'
@@ -77,7 +77,7 @@ export default {
   components: {
     UltimosLancamentos,
     ListItem,
-    Carrossel,
+    ContentInicial,
     Loading
   },
 

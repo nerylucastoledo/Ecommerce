@@ -246,7 +246,6 @@
             <div class="resumo-pedido">
 
                 <h1 class="titulo">Resumo do pedido</h1>
-
                 <div v-if="compra.items">
                     <div 
                         class="item-carrinho" 
@@ -311,11 +310,13 @@
 </template>
 
 <script>
+
 import PedidoFeito from '../components/PedidoFeito.vue'
+
 export default {
     name: 'concluirpedido',
     components: {
-        PedidoFeito
+        PedidoFeito,
     },
     data() {
         return {
@@ -369,13 +370,14 @@ export default {
             const produtos = JSON.parse(localStorage.getItem('comprar'))
             produtos.items.forEach((produto) => {
                 
+                formData.append('nome_comprador', this.formCliente.name)
                 formData.append('cpf_comprador', this.formCliente.cpf)
                 formData.append('cep_comprador', this.formCliente.cep)
                 formData.append('cidade_comprador', this.formCliente.cidade)
                 formData.append('bairro_comprador', this.formCliente.bairro)
                 formData.append('rua_comprador', this.formCliente.rua)
                 formData.append('numero_rua_comprador', this.formCliente.numero)
-                formData.append('valor_pago', produto.produto.valor_produto * produto.quantidade)
+                formData.append('valor_pago', parseInt(this.compra.valor_final))
                 formData.append('qntd_parcela', 2)
                 formData.append('quantidade', produto.quantidade)
                 formData.append('id_produto_comprado', produto.produto.id_produto)
@@ -387,14 +389,15 @@ export default {
                 fetch('https://restapiecomerce.herokuapp.com/venda/', {
                     method: 'POST',
                     body: formData
+                }).then(() => {
+                    this.pedidoFeito = true;
+                    this.$store.commit('ZERAR_CARRINHO')
+                    setTimeout(() => {
+                        this.pedidoFeito = false;
+                        this.$router.push("/");
+                    }, 1000);
                 })
             })
-            this.pedidoFeito = true;
-            this.$store.commit('ZERAR_CARRINHO')
-            setTimeout(() => {
-                this.pedidoFeito = false;
-                this.$router.push("/");
-            }, 1000);
             
         },
     },
