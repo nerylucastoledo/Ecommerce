@@ -2,56 +2,60 @@
     <section class="meus-pedidos">
         
         <h1 class="titulo-pages">Meus Pedidos</h1>
-        <div class="container" v-if="pedidos.length">   
-            <div 
-                class="produto-item"
-                v-for="(produto, index) in produtos" 
-                :key="produto+index"
-            >
-                <div class="produto-info">
-                    <router-link :to="{ name: 'produto', params: { id: produto.id_produto }}">
-                        <img :src="produto.imagem_produto" alt="Imagem produto">
-                    </router-link>
-                    
-                    <div>
-                        <h2>{{produto.nome_produto}}</h2>
 
-                        <p>
-                            Valor pago: 
-                            <strong>{{pedidos[index].valor_pago | numeroPreco}}</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="produto-entrega">
-                    <p class="dia-pra-chegar" v-if="pedidos[index].status_venda !== 'Entregue'">Chegará até o dia 14/09</p>
-
-
-                    <p class="status-pedido">
-                        Status:
-
-                        <span class="processamento" v-if="pedidos[index].status_venda === 'Processamento'">
-                            <strong>Em processamento</strong>
-                        </span>
-
-                        <span class="confirmado" v-if="pedidos[index].status_venda === 'Confirmado'">
-                            <strong>Confirmado</strong>
-                        </span>
-
-                        <span class="entregue" v-else-if="pedidos[index].status_venda === 'Entregue'">
-                            <strong>Entregue</strong>
-                        </span>
-
-                        <span class="cancelado" v-if="pedidos[index].status_venda === 'Recusado'">
-                            <strong>Cancelado</strong>
-                        </span>
-                    </p>
-                </div>
-            </div>
+        <div v-if="loading">
+            <Loading/>
         </div>
 
         <div v-else>
-            <p class="nenhum-item">Carrinho vazio! :(</p>
+            <div class="container" v-if="pedidos.length">   
+                <div 
+                    class="produto-item"
+                    v-for="(pedido, index) in pedidos"
+                    :key="pedido.id_produto_comprado + index"
+                >
+                    <div class="produto-info">
+                        <h2>{{pedido.nome_produto}}</h2>
+                        
+                        <div>
+
+                            <p>
+                                Valor pago: 
+                                <strong>{{pedido.valor_pago | numeroPreco}}</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="produto-entrega">
+                        <p class="dia-pra-chegar">Chegará até o dia 14/09</p>
+
+
+                        <p class="status-pedido">
+                            Status:
+
+                            <span class="processamento" v-if="pedido.status_venda === 'Processamento'">
+                                <strong>Em processamento</strong>
+                            </span>
+
+                            <span class="confirmado" v-if="pedido.status_venda === 'Confirmado'">
+                                <strong>Confirmado</strong>
+                            </span>
+
+                            <span class="entregue" v-else-if="pedido.status_venda === 'Entregue'">
+                                <strong>Entregue</strong>
+                            </span>
+
+                            <span class="cancelado" v-if="pedido.status_venda === 'Recusado'">
+                                <strong>Cancelado</strong>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div v-else>
+                <p class="nenhum-item">Carrinho vazio! :(</p>
+            </div>
         </div>
         
     </section>
@@ -59,46 +63,47 @@
 
 <script>
 
+import Loading from '../components/Loading.vue'
+
 export default {
 
     data() {
         return {
+            loading: 1,
             pedidos: [],
-            produtos: [],
             pedidoFeito: true,
             processamento: false,
             entregue: false,
             cancelado: false
         }
     },
+
+    components: {
+        Loading
+    },
     
     methods: {
-        async produtosComprados(email) {
-            await fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${email}`)
+        pegarComprasDoUsuario() {
+            const emailUsuario = this.$store.state.user.data.email
+            fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${emailUsuario}`)
             .then(req => req.json())
             .then(res => {
-                res.forEach(item => {
-                    this.pegarProdutoComprado(item.id_produto_comprado)
+                res.forEach(element => {
+                    this.pedidos.push(element)
                 });
-                this.pedidos = res
+                this.loading = 0
             })
         },
+    },
 
-        pegarProdutoComprado(id) {
-            fetch(`https://restapiecomerce.herokuapp.com/produto/${id}`)
-            .then(req => req.json())
-            .then(res => {
-                this.produtos.push(res)
-            })
-        }
+    mounted() {
+        setTimeout(() => {
+            this.pegarComprasDoUsuario()
+        }, 500);
     },
 
     created() {
-        var email_usuario = ''
-        setTimeout(() => {
-            email_usuario = this.$store.state.user.data.email
-            this.produtosComprados(email_usuario)
-        }, 400)
+        document.title =  'Meus pedidos'
     }
 
 }

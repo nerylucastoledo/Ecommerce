@@ -156,6 +156,7 @@ export default {
             const formData = new FormData()
 
             linha.status_venda = status
+            console.log(linha)
 
             formData.append('cpf_comprador', linha.cpf_comprador)
             formData.append('cep_comprador', linha.cep_comprador)
