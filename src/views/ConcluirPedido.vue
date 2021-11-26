@@ -359,10 +359,12 @@ export default {
                 })
             }
         },
+        
         submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
             document.querySelector('.formulario-entrega').style.display = 'block'
         },
+
         confirmarPedido() {
             const formData = new FormData()
             let date = new Date()

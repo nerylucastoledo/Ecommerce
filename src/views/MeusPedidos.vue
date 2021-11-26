@@ -27,8 +27,7 @@
                     </div>
 
                     <div class="produto-entrega">
-                        <p class="dia-pra-chegar">Chegará até o dia 14/09</p>
-
+                        <p class="dia-pra-chegar">Chegará até o dia {{reverseMessage(pedido.data_venda)}}</p>
 
                         <p class="status-pedido">
                             Status:
@@ -94,6 +93,26 @@ export default {
                 this.loading = 0
             })
         },
+
+        reverseMessage: function (dado) {
+            var dia = dado.slice(8, 10)
+            var mes = dado.slice(5, 7)
+            var ano = dado.slice(0, 4)
+
+            var diaQueChegara = parseInt(dia) + 7
+
+            if(diaQueChegara > 31) {
+                mes = parseInt(mes) + 1
+                diaQueChegara = diaQueChegara - 31
+            }
+
+            if(mes >= 13) {
+                mes = 1
+                ano = parseInt(ano) + 1
+            }
+
+            return diaQueChegara.toString() + "-" + mes + "-" + ano
+        }
     },
 
     mounted() {
