@@ -88,6 +88,14 @@ a {
     color: #222;
 }
 
+.titulo-form {
+  font-size: 42px;
+  font-style: italic;
+  color: #222;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
 .titulo::before {
     display: inline-block;
     content: "";
@@ -106,7 +114,6 @@ a {
 }
 
 .item {
-    border-radius: 4px;
     position: relative;
     text-align: center;
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
@@ -114,16 +121,16 @@ a {
     padding: 10px;
     border-radius: 4px;
     margin-top: 40px;
-    flex: 1;
+    flex: 1 1;
 }
 
 .zoom {
     overflow: hidden;
-    max-width: 350px;
     position: relative;
 }
 
 .zoom img {
+    max-width: 350px;
     display: block;
     margin: 0 auto 20px;
     border-radius: 4px;

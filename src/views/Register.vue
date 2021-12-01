@@ -19,7 +19,7 @@
           id="email" 
           type="email" 
           name="email" 
-          autocomplete="username" 
+          autocomplete="current-email" 
           required 
           autofocus 
           v-model="form.email"

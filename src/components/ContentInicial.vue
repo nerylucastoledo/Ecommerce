@@ -4,7 +4,9 @@
     <div class="content-image">
       <div class="container">
         <h2>A bicicleta que você sonha</h2>
+
         <p>Para ter a melhor bicicleta você deve fazer a escolher certa. A LucasBiker chegou para revolucionar a forma de vender bicicletas no país. Faça a escolha certa</p>
+
         <a href="#ultimos-lancamentos" class="comprar-bicicleta">Comprar</a>
       </div>
     </div>
@@ -50,8 +52,6 @@ export default {
 
 <style scoped>
 
-/*SLIDE */
-
 .home-content {
   margin-top: 100px;
   margin-bottom: 60px;
@@ -89,6 +89,10 @@ export default {
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
   padding: 20px;
+}
+
+.info-ecommerce > div {
+  margin: 0 8px;
 }
 
 .info-ecommerce p {
@@ -129,6 +133,10 @@ export default {
 }
 
 @media (max-width: 700px) {
+  .content-image {
+    padding: 20px 0px;
+  }
+
   .info-ecommerce {
     display: grid;
     grid-template-columns: 2fr 2fr;
@@ -143,10 +151,7 @@ export default {
   }
 }
 
-@media (max-width: 440px) {
-  .content-image {
-    padding: 20px 0px;
-  }
+@media (max-width: 510px) {
 
   .content-image h2 {
     font-size: 3rem;

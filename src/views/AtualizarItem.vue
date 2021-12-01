@@ -1,20 +1,16 @@
 <template>
-    <section class="cadastrar-item">
+    <section class="atualizar">
         <div class="sidebar">
             <BarraLateral/>
         </div>
         
         <div v-if="todos_produtos" class="atualizar-items container">
             <div v-for="produto in todos_produtos" :key="produto.id_produto">
-                <div class="item" @click="atualizarBicicleta(produto)">
+                <div class="item" @click='atualizarDados(produto)'>
                     <img :src="produto.imagem_produto" :alt="produto.nome_produto + 'imagem'">
                     <p>{{produto.nome_produto}}</p>
                 </div>
             </div>
-        </div>
-
-        <div class="modal-form formulario">
-            <FormItem/>
         </div>
 
     </section>
@@ -23,19 +19,16 @@
 <script>
 
 import BarraLateral from '../components/BarraLateral.vue'
-import FormItem from '../components/FormItem.vue'
 
 export default {
 
     components: {
         BarraLateral,
-        FormItem
     },
 
     data() {
         return {
             todos_produtos: null,
-            alterado: null
         }
     },
 
@@ -58,6 +51,11 @@ export default {
 
 <style scoped>
 
+.atualizar {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
 .atualizar-items {
     margin: 100px 0 60px;
     display: flex;
@@ -78,11 +76,6 @@ export default {
 
 .item {
     cursor: pointer;
-}
-
-.modal-form {
-    display: none;
-    z-index: 1;
 }
 
 </style>

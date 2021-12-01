@@ -87,7 +87,7 @@
                     <label for="cep">Cep</label>
                     <input 
                         id="cep" 
-                        type="text" 
+                        type="number" 
                         cep="cep" 
                         required 
                         autofocus 
@@ -169,18 +169,6 @@
 
                 <div class="entrega-pagamento">
                     <div>
-                        <label for="formaDeEntregar">Forma de entrega</label>
-                        <select 
-                            name="formaDeEntregar" 
-                            required 
-                            v-model="formEntregaPagamento.formaEntrega"
-                        >
-                            <option value="pac">Correio: Pac</option>
-                            <option value="sedex">Correio: Sedex</option>
-                        </select>
-                    </div>
-
-                    <div>
                         <label for="formaDePagar">Forma de pagamento</label>
                         <select 
                             name="formaDePagar" 
@@ -195,15 +183,24 @@
 
                 <div v-if="formEntregaPagamento.formaPagamento !== 'boleto'">
                     <div>
-                        <label for="numeroCartao">Número do cartão</label>
+                        <label class="label-cartao" for="numeroCartao">Número do cartão</label>
+                        <span v-if="valido">
+                            <font-awesome-icon icon="check" size="1x"/>
+                        </span>
+                        <span v-else>
+                            <font-awesome-icon icon="times" size="1x"/>
+                        </span>
                         <input 
                             id="numeroCartao" 
                             type="numeroCartao" 
-                            name="numeroCartao" 
-                            required 
+                            name="numeroCartao"
+                            required
                             v-model="formEntregaPagamento.numeroCartao"
+                            @keyup="verificarCartao(formEntregaPagamento.numeroCartao)"
+                            :class="{ valido: valido}"
                         >
                     </div>
+
 
                     <div>
                         <label for="nomeSobrenome">Nome e sobrenome</label>
@@ -235,7 +232,7 @@
                             id="codigoSeguranca" 
                             type="codigoSeguranca" 
                             name="codigoSeguranca" 
-                            required 
+                            required
                             v-model="formEntregaPagamento.codigoSeguranca"
                         >
                     </div>
@@ -243,58 +240,59 @@
 
             </form>
 
-            <div class="resumo-pedido">
+            <div>
 
                 <h1 class="titulo">Resumo do pedido</h1>
                 <div v-if="compra.items">
                     <div 
-                        class="item-carrinho" 
+                        class="carrinho-item" 
                         v-for="(produto, index) in compra.items" 
                         :key="produto+index"
                     >
                         <router-link :to="{ name: 'produto', params: { id: produto.produto.id_produto }}">
                             <img 
-                                class="carrinho-img" 
                                 :src="produto.produto.imagem_produto" 
                                 :alt="produto.produto.nome_produto"
                             >
                         </router-link>
 
-                        <div class="carrinho-info-produto">
+                        <div>
                             <h2 class="nome-produto">{{produto.produto.nome_produto}}</h2>
-
                             <p class="quantidade">
                                 Quantidade: 
-                                <span class="quantidade-produto">{{produto.quantidade}}</span>
+                                <strong>{{produto.quantidade}}</strong>
                             </p>
                         </div>
 
-                        <div class="preco-unitario">
+                        <div>
                             <h2>Preço unitário</h2>
 
-                            <p>{{produto.produto.valor_produto | numeroPreco}}</p>
+                            <p class="valor-produto">{{produto.produto.valor_produto | numeroPreco}}</p>
                         </div>
 
-                        <div class="preco-total">
+                        <div>
                             <h2>Preço total</h2>
 
-                            <p>{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
+                            <p class="preco-total preco-total-carrinho">{{produto.produto.valor_produto * produto.quantidade | numeroPreco}}</p>
                         </div>
                     </div>
-                </div>
-                
-                <div>
-                    <p class="valor-final">Valor Final + Frete: 
-                        <span>{{compra.valor_final | numeroPreco}}</span>
-                    </p>
 
-                    <button
-                        class="btn btn-pedido"
-                        type="submit" 
-                        @click.prevent="confirmarPedido"
-                    >
-                        Confirmar compra
-                    </button>
+                    <div>
+                        <p class="valor-final">Valor Final + Frete: 
+                            <span>{{compra.valor_final | numeroPreco}}</span>
+                        </p>
+
+                        <p v-if="mensagemDeErro" class="mensagem-erro-cartao">{{mensagemDeErro}}</p>
+                        
+                        <button
+                            class="btn btn-pedido"
+                            type="submit" 
+                            @click.prevent="confirmarPedido"
+                        >
+                            Confirmar compra
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
@@ -343,11 +341,15 @@ export default {
                 codigoSeguranca: "",
             },
             compra: null,
-            pedidoFeito: null
+            pedidoFeito: null,
+            valido: false,
+            mensagemDeErro: null
         };
     },
+
     methods: {
         puxarEndereco(cep) {
+
             if(cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(req => req.json())
@@ -359,6 +361,16 @@ export default {
                 })
             }
         },
+
+        verificarCartao(numero) {
+            const enterCard = require("cardvalidatorfabi")
+            const cartaoValido = enterCard.cardValidator(numero)
+            if(cartaoValido === true) {
+                this.valido = true
+            } else {
+                this.valido = false
+            }
+        },
         
         submit() {
             document.querySelector('.btn-pedido').style.display = 'none'
@@ -366,40 +378,47 @@ export default {
         },
 
         confirmarPedido() {
-            const formData = new FormData()
-            let date = new Date()
+            if(this.valido) {
+                const formData = new FormData()
+                let date = new Date()
 
-            const produtos = JSON.parse(localStorage.getItem('comprar'))
-            produtos.items.forEach((produto) => {
-                
-                formData.append('nome_comprador', this.formCliente.name)
-                formData.append('cpf_comprador', this.formCliente.cpf)
-                formData.append('cep_comprador', this.formCliente.cep)
-                formData.append('cidade_comprador', this.formCliente.cidade)
-                formData.append('bairro_comprador', this.formCliente.bairro)
-                formData.append('rua_comprador', this.formCliente.rua)
-                formData.append('numero_rua_comprador', this.formCliente.numero)
-                formData.append('valor_pago', parseInt(this.compra.valor_final))
-                formData.append('qntd_parcela', 2)
-                formData.append('quantidade', produto.quantidade)
-                formData.append('id_produto_comprado', produto.produto.id_produto)
-                formData.append('email_comprador', this.$store.state.user.data.email)
-                formData.append('data_venda', date.toISOString().slice(0,10))
-                formData.append('status_venda', 'Processamento')
-                formData.append('nome_produto', produto.produto.nome_produto)
+                const produtos = JSON.parse(localStorage.getItem('comprar'))
+                produtos.items.forEach((produto) => {
+                    
+                    formData.append('nome_comprador', this.formCliente.name)
+                    formData.append('cpf_comprador', this.formCliente.cpf)
+                    formData.append('cep_comprador', this.formCliente.cep)
+                    formData.append('cidade_comprador', this.formCliente.cidade)
+                    formData.append('bairro_comprador', this.formCliente.bairro)
+                    formData.append('rua_comprador', this.formCliente.rua)
+                    formData.append('numero_rua_comprador', this.formCliente.numero)
+                    formData.append('valor_pago', parseInt(this.compra.valor_final))
+                    formData.append('qntd_parcela', 2)
+                    formData.append('quantidade', produto.quantidade)
+                    formData.append('id_produto_comprado', produto.produto.id_produto)
+                    formData.append('email_comprador', this.$store.state.user.data.email)
+                    formData.append('data_venda', date.toISOString().slice(0,10))
+                    formData.append('status_venda', 'Processamento')
+                    formData.append('nome_produto', produto.produto.nome_produto)
 
-                fetch('https://restapiecomerce.herokuapp.com/venda/', {
-                    method: 'POST',
-                    body: formData
-                }).then(() => {
-                    this.pedidoFeito = true;
-                    this.$store.commit('ZERAR_CARRINHO')
-                    setTimeout(() => {
-                        this.pedidoFeito = false;
-                        this.$router.push("/");
-                    }, 1000);
+                    fetch('https://restapiecomerce.herokuapp.com/venda/', {
+                        method: 'POST',
+                        body: formData
+                    }).then(() => {
+                        this.pedidoFeito = true;
+                        this.$store.commit('ZERAR_CARRINHO')
+                        setTimeout(() => {
+                            this.pedidoFeito = false;
+                            this.$router.push("/");
+                        }, 1000);
+                        this.mensagemDeErro = null
+                    }).catch(() => {
+                        console.log('errado')
+                    })
                 })
-            })
+            } else {
+                this.mensagemDeErro = 'Número de cartão incorreto'
+            }
             
         },
     },
@@ -471,68 +490,39 @@ export default {
     font-size: 18px;
     cursor: pointer;
 }
-/* RESUMO DO PEDIDO */
-.resumo-pedido {
-    margin-bottom: 60px;
-}
 
-.resumo-pedido h1 {
-    margin-bottom: 40px;
-}
-
-.nome-produto {
-    text-align: initial;
-}
-
-.item-carrinho {
-    margin-bottom: 30px;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr;
-    padding: 20px 0px;
-    position: relative;
-    text-align: center;
-    background-color: #F3F2F2;
-}
-
-.carrinho-img {
-    height: 200px;
-    width: 350px;
-}
-
-.carrinho-info-produto {
-    margin-left: 20px;
-}
-
-h2 {
-    font-size: 30px;
-}
-
-.quantidade-produto {
-    color: #ada9a9;
-}
-
-.carrinho-info-produto p{
+select {
+    height: 40px;
+    margin-bottom: 20px;
     font-size: 18px;
-    color: #000;
+}
+
+.valido {
+    border: 1px solid green;
+}
+
+.mensagem-erro-cartao {
+    color: red;
+    text-align: right;
     margin-top: 20px;
 }
 
-.carrinho-info-produto p:nth-child(2){
-    margin-top: 125px;
+.label-cartao {
+    margin-right: 10px;
 }
 
-.preco-unitario p, .preco-total p {
-    color: #747070;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 130px;
+/* RESUMO DO PEDIDO */
+
+.carrinho-item {
+    margin-top: 40px;
+    background-color: #f1efef;
+    padding: 20px 0;
 }
 
 .valor-final {
-    display: block;
-    font-weight: bold;
-    font-size: 24px;
     text-align: right;
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 @media (max-width: 440px) {
@@ -542,6 +532,20 @@ h2 {
 
     .form > div div {
         width: 100%;
+    }
+}
+
+@media (max-width: 530px) {
+    .carrinho-item {
+        padding: 20px;
+    }
+
+    .titulo {
+        font-size: 2rem;
+    }
+    
+    .titulo::before {
+        display: none;
     }
 }
 

@@ -34,7 +34,7 @@
                     <div class="footer-contato">
                         <h2 class="titulo-footer">CONTATOS</h2>
 
-                        <p>+55 (35)9 9742-0423</p>
+                        <p>(35)9 9742-0423</p>
 
                         <p>lucasnerytoledo@hotmail.com</p>
 
@@ -45,8 +45,8 @@
                     <div  class="footer-sociais">
                         <h2 class="titulo-footer">REDES SOCIAIS</h2>
 
-                        <a target= "_blank" :href="facebok">
-                            <img src="@/assets/facebook.png" alt="Icon Facebook">
+                        <a target= "_blank" :href="linkedin">
+                            <img src="@/assets/linkedin.png" alt="Icon Linkedin">
                         </a>
 
                         <a target= "_blank" :href="instagram">
@@ -76,7 +76,7 @@ export default {
             form: {
                 email: ""
             },
-            facebok: "https://www.facebook.com/LucasNeryToledo/",
+            linkedin: "https://www.linkedin.com/in/lucas-nery-toledo/",
             instagram: "https://www.instagram.com/lucas_nery6/",
             whatsapp: "https://api.whatsapp.com/send?phone=5535997420423"
         }

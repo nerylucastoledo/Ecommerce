@@ -1,7 +1,5 @@
 <template>
     <section class="conteudo-frete">
-
-
         <div>
             <div>
                 <label for="cupom">Cupom:</label>
@@ -11,7 +9,6 @@
                 <input type="text" name="cupom" v-model="cupom" class="input-frete">
                 <button class="btn-frete" @click="calcularCupom(cupom)">Ok</button>
             </div>
-
         </div>
         
         <div>
@@ -23,13 +20,14 @@
                 <input type="text" name="frete" v-model="frete" class="input-frete">
                 <button class="btn-frete" @click="calcularFrete(frete)">Ok</button>
             </div>
-
         </div>
 
-        <div v-if="valorCupom">
+        <div v-if="valorCupom || cupomErrado">
             <p class="texto-valor">Desconto:</p>
-
-            <p class="valor">- {{valorCupom}}%</p>
+            
+            <p v-if="cupomErrado" class="cupom-errado">{{cupomErrado}}</p>
+            
+            <p v-else class="valor">- {{valorCupom}}%</p>
         </div>
 
         <div v-if="valorFrete">
@@ -69,6 +67,7 @@ export default {
             valorFrete: 0,
             cupom: null,
             valorCupom: 0,
+            cupomErrado: null
         }
     },
 
@@ -81,14 +80,20 @@ export default {
         calcularCupom(text_cupom) {
             if(text_cupom.toLowerCase() === 'bike10') {
                 this.valorCupom = 10
+                this.cupomErrado = null
+            } else {
+                this.valorCupom = 0
+                this.cupomErrado = 'Cupom incorreto'
             }
         },
 
         comprar() {
-            var carrinho = JSON.parse(localStorage.getItem('carrinho'))
-            carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
-            localStorage.setItem('comprar', JSON.stringify(carrinho))
-            this.$router.push("concluir-pedido");
+            if(this.valorFrete) {
+                var carrinho = JSON.parse(localStorage.getItem('carrinho'))
+                carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
+                localStorage.setItem('comprar', JSON.stringify(carrinho))
+                this.$router.push("concluir-pedido");
+            }
         }
 
     },
@@ -105,7 +110,6 @@ export default {
     background-color: #F3F2F2;
     padding: 20px;
     float: right;
-    margin-bottom: 60px;
     width: 350px;
 }
 
@@ -113,7 +117,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 40px 0px;
+    margin: 20px 0px;
 }
 
 .conteudo-frete label {
@@ -156,7 +160,12 @@ export default {
 }
 
 .btn-finalizar {
-    float: right;
+    display: block;
+    margin: 0 auto;
+}
+
+.cupom-errado {
+    color: coral;
 }
 
 @media (max-width: 530px) {

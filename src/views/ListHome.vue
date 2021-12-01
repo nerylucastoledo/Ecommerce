@@ -15,9 +15,15 @@
         <div class="racing" key="racing">
             <ListItem lista="Racing">
                 <h1 class="titulo">RACING</h1>
+
                 <div class="imagem-item-home">
                     <router-link to="/racing">
-                        <img id="imagem-card-categoria" src="../assets/racing-2.png" alt="Racing">
+                        <img 
+                            id="imagem-card-categoria" 
+                            src="../assets/racing-2.png" 
+                            alt="Racing"
+                        >
+
                         <p class="texto-imagem-home">Venha viver experiências únicas com nossas racing.</p>
                     </router-link>
                 </div>
@@ -29,9 +35,15 @@
         <div class="retro" key="retro">
             <ListItem lista="Retro">
                 <h1 class="titulo">RETRÔ</h1>
+
                 <div class="imagem-item-home">
                     <router-link to="/retro">
-                        <img id="imagem-card-categoria" src="../assets/retro-foto.jpg" alt="Bicileta Retrô">
+                        <img 
+                            id="imagem-card-categoria" 
+                            src="../assets/retro-foto.jpg" 
+                            alt="Bicileta Retrô"
+                        >
+
                         <p class="texto-imagem-home">As retrô nunca irão sair de moda.</p>
                     </router-link>
                 </div>
@@ -43,9 +55,15 @@
         <div class="motorizada" key="motorizada">
             <ListItem lista="Motorizada">
                 <h1 class="titulo">MOTORIZADA</h1>
+
                 <div class="imagem-item-home">
                     <router-link to="/motorizada">
-                        <img id="imagem-card-categoria" src="../assets/motorizada-foto.jpg" alt="Bicileta Motorizada">
+                        <img 
+                            id="imagem-card-categoria" 
+                            src="../assets/motorizada-foto.jpg" 
+                            alt="Bicileta Motorizada"
+                        >
+
                         <p class="texto-imagem-home">Se você gosta de velocidade, aqui você irá encontrar a melhor.</p>
                     </router-link>
                 </div>

@@ -34,20 +34,20 @@
             <div class="menu ativo">
                 <ul v-if="user.loggedIn" @click="abrirMenu">
                     <li>
-                        <router-link to="/meus-pedidos">
+                        <router-link to="/meus-pedidos" title="Seus Pedidos">
                             <font-awesome-icon icon="truck-moving" size="2x"/>
                         </router-link>
                     </li>
 
                     <li class="carrinho-header">
-                        <router-link to="/carrinho">
+                        <router-link to="/carrinho" title="Carrinho">
                             <font-awesome-icon icon="shopping-cart" size="2x"/>
                             <span>{{ carrinhoQuantidade }}</span>
                         </router-link>
                     </li>
 
                     <li>
-                        <span class="sair-login-mobile" @click="signOut">
+                        <span class="sair-login-mobile" @click="signOut" title="Sair">
                             <font-awesome-icon icon="sign-out-alt" size="2x"/>
                         </span>
                     </li>
@@ -84,6 +84,7 @@ export default {
         ...mapGetters({
             user: "user"
         }),
+
         carrinhoQuantidade() {
             let total = 0
 
@@ -267,6 +268,10 @@ header {
         height: 5px;
         background-color: #FFBA00;
         margin: 6px 0;
+    }
+
+    .btn-login {
+        border: 2px solid #fff;
     }
 
     .menu a {

@@ -121,6 +121,8 @@
                 <p>Nenhum produto encontrado!</p>
             </div>
 
+            <p>{{valor_final}}</p>
+
         </div>
     </section>
 </template>
