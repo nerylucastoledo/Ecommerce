@@ -1,6 +1,6 @@
 <template>
     <section class="modal">
-      <div>
+      <div class="modal-sucesso">
         <slot></slot>
       </div>
     </section>
@@ -18,16 +18,27 @@
     z-index: 1;
     opacity:1;
     pointer-events: none;
-    color: #13ac13;
     text-align: center;
+    padding: 0px 10px;
+}
+
+.modal-sucesso {
+  color: #13ac13;
+  background: #a9eca9;
 }
 
 .modal > div {
-    border-radius: 10px;
-    width: 400px;
-    position: relative;
-    margin: 10% auto;
-    padding: 100px 20px;
-    background: #a9eca9;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 10px;
+  padding: 40px 40px;
+}
+
+.modal:before {
+  display: inline-block;
+  vertical-align: middle;
+  content: " ";
+  height: 100%;
 }
 </style>

@@ -121,8 +121,6 @@
                 <p>Nenhum produto encontrado!</p>
             </div>
 
-            <p>{{valor_final}}</p>
-
         </div>
     </section>
 </template>
@@ -402,6 +400,18 @@ export default {
 
     .comprar-bicicleta {
         font-size: 14px;
+    }
+
+    .cor-produto {
+        font-size: 16px;
+    }
+
+    .qntd-estoque {
+        font-size: 16px;
+    }
+
+    .input-quantidade input {
+        padding: 0px;
     }
 }
 

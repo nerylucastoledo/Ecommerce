@@ -298,11 +298,17 @@
             </div>
         </div>
 
-       <PedidoFeito v-if="pedidoFeito">
+       <PedidoFeito v-if="pedidoFeito === true">
             <p>PARABÉNS!! Seu pedido foi feito. ;)</p>
             <br>
             <p>Agora é so aguardar.</p>
        </PedidoFeito>
+
+       <PedidoRecusado v-else-if="pedidoFeito === false">
+            <p>Pedido recusado, dados incorretos</p>
+            <br>
+            <p>Tente novamente</p>
+       </PedidoRecusado>
 
     </section>
 </template>
@@ -310,11 +316,13 @@
 <script>
 
 import PedidoFeito from '../components/PedidoFeito.vue'
+import PedidoRecusado from '../components/PedidoRecusado.vue'
 
 export default {
     name: 'concluirpedido',
     components: {
         PedidoFeito,
+        PedidoRecusado
     },
     data() {
         return {
@@ -349,7 +357,6 @@ export default {
 
     methods: {
         puxarEndereco(cep) {
-
             if(cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                 .then(req => req.json())
@@ -413,7 +420,11 @@ export default {
                         }, 1000);
                         this.mensagemDeErro = null
                     }).catch(() => {
-                        console.log('errado')
+                        this.pedidoFeito = false;
+                        setTimeout(() => {
+                            this.pedidoFeito = null;
+                        }, 1000);
+                        this.mensagemDeErro = null
                     })
                 })
             } else {
@@ -546,6 +557,10 @@ select {
     
     .titulo::before {
         display: none;
+    }
+
+    .valor-final {
+        font-size: 24px;
     }
 }
 

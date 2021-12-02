@@ -8,6 +8,10 @@
     <div v-else>
         <ContentInicial/>
 
+        <div>
+            <PopUpCupom/>
+        </div>
+
         <div key="ultimos-lancamentos" id="ultimos-lancamentos">
             <UltimosLancamentos/>
         </div>
@@ -82,6 +86,7 @@ import ContentInicial from '../components/ContentInicial.vue'
 import UltimosLancamentos from '../components/UltimosLancamentos.vue'
 import ListItem from '../components/ListItem.vue'
 import Loading from '../components/Loading.vue'
+import PopUpCupom from '../components/PopUpCupom.vue'
 
 export default {
   name: 'Home',
@@ -96,7 +101,8 @@ export default {
     UltimosLancamentos,
     ListItem,
     ContentInicial,
-    Loading
+    Loading,
+    PopUpCupom
   },
 
   created() {

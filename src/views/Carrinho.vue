@@ -219,4 +219,18 @@ export default {
     }
 }
 
+@media (max-width: 440px) {
+    .quantidade {
+        font-size: 16px;
+    }
+    
+    .carrinho-item div:nth-child(3) h2, .carrinho-item div:nth-child(4) h2{
+        font-size: 16px;
+    }
+
+    .valor-produto {
+        font-size: 16px;
+    }
+}
+
 </style>

@@ -3,6 +3,8 @@
     
     <h1 class="titulo-login">Esqueci minha senha</h1>
 
+    <p class="erro-usuario" v-if="error">{{error}}</p>
+
     <div v-if="!emailSending">
       <form action="#" @submit.prevent="submit">
         <label for="email">Seu e-mail</label>
@@ -15,8 +17,6 @@
           autofocus 
           v-model="form.email"
         >
-
-        <p class="email-errado" v-if="error">{{error}}</p>
 
         <div>
           <button type="submit" class="btn btn-login">Enviar</button>
@@ -61,7 +61,7 @@ export default {
         })
         .catch(() => {
           this.emailSending = false;
-          this.error = "Email não encontrado. Verifique novamente.";
+          this.error = "Email não encontrado.";
         });
         }
   }
@@ -77,15 +77,6 @@ export default {
 
 #email {
   margin-bottom: 20px;
-}
-
-.email-errado {
-  text-align: center;
-  font-size: 18px;
-  color: red;
-  padding: 5px;
-  display: block;
-  margin: 0 auto 20px auto;
 }
 
 .email-enviado {

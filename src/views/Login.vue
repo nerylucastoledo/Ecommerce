@@ -62,7 +62,7 @@ export default {
         this.$router.replace({ name: "Home" });
       })
       .catch(() => {
-        this.error = 'Usuário não encontrado!';
+        this.error = 'E-mail ou senha incorreto!';
       });
     }
   }

@@ -7,7 +7,7 @@
 
                     <p>Insira seu melhor e-mail para receber promoções e muito mais.</p>
 
-                    <form class="inscrever" action="#" @submit.prevent="submit">
+                    <form class="inscrever" action="https://api.staticforms.xyz/submit" method="post">
                         <input 
                             id="email" 
                             type="email" 
@@ -17,7 +17,7 @@
                             autofocus 
                             v-model="form.email"
                         >
-
+                        
                         <button type="submit" class="btn-increver">Inscrever</button>
                     </form>
                 </div>

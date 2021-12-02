@@ -139,4 +139,10 @@ form input:hover, form input:focus {
   text-decoration: underline;
 }
 
+@media (max-width: 530px) {
+  .titulo-login{
+    font-size: 32px;
+  }
+}
+
 </style>

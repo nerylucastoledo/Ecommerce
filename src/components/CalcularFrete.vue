@@ -97,9 +97,6 @@ export default {
         }
 
     },
-    /*
-    http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem=37553559&sCepDestino=${cepDestinho}&nVlPeso=10&nCdFormato=2&nVlComprimento=20&nVlAltura=200&nVlLargura=200&sCdMaoPropria=n&nVlValorDeclarado=0&sCdAvisoRecebimento=n&nCdServico=04510&nVlDiametro=10&StrRetorno=xml&nIndicaCalculo=3
-    */
 }
 </script>
 
@@ -179,6 +176,20 @@ export default {
 
     .input-frete {
         max-width: 120px;
+    }
+}
+
+@media (max-width: 440px) {
+    .input-frete {
+        max-width: 100px;
+    }
+
+    .texto-valor, .valor {
+        font-size: 16px;
+    }
+
+    .comprar-bicicleta {
+        font-size: 16px;
     }
 }
 

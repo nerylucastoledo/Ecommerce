@@ -54,7 +54,7 @@
                 </ul>
 
                 <ul v-else>
-                    <li>
+                    <li @click="abrirMenu">
                         <router-link to="/login">
                             <button class="btn-login">Entrar <font-awesome-icon icon="user" size="3px"/></button>
                         </router-link>
@@ -321,6 +321,7 @@ header {
 }
 
 @media (max-width: 440px) {
+
     .menu-meio li a {
         font-size: 16px;
     }

@@ -4,7 +4,7 @@
             <BarraLateral/>
         </div>
 
-        <div class="formulario">
+        <div class="formulario container">
             <FormItem/>
         </div>
     </section>
@@ -24,3 +24,19 @@ export default {
     
 }
 </script>
+
+<style scoped>
+
+.cadastrar-item {
+    display: flex;
+}
+
+.cadastrar-item > div:nth-child(2) {
+    margin-top: 60px;
+}
+
+.sidebar {
+    height: 100%;
+}
+
+</style>
