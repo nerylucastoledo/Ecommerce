@@ -49,7 +49,7 @@ export default {
     color: #fff;
     background-color: coral;
     border-radius: 50%;
-    padding: 3px;
+    padding: 3px 5px;
     font-size: 14px;
     cursor: pointer;
 }

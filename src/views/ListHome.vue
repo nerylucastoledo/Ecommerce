@@ -107,10 +107,6 @@ export default {
 
   created() {
     document.title =  'Home - LucasBiker'
-
-    setTimeout(() => {
-        this.loading = 0
-    }, 2000);
   }
 
 }
