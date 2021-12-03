@@ -2,7 +2,7 @@
 
 > Status do Projeto: Em andamento! 	:warning:
 
-## Um ecommerce de bibicletas.
+## Uma loja virtual de vendas de bibicletas
 
 
 ### O que o site é capaz de fazer 💥
