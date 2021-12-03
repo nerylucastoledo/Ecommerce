@@ -10,7 +10,7 @@
 Lado usuário:
 - Criar um usuário novo (autenticado com firebase)
 - Fazer login com usuário existente (autenticado com firebase)
-- Resetar senha com envio via e-mail
+- Resetar senha com envio por e-mail
 - Visualizar os produtos da loja
 - Entrar na página de um produto específico
 - Adicionar produtos ao carrinho
