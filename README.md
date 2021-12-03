@@ -17,7 +17,7 @@ Lado usuário:
 - Remover produtos do carrinho
 - Comprar algum produto
 - Comprar produto com cupom de desconto
-- Inserir dados de entrega (consumindo de cep)
+- Inserir dados de entrega (consumindo uma api de cep)
 - Visualizar a pagina de pedidos feitos
 
 Lado Admin:
