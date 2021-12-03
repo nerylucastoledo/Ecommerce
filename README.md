@@ -1,7 +1,8 @@
 # Ecommerce :moneybag:
 
+> Status do Projeto: Em andamento! 	:warning:
 
-## Um ecommerce de bibicletas contendo 3 categorias diferentes, Racing, Retrô e Motorizada.
+## Um ecommerce de bibicletas.
 
 
 ### O que o site é capaz de fazer 💥
@@ -9,29 +10,34 @@
 Lado usuário:
 - Criar um usuário novo (autenticado com firebase)
 - Fazer login com usuário existente (autenticado com firebase)
-- Visualizar os produtos
-- Entrar na página do produto específico
+- Resetar senha com envio via e-mail
+- Visualizar os produtos da loja
+- Entrar na página de um produto específico
 - Adicionar produtos ao carrinho
 - Remover produtos do carrinho
 - Comprar algum produto
-- Inserir dados de entrega (consumindo api para calcular o valor do frete)
+- Comprar produto com cupom de desconto
+- Inserir dados de entrega (consumindo de cep)
 - Visualizar a pagina de pedidos feitos
 
 Lado Admin:
 - Inserir um novo produto (bicicleta) e publicar no site.
 - Atualizar os dados de um produto específico.
 - Deletar produtos.
-- Visualizar a quantidade de vendas no mês / dia
-- Ganhos em R$ no mês / dia
+- Visualizar a quantidade de vendas no dia / semana
+- Utilização de gráficos para controle
+- Ganhos em R$ no dia / semana / mês
 - Finalizar pedido
-
-> Status do Projeto: Em andamento! 	:warning:
+- Alterar o status do produto, processando, cancelado, aceito, entregue
 
 ## Projeto integrado com Api Rest
 A api que está sendo utilizada no projeto foi feita com django rest framework.
 
 ## Projeto integrado com AWS
 Todas as imagens do projeto estão sendo adicionadas no s3 da amazon.
+
+## Projeto integrado com firebase
+O sistema de login, criação de conta e reset de senha é feita com o firebase
 
 ## Como rodar a aplicação na sua máquina :rocket:
 No terminal clone o projeto:
@@ -49,7 +55,7 @@ Com o projeto na sua maquina, rode
 Depois de instaladas as dependências, rode
 
 ```sh
-  npm start
+  npm run serve
 ```
 
 Acesse
