@@ -4,7 +4,7 @@
             <router-link to="/">
                 <img 
                     id="logo" 
-                    src="@/assets/logo-bike.png" 
+                    src="@/assets/logo-bike.webp" 
                     alt="LucasBiker"
                 >
             </router-link>
@@ -176,6 +176,8 @@ header {
 
 #logo {
     margin-top: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .menu-meio {

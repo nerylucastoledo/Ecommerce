@@ -1,9 +1,6 @@
 <template>
     <section>
-        <div class="sidebar">
-            <BarraLateral/>
-        </div>
-        <form action="#" @submit.prevent="cadastrarBicicleta" class="container">
+        <form action="#" class="formulario-item container">
             <label for="categoria">Categoria</label>
             <select name="categoria" id="categoria" v-model="form.categoria">
                 <option value="Racing">Racing</option>
@@ -71,9 +68,7 @@
                 ref="imagem_produto"
             >
 
-            <div>
-                <button class="btn btn-login" type="submit">Login</button>
-            </div>
+            <slot></slot>
 
         </form>
     </section>
@@ -94,13 +89,29 @@ export default {
                 valor_produto: null,
                 preco_antigo: null,
                 imagem_produto: null,
-                avaliacoes: []
+                avaliacoes: [],
+                metodo: null,
+                id_produto: null
             }
         }
     },
 
-    methods: {
-        cadastrarBicicleta() {
+    mounted() {
+        this.$root.$on('FormItem', (from) => {
+            this.form.id_produto = from.id_produto
+            this.form.categoria = from.categoria
+            this.form.nome_produto = from.nome_produto,
+            this.form.cor_produto = from.cor_produto,
+            this.form.quantidade_estoque = from.quantidade_estoque,
+            this.form.valor_produto = from.valor_produto,
+            this.form.preco_antigo = from.preco_antigo,
+            this.form.imagem_produto = ''
+            if(from.avaliacoes) {
+                this.form.avaliacoes =from.avaliacoes
+            }
+        });
+
+        this.$root.$on('cadastrarBicicleta', () => {
             const file = this.$refs.imagem_produto.files[0];
             const form = new FormData();
 
@@ -113,14 +124,42 @@ export default {
             form.append("avaliacoes", JSON.stringify(this.form.avaliacoes));
             form.append("imagem_produto", file);
 
+            console.log(...form)
+
             fetch('https://restapiecomerce.herokuapp.com/produto/', {
                 method: 'POST',
                 body: form
             }).then(() => {
                 this.$router.push({name: 'Dashboard'})
             })
-        },
-    },
+        });
+
+        this.$root.$on('atualizarDados', () => {
+            const file = this.$refs.imagem_produto.files[0];
+            const form = new FormData();
+
+            console.log('cheguei no atualizar dados')
+            console.log('Esse é o formulario: ', this.form)
+
+            form.append("categoria", this.form.categoria);
+            form.append("nome_produto", this.form.nome_produto);
+            form.append("cor_produto", this.form.cor_produto);
+            form.append("quantidade_estoque", this.form.quantidade_estoque);
+            form.append("valor_produto", parseInt(this.form.valor_produto));
+            form.append("preco_antigo", parseInt(this.form.preco_antigo));
+            form.append("avaliacoes", JSON.stringify(this.form.avaliacoes));
+            form.append("imagem_produto", file);
+
+            console.log(...form)
+
+            fetch(`https://restapiecomerce.herokuapp.com/produto/${this.form.id_produto}/`, {
+                method: 'PUT',
+                body: form
+            }).then(() => {
+                this.$router.push({name: 'Dashboard'})
+            })
+        });
+    }
 
 }
 </script>
@@ -134,7 +173,7 @@ export default {
     margin-bottom: -60px;
 }
 
-form {
+.formulario-item {
     width: 900px;
     margin-bottom: 60px;
 }

@@ -5,7 +5,11 @@
         </div>
 
         <div class="formulario container">
-            <FormItem/>
+            <FormItem>
+                <div>
+                    <button class="btn btn-login" type="submit" @click.prevent="cadastrarBicicleta">Cadastrar Item</button>
+                </div>
+            </FormItem>
         </div>
     </section>
 </template>
@@ -21,6 +25,12 @@ export default {
         BarraLateral,
         FormItem
     },
+
+    methods: {
+        cadastrarBicicleta() {
+            this.$root.$emit('cadastrarBicicleta');
+        }
+    }
     
 }
 </script>
@@ -32,7 +42,7 @@ export default {
 }
 
 .cadastrar-item > div:nth-child(2) {
-    margin-top: 60px;
+    margin-top: 160px;
 }
 
 .sidebar {

@@ -45,16 +45,16 @@
                     <div  class="footer-sociais">
                         <h2 class="titulo-footer">REDES SOCIAIS</h2>
 
-                        <a target= "_blank" :href="linkedin">
-                            <img src="@/assets/linkedin.png" alt="Icon Linkedin">
+                        <a target= "_blank" rel="noreferrer" :href="linkedin">
+                            <img src="@/assets/linkedin.webp" alt="Icon Linkedin">
                         </a>
 
-                        <a target= "_blank" :href="instagram">
-                            <img src="@/assets/instagram.png" alt="Icon Instagram">
+                        <a target= "_blank" rel="noreferrer" :href="instagram">
+                            <img src="@/assets/instagram.webp" alt="Icon Instagram">
                         </a>
 
-                        <a target= "_blank" :href="whatsapp">
-                            <img src="@/assets/whatsapp.png" alt="Icon Whatsapp">
+                        <a target= "_blank" rel="noreferrer" :href="whatsapp">
+                            <img src="@/assets/whatsapp.webp" alt="Icon Whatsapp">
                         </a>
                     </div>
                 </div>

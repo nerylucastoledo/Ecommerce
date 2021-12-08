@@ -18,7 +18,7 @@
                             class="estrelas-produto" 
                             v-for="(estrela, index) in qntd_estrelas_do_produto" 
                             :key="estrela+index" 
-                        >
+                            >
                             {{estrelas_preenchidas}}
                         </span>
 
@@ -163,7 +163,6 @@ export default {
                 if(res[0].avaliacoes.length) {
                     this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
                 }
-
                 document.title = `${res[0].nome_produto} - LucasBiker`
             })
         },

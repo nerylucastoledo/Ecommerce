@@ -24,7 +24,7 @@
                     <router-link to="/racing">
                         <img 
                             id="imagem-card-categoria" 
-                            src="../assets/racing-2.png" 
+                            src="../assets/racing-2.webp" 
                             alt="Racing"
                         >
 
@@ -44,7 +44,7 @@
                     <router-link to="/retro">
                         <img 
                             id="imagem-card-categoria" 
-                            src="../assets/retro-foto.jpg" 
+                            src="../assets/retro-foto.webp" 
                             alt="Bicileta Retrô"
                         >
 
@@ -64,7 +64,7 @@
                     <router-link to="/motorizada">
                         <img 
                             id="imagem-card-categoria" 
-                            src="../assets/motorizada-foto.jpg" 
+                            src="../assets/motorizada-foto.webp" 
                             alt="Bicileta Motorizada"
                         >
 
@@ -107,6 +107,9 @@ export default {
 
   created() {
     document.title =  'Home - LucasBiker'
+    setTimeout(() => {
+        this.loading = 0
+    }, 300);
   }
 
 }
