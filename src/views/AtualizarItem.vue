@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .atualizar {
     display: grid;

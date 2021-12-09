@@ -174,7 +174,7 @@ export default {
 }
 
 .formulario-item {
-    width: 900px;
+    max-width: 100%;
     margin-bottom: 60px;
 }
 

@@ -40,7 +40,7 @@ export default {
 .sidebar {
     margin-top: 100px;
     background-color: #fff;
-    width: 200px;
+    min-width: 200px;
     text-align: center;
     margin-right: 40px;
 }
