@@ -385,7 +385,7 @@ export default {
         },
 
         confirmarPedido() {
-            if(this.valido) {
+            if(this.valido || this.formEntregaPagamento.formaPagamento === 'boleto') {
                 const formData = new FormData()
                 let date = new Date()
 

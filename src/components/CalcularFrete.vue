@@ -90,7 +90,11 @@ export default {
         comprar() {
             if(this.valorFrete) {
                 var carrinho = JSON.parse(localStorage.getItem('carrinho'))
-                carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
+                if(this.valorCupom) {
+                    carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
+                } else {
+                    carrinho.valor_final = this.valorProdutos + this.valorFrete
+                }
                 localStorage.setItem('comprar', JSON.stringify(carrinho))
                 this.$router.push("concluir-pedido");
             }
