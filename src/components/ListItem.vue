@@ -13,7 +13,7 @@
                         <div class="zoom">
                             <img id="imagem-bicicleta" :src="bicicleta.imagem_produto" alt="Bike">
 
-                            <span class="desconto">- {{((bicicleta.preco_antigo - bicicleta.valor_produto) *100 / bicicleta.preco_antigo).toFixed(0)}}%</span>
+                            <span class="desconto">- {{calcularDesconto(bicicleta.preco_antigo, bicicleta.valor_produto)}}%</span>
                         </div>
 
                         <div class="info-item">
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+
 export default {
 
     props: [
@@ -56,6 +57,10 @@ export default {
             .then(res => {
                 this.listaProdutos = res
             })
+        },
+        
+        calcularDesconto(valorAntigo, valorProduto) {
+            return ((valorAntigo - valorProduto) * 100 / valorAntigo).toFixed(0)
         }
     },
 

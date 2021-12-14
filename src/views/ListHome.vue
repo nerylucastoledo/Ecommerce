@@ -1,7 +1,7 @@
 <template>
   <section>
-
-    <div v-if="loading">
+      
+    <div v-if="!loading">
         <Loading/>
     </div>
 
@@ -91,9 +91,9 @@ import PopUpCupom from '../components/PopUpCupom.vue'
 export default {
   name: 'Home',
 
-  data(){
+  data() {
       return {
-          loading: 1
+          loading: false
       }
   },
 
@@ -105,12 +105,40 @@ export default {
     PopUpCupom
   },
 
-  created() {
-    document.title =  'Home - LucasBiker'
-    setTimeout(() => {
-        this.loading = 0
-    }, 300);
-  }
+
+  methods: {
+        async getProdutoRacing() {
+            await this.chamarApi('Racing')
+            this.loading = true
+        },
+
+        getProdutoRetro() {
+            this.chamarApi('Retro')
+        },
+
+        getProdutoMotorizada() {
+            this.chamarApi('Motorizada')
+        },
+
+        chamarApi(categoria) {
+            return new Promise(resolve => {
+                fetch(`https://restapiecomerce.herokuapp.com/produto/?categoria=${categoria}`)
+                .then(req => req.json())
+                .then(res => {
+                    this.$store.state.listaLancamentos.push(res.reverse()[0])
+                    resolve('resolvido')
+                })
+            });
+        },
+    },
+
+    created() {
+        document.title =  'Home - LucasBiker'
+        this.$store.state.listaLancamentos = []
+        this.getProdutoRacing()
+        this.getProdutoRetro()
+        this.getProdutoMotorizada()
+    }
 
 }
 
@@ -120,6 +148,10 @@ export default {
 
 .racing, .retro, .motorizada {
   margin-top: 60px;
+}
+
+.color-red {
+    margin-top: 160px;
 }
 
 </style>

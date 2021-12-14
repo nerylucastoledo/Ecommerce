@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="produto-entrega">
-                        <p class="dia-pra-chegar">Chegará até o dia {{reverseMessage(pedido.data_venda)}}</p>
+                        <p class="dia-pra-chegar">Chegará até o dia {{dataQueChegara(pedido.data_venda)}}</p>
 
                         <p class="status-pedido">
                             Status:
@@ -94,7 +94,7 @@ export default {
             })
         },
 
-        reverseMessage: function (dado) {
+        dataQueChegara: function (dado) {
             var dia = dado.slice(8, 10)
             var mes = dado.slice(5, 7)
             var ano = dado.slice(0, 4)

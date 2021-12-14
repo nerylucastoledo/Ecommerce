@@ -71,7 +71,7 @@
                         >
                     </div>
 
-                    <div>
+                    <div v-if="produto.quantidade_estoque">
                         <button 
                             class="comprar-bicicleta" 
                             @click="comprarProduto"

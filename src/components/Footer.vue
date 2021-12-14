@@ -7,7 +7,7 @@
 
                     <p>Insira seu melhor e-mail para receber promoções e muito mais.</p>
 
-                    <form class="inscrever" action="https://api.staticforms.xyz/submit" method="post">
+                    <form class="inscrever" method="post">
                         <input 
                             id="email" 
                             type="email" 
@@ -39,7 +39,6 @@
                         <p>lucasnerytoledo@hotmail.com</p>
 
                         <p>Rua Tabaranas, 125 - Pouso Alegre, MG</p>
-
                     </div>
 
                     <div  class="footer-sociais">

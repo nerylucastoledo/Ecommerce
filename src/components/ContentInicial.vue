@@ -5,7 +5,10 @@
       <div class="container">
         <h2>A bicicleta que você sonha</h2>
 
-        <p>Para ter a melhor bicicleta você deve fazer a escolher certa. A LucasBiker chegou para revolucionar a forma de vender bicicletas no país. Faça a escolha certa</p>
+        <p>
+          Para ter a melhor bicicleta você deve fazer a escolher certa. A LucasBiker chegou para 
+          revolucionar a forma de vender bicicletas no país. Faça a escolha certa
+        </p>
 
         <a href="#ultimos-lancamentos" class="comprar-bicicleta">Comprar</a>
       </div>

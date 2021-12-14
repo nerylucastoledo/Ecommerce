@@ -87,7 +87,6 @@ export default {
 
         carrinhoQuantidade() {
             let total = 0
-
             for(let i = 0; i < this.carrinho.items.length; i++) {
                 total += this.carrinho.items[i].quantidade
             }

@@ -4,16 +4,18 @@
 
             <h1 class="titulo">LANÇAMENTOS</h1>
 
-            <div class="item-bicicleta" v-if="listaLancamentos">
+            <div class="item-bicicleta" v-if="this.$store.state.listaLancamentos">
                 <div 
-                    v-for="(bicicleta, index) in listaLancamentos"
+                    v-for="(bicicleta, index) in this.$store.state.listaLancamentos"
                     :key="bicicleta+index"
                 >
                     <div class="item">
                         <div class="zoom">
                             <img id="imagem-bicicleta" :src="bicicleta.imagem_produto" alt="Bike">
 
-                            <span class="desconto">- {{((bicicleta.preco_antigo - bicicleta.valor_produto) * 100 / bicicleta.preco_antigo).toFixed(0)}}%</span>
+                            <span class="desconto">
+                                - {{ calcularDesconto(bicicleta.preco_antigo, bicicleta.valor_produto)}}%
+                            </span>
                         </div>
 
                         <div class="info-item">
@@ -38,41 +40,11 @@
 
 <script>
 export default {
-
-    data() {
-        return {
-            listaLancamentos: [],
-        }
-    },
-
+    
     methods: {
-        getProdutoRacing() {
-            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Racing')
-            .then(req => req.json())
-            .then(res => {
-                this.listaLancamentos.push(res.reverse()[0])
-            })
-        },
-        getProdutoRetro() {
-            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Retro')
-            .then(req => req.json())
-            .then(res => {
-                this.listaLancamentos.push(res.reverse()[0])
-            })
-        },
-        getProdutoMotorizada() {
-            fetch('https://restapiecomerce.herokuapp.com/produto/?categoria=Motorizada')
-            .then(req => req.json())
-            .then(res => {
-                this.listaLancamentos.push(res.reverse()[0])
-            })
-        },
-    },
-
-    created() {
-        this.getProdutoRacing()
-        this.getProdutoRetro()
-        this.getProdutoMotorizada()
+        calcularDesconto(valorAntigo, valorProduto) {
+            return ((valorAntigo - valorProduto) * 100 / valorAntigo).toFixed(0)
+        }
     }
 }
 </script>

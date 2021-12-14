@@ -119,6 +119,7 @@ import BarraLateral from '../components/BarraLateral.vue'
 
 
 export default {
+    name: 'Dashboard',
 
     components: {
         DashboardPorcentagem,

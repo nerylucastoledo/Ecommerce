@@ -13,6 +13,7 @@ export default new Vuex.Store({
     carrinho: {
       items: [],
     },
+    listaLancamentos: []
   },
 
   getters: {

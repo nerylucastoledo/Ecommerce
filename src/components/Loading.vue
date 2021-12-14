@@ -15,45 +15,45 @@ export default {
 
 <style scoped>
 
-    .page-loading span {
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: #FFBA00;
-        margin: 4px;
-        animation: dots .6s cubic-bezier(0.6, 0.1, 1, 0.4) infinite alternate;
+.page-loading span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFBA00;
+    margin: 4px;
+    animation: dots .6s cubic-bezier(0.6, 0.1, 1, 0.4) infinite alternate;
+}
+
+.page-loading {
+    display: block;
+    text-align: center;
+    margin-top: 160px;
+}
+
+.page-loading span:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.page-loading span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.page-loading span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.page-loading span:nth-child(4) {
+    animation-delay: .4s;
+}
+
+@keyframes dots {
+    from {
+        transform: translate3d(0, 0, 0);
     }
 
-    .page-loading {
-        display: block;
-        text-align: center;
-        margin-top: 160px;
+    to {
+        transform: translate3d(0, 30px, 0);
     }
-
-    .page-loading span:nth-child(1) {
-        animation-delay: .1s;
-    }
-
-    .page-loading span:nth-child(2) {
-        animation-delay: .2s;
-    }
-
-    .page-loading span:nth-child(3) {
-        animation-delay: .3s;
-    }
-
-    .page-loading span:nth-child(4) {
-        animation-delay: .4s;
-    }
-
-    @keyframes dots {
-        from {
-            transform: translate3d(0, 0, 0);
-        }
-
-        to {
-            transform: translate3d(0, 30px, 0);
-        }
-    }
+}
 </style>
