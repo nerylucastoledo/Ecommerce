@@ -30,29 +30,6 @@
             <div class="dados-vendas">
                 <div>
                     <h2>Últimas Vendas</h2>
-                    
-                    <div class="filtro">
-                        <div>
-                            <input 
-                                name="filtrar"
-                                type="text" 
-                                placeholder="Pesquisar comprador"
-                            >
-
-                            <span>
-                                <font-awesome-icon icon="search" size="1x"/>
-                            </span>
-                        </div>
-
-                        <div class="status-pedido">
-                            <p>Todas</p>
-
-                            <p>Aberta</p>
-
-                            <p>Finalizada</p>
-
-                        </div>
-                    </div>
 
                     <table>
                         <tr>
@@ -67,22 +44,49 @@
 
                         <tr v-for="(venda, index) in vendas" :key=" venda+index">
                             <td class="ordem">{{venda.id_compra}}</td>
+
                             <td>{{venda.nome_comprador}}</td>
+
                             <td>{{venda.nome_produto}}</td>
+
                             <td>{{venda.cidade_comprador}}</td>
+
                             <td>{{venda.valor_pago | numeroPreco}}</td>
-                            <td class="confirmado" v-if="venda.status_venda === 'Confirmado'">{{venda.status_venda}}</td>
-                            <td class="recusado" v-else-if="venda.status_venda === 'Recusado'">{{venda.status_venda}}</td>
-                            <td class="processamento" v-else-if="venda.status_venda === 'Processamento'">{{venda.status_venda}}</td>
-                            <td class="entregue" v-else-if="venda.status_venda === 'Entregue'">Entregue</td>
+
+                            <td class="confirmado" 
+                                v-if="venda.status_venda === 'Confirmado'"
+                            >
+                                {{venda.status_venda}}
+                            </td>
+
+                            <td class="recusado" 
+                                v-else-if="venda.status_venda === 'Recusado'"
+                            >
+                                {{venda.status_venda}}
+                            </td>
+
+                            <td class="processamento" 
+                                v-else-if="venda.status_venda === 'Processamento'"
+                            >
+                                {{venda.status_venda}}
+                            </td>
+
+                            <td class="entregue" 
+                                v-else-if="venda.status_venda === 'Entregue'"
+                            >
+                                Entregue
+                            </td>
+
                             <td v-if="venda.status_venda === 'Processamento'">
                                 <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
                                     <font-awesome-icon icon="check" size="1x"/>
                                 </button>
+
                                 <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
                                     <font-awesome-icon icon="times" size="1x"/>
                                 </button>
                             </td>
+
                             <td v-else-if="venda.status_venda !== 'Processamento' && venda.status_venda !== 'Entregue'">
                                 <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
                                     <font-awesome-icon icon="truck-moving" size="1x"/>
@@ -328,37 +332,6 @@ export default {
     font-size: 24px;
 }
 
-/* FILTRO */
-
-.filtro {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-}
-
-input {
-    border: none;
-    border-bottom: 1px solid #6589e4;
-    width: 200px;
-    font-size: 16px;
-}
-
-.status-pedido p {
-    display: inline-block;
-    color: #abb8ca;
-    padding: 5px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.status-pedido p:hover {
-    background-color: #6589e4;
-    color: #fff;
-}
-
-.status-pedido p {
-    margin: 0 10px;
-}
 
 /* DADOS VENDAS */
 

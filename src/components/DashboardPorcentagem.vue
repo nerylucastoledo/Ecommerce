@@ -1,10 +1,10 @@
 <template>
     <div>
         <slot></slot>
+        
         <div id="chart">
             <apexchart type="bar" height="150" :options="chartOptions" :series="series"></apexchart>
         </div>
-
     </div>
 </template>
 

@@ -68,7 +68,7 @@ export default {
 
     data() {
         return {
-            loading: 1,
+            loading: true,
             pedidos: [],
             pedidoFeito: true,
             processamento: false,
@@ -82,16 +82,16 @@ export default {
     },
     
     methods: {
-        pegarComprasDoUsuario() {
+        async pegarComprasDoUsuario() {
             const emailUsuario = this.$store.state.user.data.email
-            fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${emailUsuario}`)
+            await fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${emailUsuario}`)
             .then(req => req.json())
             .then(res => {
                 res.forEach(element => {
                     this.pedidos.push(element)
                 });
-                this.loading = 0
             })
+            this.loading = false
         },
 
         dataQueChegara: function (dado) {
@@ -116,9 +116,7 @@ export default {
     },
 
     mounted() {
-        setTimeout(() => {
-            this.pegarComprasDoUsuario()
-        }, 500);
+        this.pegarComprasDoUsuario()
     },
 
     created() {

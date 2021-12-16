@@ -7,6 +7,7 @@
 
             <div>
                 <input type="text" name="cupom" v-model="cupom" class="input-frete">
+
                 <button class="btn-frete" @click="calcularCupom(cupom)">Ok</button>
             </div>
         </div>
@@ -18,6 +19,7 @@
 
             <div>
                 <input type="text" name="frete" v-model="frete" class="input-frete">
+
                 <button class="btn-frete" @click="calcularFrete(frete)">Ok</button>
             </div>
         </div>
@@ -45,7 +47,8 @@
         <div>
             <p class="texto-valor">Valor Final:</p>
             
-            <p v-if="valorCupom" class="valor">{{valorProdutos - (valorProdutos / valorCupom) + valorFrete | numeroPreco}}</p>
+            <p v-if="valorCupom" class="valor">{{calcularValorComCupom(valorProdutos, valorCupom, valorFrete) | numeroPreco}}</p>
+            
             <p v-else class="valor">{{valorProdutos + valorFrete | numeroPreco}}</p>
         </div>
 
@@ -98,6 +101,10 @@ export default {
                 localStorage.setItem('comprar', JSON.stringify(carrinho))
                 this.$router.push("concluir-pedido");
             }
+        },
+
+        calcularValorComCupom(valorDoProduto, valorCupom, valorDoFrente) {
+            return valorDoProduto - (valorDoProduto / valorCupom) + valorDoFrente
         }
 
     },

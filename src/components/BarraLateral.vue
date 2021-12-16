@@ -5,6 +5,7 @@
                 <span>
                     <font-awesome-icon icon="chart-bar" size="1x"/>
                 </span>
+
                 <p>Painel</p>
             </router-link>
         </li>
@@ -14,6 +15,7 @@
                 <span>
                     <font-awesome-icon icon="cubes" size="1x"/>
                 </span>
+
                 <p>Cadastrar</p>
             </router-link>
         </li>
@@ -23,6 +25,7 @@
                 <span>
                     <font-awesome-icon icon="pen" size="1x"/>
                 </span>
+                
                 <p>Atualizar</p>
             </router-link>
         </li>

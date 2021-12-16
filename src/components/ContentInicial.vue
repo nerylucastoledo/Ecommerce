@@ -1,6 +1,5 @@
  <template>
   <section class="home-content">
-    
     <div class="content-image">
       <div class="container">
         <h2>A bicicleta que você sonha</h2>
@@ -41,7 +40,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 

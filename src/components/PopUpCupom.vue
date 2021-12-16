@@ -3,7 +3,9 @@
         <p>Use: 
             <span class="cupom">bike10</span>
         </p>
+
         <p>Para 10% de desconto</p>
+        
         <p class="fechar-cupom" @click="fecharCupom">X</p>
     </div>
 </template>

@@ -6,16 +6,19 @@
         
         <div v-if="todos_produtos" class="atualizar-items container">
             <div v-for="produto in todos_produtos" :key="produto.id_produto">
-                <div class="item" @click='atualizarItem(produto)'>
-                    <img :src="produto.imagem_produto" :alt="produto.nome_produto + 'imagem'">
-                    <p>{{produto.nome_produto}}</p>
+                <div class="item">
+                    <div @click='atualizarItem(produto)'>
+                        <img :src="produto.imagem_produto" :alt="produto.nome_produto + 'imagem'">
+                        <p>{{produto.nome_produto}}</p>
+                    </div>
+                    <p class="fechar" @click="deletarItem(produto.nome_produto, produto.id_produto)">X</p>
                 </div>
             </div>
         </div>
 
         <div class="formulario">
             <div>
-                <p @click="fecharModalFormulario">X</p>
+                <p class="fechar" @click="fecharModalFormulario">X</p>
                 <FormItem>
                     <div>
                         <button class="btn btn-login" type="submit" @click.prevent="atualizarDados">Atualizar Item</button>
@@ -63,9 +66,22 @@ export default {
             this.$root.$emit('atualizarDados');
         },
 
+        deletarItem(nome_produto, id_produto) {
+            const confirmar_delete = confirm(`Tem certeza que deseja excluir ${nome_produto}`)
+            console.log(confirmar_delete)
+            if(confirmar_delete) {
+                fetch(`https://restapiecomerce.herokuapp.com/produto/${id_produto}/`, {
+                    method: 'DELETE',
+                }).then(() => {
+                    this.pegarTodasBicicletas()
+                })
+            }
+        },
+
         fecharModalFormulario() {
             document.querySelector('.formulario').style.display = 'none'
-        }
+        },
+
     },
 
     created() {
@@ -104,10 +120,6 @@ export default {
     cursor: pointer;
 }
 
-.formulario-item {
-    max-width: 400px;
-}
-
 .formulario {
     display: none;
     position: fixed;
@@ -115,8 +127,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.8);;
-    padding: 20px 10px 10px;
+    background: rgba(0,0,0,0.8);
     border-radius: 4px;
     z-index: 2;
 }
@@ -130,16 +141,17 @@ export default {
     background-color: #fff;
 }
 
-.formulario > div p {
+.fechar {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 18px;
+    top: -4px;
+    right: -4px;
+    font-size: 16px;
     color: #fff;
     background-color: red;
-    padding: 5px;
+    padding: 2px 5px;
     cursor: pointer;
     border-radius: 50%;
+    z-index: 2;
 }
 
 </style>

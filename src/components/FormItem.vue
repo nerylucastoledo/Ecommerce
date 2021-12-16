@@ -112,53 +112,35 @@ export default {
         });
 
         this.$root.$on('cadastrarBicicleta', () => {
-            const file = this.$refs.imagem_produto.files[0];
-            const form = new FormData();
-
-            form.append("categoria", this.form.categoria);
-            form.append("nome_produto", this.form.nome_produto);
-            form.append("cor_produto", this.form.cor_produto);
-            form.append("quantidade_estoque", this.form.quantidade_estoque);
-            form.append("valor_produto", parseInt(this.form.valor_produto));
-            form.append("preco_antigo", parseInt(this.form.preco_antigo));
-            form.append("avaliacoes", JSON.stringify(this.form.avaliacoes));
-            form.append("imagem_produto", file);
-
-            console.log(...form)
-
-            fetch('https://restapiecomerce.herokuapp.com/produto/', {
-                method: 'POST',
-                body: form
-            }).then(() => {
-                this.$router.push({name: 'Dashboard'})
-            })
+            this.cadastrarOuAtualizarItem(this.form, 'POST', '')
         });
 
         this.$root.$on('atualizarDados', () => {
+            this.cadastrarOuAtualizarItem(this.form, 'PUT', this.form.id_produto + '/')
+        });
+    },
+
+    methods: {
+        cadastrarOuAtualizarItem(formulario, metodo, url_final) {
             const file = this.$refs.imagem_produto.files[0];
             const form = new FormData();
 
-            console.log('cheguei no atualizar dados')
-            console.log('Esse é o formulario: ', this.form)
-
-            form.append("categoria", this.form.categoria);
-            form.append("nome_produto", this.form.nome_produto);
-            form.append("cor_produto", this.form.cor_produto);
-            form.append("quantidade_estoque", this.form.quantidade_estoque);
-            form.append("valor_produto", parseInt(this.form.valor_produto));
-            form.append("preco_antigo", parseInt(this.form.preco_antigo));
-            form.append("avaliacoes", JSON.stringify(this.form.avaliacoes));
+            form.append("categoria", formulario.categoria);
+            form.append("nome_produto", formulario.nome_produto);
+            form.append("cor_produto", formulario.cor_produto);
+            form.append("quantidade_estoque", formulario.quantidade_estoque);
+            form.append("valor_produto", parseInt(formulario.valor_produto));
+            form.append("preco_antigo", parseInt(formulario.preco_antigo));
+            form.append("avaliacoes", JSON.stringify(formulario.avaliacoes));
             form.append("imagem_produto", file);
 
-            console.log(...form)
-
-            fetch(`https://restapiecomerce.herokuapp.com/produto/${this.form.id_produto}/`, {
-                method: 'PUT',
+            fetch('https://restapiecomerce.herokuapp.com/produto/' + url_final, {
+                method: metodo,
                 body: form
             }).then(() => {
                 this.$router.push({name: 'Dashboard'})
             })
-        });
+        }
     }
 
 }
