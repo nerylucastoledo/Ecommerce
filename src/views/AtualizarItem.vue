@@ -68,7 +68,7 @@ export default {
 
         deletarItem(nome_produto, id_produto) {
             const confirmar_delete = confirm(`Tem certeza que deseja excluir ${nome_produto}`)
-            console.log(confirmar_delete)
+            
             if(confirmar_delete) {
                 fetch(`https://restapiecomerce.herokuapp.com/produto/${id_produto}/`, {
                     method: 'DELETE',
