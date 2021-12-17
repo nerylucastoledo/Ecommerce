@@ -38,6 +38,8 @@
 
 <script>
 
+import { api } from '../service'
+
 export default {
 
     props: [
@@ -52,10 +54,9 @@ export default {
 
     methods: {
         getProduto() {
-            fetch(`https://restapiecomerce.herokuapp.com/produto/?categoria=${this.lista}`)
-            .then(req => req.json())
+            api.get(`produto/?categoria=${this.lista}`)
             .then(res => {
-                this.listaProdutos = res
+                this.listaProdutos = res.data
             })
         },
         

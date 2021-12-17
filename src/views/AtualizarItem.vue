@@ -34,6 +34,7 @@
 
 import BarraLateral from '../components/BarraLateral.vue'
 import FormItem from '../components/FormItem.vue'
+import { api } from '../service'
 
 export default {
 
@@ -50,10 +51,9 @@ export default {
 
     methods: {
         pegarTodasBicicletas() {
-            fetch('https://restapiecomerce.herokuapp.com/produto/')
-            .then(req => req.json())
+            api.get('produto/')
             .then(res => {
-                this.todos_produtos = res
+                this.todos_produtos = res.data
             })
         },
 
@@ -70,9 +70,8 @@ export default {
             const confirmar_delete = confirm(`Tem certeza que deseja excluir ${nome_produto}`)
             
             if(confirmar_delete) {
-                fetch(`https://restapiecomerce.herokuapp.com/produto/${id_produto}/`, {
-                    method: 'DELETE',
-                }).then(() => {
+                api.delete(`produto/${id_produto}`)
+                .then(() => {
                     this.pegarTodasBicicletas()
                 })
             }

@@ -88,6 +88,8 @@ import ListItem from '../components/ListItem.vue'
 import Loading from '../components/Loading.vue'
 import PopUpCupom from '../components/PopUpCupom.vue'
 
+import { api } from "../service.js";
+
 export default {
   name: 'Home',
 
@@ -122,10 +124,9 @@ export default {
 
         chamarApi(categoria) {
             return new Promise(resolve => {
-                fetch(`https://restapiecomerce.herokuapp.com/produto/?categoria=${categoria}`)
-                .then(req => req.json())
+                api.get(`produto/?categoria=${categoria}`)
                 .then(res => {
-                    this.$store.state.listaLancamentos.push(res.reverse()[0])
+                    this.$store.state.listaLancamentos.push(res.data.reverse()[0])
                     resolve('resolvido')
                 })
             });

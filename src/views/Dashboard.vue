@@ -1,114 +1,121 @@
 <template>
-    <section class="dashboard">
-        <div class="sidebar">
-            <BarraLateral/>
+    <section>
+
+        <div v-if="loading" class="loading">
+            <Loading/>
         </div>
 
-        <div class="dashboard-content">
-            <h1>Dashboard</h1>
-            
-            <div class="dados">
-                <div>
-                    <h2>Hoje</h2>
-
-                    <p>{{valor_vendas_hoje | numeroPreco}}</p>
-                </div>
-
-                <div>
-                    <h2>Essa semana</h2>
-
-                    <p>{{valor_vendas_semana | numeroPreco}}</p>
-                </div>
-
-                <div>
-                    <h2>Esse mês</h2>
-
-                    <p>{{valor_vendas_mes | numeroPreco}}</p>
-                </div>
+        <div v-else class="dashboard">
+            <div class="sidebar">
+                <BarraLateral/>
             </div>
 
-            <div class="dados-vendas">
-                <div>
-                    <h2>Últimas Vendas</h2>
+            <div class="dashboard-content">
+                <h1>Dashboard</h1>
+                
+                <div class="dados">
+                    <div>
+                        <h2>Hoje</h2>
 
-                    <table>
-                        <tr>
-                            <th>Ordem da venda</th>
-                            <th>Comprador</th>
-                            <th>Produto</th>
-                            <th>Cidade</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Pedido</th>
-                        </tr>
+                        <p>{{valor_vendas_hoje | numeroPreco}}</p>
+                    </div>
 
-                        <tr v-for="(venda, index) in vendas" :key=" venda+index">
-                            <td class="ordem">{{venda.id_compra}}</td>
+                    <div>
+                        <h2>Essa semana</h2>
 
-                            <td>{{venda.nome_comprador}}</td>
+                        <p>{{valor_vendas_semana | numeroPreco}}</p>
+                    </div>
 
-                            <td>{{venda.nome_produto}}</td>
+                    <div>
+                        <h2>Esse mês</h2>
 
-                            <td>{{venda.cidade_comprador}}</td>
-
-                            <td>{{venda.valor_pago | numeroPreco}}</td>
-
-                            <td class="confirmado" 
-                                v-if="venda.status_venda === 'Confirmado'"
-                            >
-                                {{venda.status_venda}}
-                            </td>
-
-                            <td class="recusado" 
-                                v-else-if="venda.status_venda === 'Recusado'"
-                            >
-                                {{venda.status_venda}}
-                            </td>
-
-                            <td class="processamento" 
-                                v-else-if="venda.status_venda === 'Processamento'"
-                            >
-                                {{venda.status_venda}}
-                            </td>
-
-                            <td class="entregue" 
-                                v-else-if="venda.status_venda === 'Entregue'"
-                            >
-                                Entregue
-                            </td>
-
-                            <td v-if="venda.status_venda === 'Processamento'">
-                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
-                                    <font-awesome-icon icon="check" size="1x"/>
-                                </button>
-
-                                <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
-                                    <font-awesome-icon icon="times" size="1x"/>
-                                </button>
-                            </td>
-
-                            <td v-else-if="venda.status_venda !== 'Processamento' && venda.status_venda !== 'Entregue'">
-                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
-                                    <font-awesome-icon icon="truck-moving" size="1x"/>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
+                        <p>{{valor_vendas_mes | numeroPreco}}</p>
+                    </div>
                 </div>
 
-                <div class="metas">
-                    <div class="dia">
-                        <DashboardPorcentagem :series="series_dia" teste="Dia">
-                            <h2>% Vendas do dia</h2>
-                        </DashboardPorcentagem>
+                <div class="dados-vendas">
+                    <div>
+                        <h2>Últimas Vendas</h2>
+
+                        <table>
+                            <tr>
+                                <th>Ordem da venda</th>
+                                <th>Comprador</th>
+                                <th>Produto</th>
+                                <th>Cidade</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Pedido</th>
+                            </tr>
+
+                            <tr v-for="(venda, index) in vendas" :key=" venda+index">
+                                <td class="ordem">{{venda.id_compra}}</td>
+
+                                <td>{{venda.nome_comprador}}</td>
+
+                                <td>{{venda.nome_produto}}</td>
+
+                                <td>{{venda.cidade_comprador}}</td>
+
+                                <td>{{venda.valor_pago | numeroPreco}}</td>
+
+                                <td class="confirmado" 
+                                    v-if="venda.status_venda === 'Confirmado'"
+                                >
+                                    {{venda.status_venda}}
+                                </td>
+
+                                <td class="recusado" 
+                                    v-else-if="venda.status_venda === 'Recusado'"
+                                >
+                                    {{venda.status_venda}}
+                                </td>
+
+                                <td class="processamento" 
+                                    v-else-if="venda.status_venda === 'Processamento'"
+                                >
+                                    {{venda.status_venda}}
+                                </td>
+
+                                <td class="entregue" 
+                                    v-else-if="venda.status_venda === 'Entregue'"
+                                >
+                                    Entregue
+                                </td>
+
+                                <td v-if="venda.status_venda === 'Processamento'">
+                                    <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
+                                        <font-awesome-icon icon="check" size="1x"/>
+                                    </button>
+
+                                    <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
+                                        <font-awesome-icon icon="times" size="1x"/>
+                                    </button>
+                                </td>
+
+                                <td v-else-if="venda.status_venda !== 'Processamento' && venda.status_venda !== 'Entregue'">
+                                    <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
+                                        <font-awesome-icon icon="truck-moving" size="1x"/>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
-                    <div class="semana">
-                        <DashboardPorcentagem :series="seriesSemana" teste="Semana">
-                            <h2>% Vendas da semana</h2>
-                        </DashboardPorcentagem>
-                    </div>
+                    <div class="metas">
+                        <div class="dia">
+                            <DashboardPorcentagem :series="series_dia" teste="Dia">
+                                <h2>% Vendas do dia</h2>
+                            </DashboardPorcentagem>
+                        </div>
 
+                        <div class="semana">
+                            <DashboardPorcentagem :series="seriesSemana" teste="Semana">
+                                <h2>% Vendas da semana</h2>
+                            </DashboardPorcentagem>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,15 +126,18 @@
 <script>
 
 import DashboardPorcentagem from '../components/DashboardPorcentagem.vue'
+import Loading from '../components/Loading.vue'
 import BarraLateral from '../components/BarraLateral.vue'
 
+import { api } from '../service'
 
 export default {
     name: 'Dashboard',
 
     components: {
         DashboardPorcentagem,
-        BarraLateral
+        BarraLateral,
+        Loading
     },
     
     data() {
@@ -140,7 +150,8 @@ export default {
             date: new Date(),
             series_dia: [],
             seriesSemana: [],
-            seriesMes: []
+            seriesMes: [],
+            loading: true
         }
     },
 
@@ -177,23 +188,20 @@ export default {
             formData.append('nome_produto', linha.nome_produto)
             formData.append('id_compra', linha.id_compra)
 
-            fetch(`https://restapiecomerce.herokuapp.com/venda/${linha.id_compra}/`, {
-                method: 'PUT',
-                body: formData
-            })
+            api.put(`venda/${linha.id_compra}/`, formData)
         },
 
-        pegarVendasFeitas() {
-            fetch('https://restapiecomerce.herokuapp.com/venda/')
-            .then(req => req.json())
+        async pegarVendasFeitas() {
+            await api.get('venda/')
             .then(res => {
-                this.vendas = res
-                this.vendasDoDia(res)
-                this.vendasDaSemana(res)
-                res.forEach((venda) => {
+                this.vendas = res.data
+                this.vendasDoDia(res.data)
+                this.vendasDaSemana(res.data)
+                res.data.forEach((venda) => {
                     this.valor_vendas_mes += venda.valor_pago
                 })
             })
+            this.loading = false
         },
 
         vendasDoDia(quantidade) {
@@ -222,14 +230,12 @@ export default {
         },
 
         formatarDadosVendas(quantidade, data, num_iniial, num_final, qntd_dias,) {
-
             var date = data
             var list_series = []
             var valor_arrecadado = 0
             var mes_corrente = parseInt(this.dataCompleta.slice(5, 7))
 
             quantidade.forEach((venda) => {
-
                 var data_venda = venda.data_venda.slice(num_iniial, num_final)
                 var diferença_de_dias = parseInt(date) - parseInt(data_venda)
                 var mes_da_venda = parseInt(venda.data_venda.slice(5, 7))
@@ -239,16 +245,13 @@ export default {
 
                     if(exists.length) {
                         exists[0].data[0] = exists[0].data[0] + 1
-
                     } else {
                         var series_body = {
                             name: `${venda.nome_produto}`,
                             data: [venda.quantidade]
                         }
-
                         list_series.push(series_body)
                     }
-
                     valor_arrecadado += venda.valor_pago
                 }
             })
@@ -418,6 +421,10 @@ td, th {
     margin-bottom: 30px;
     background-color: #fff;
     padding: 30px 0;
+}
+
+.loading {
+    margin: 0 auto 60px;
 }
 
 

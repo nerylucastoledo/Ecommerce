@@ -317,6 +317,7 @@
 
 import PedidoFeito from '../components/PedidoFeito.vue'
 import PedidoRecusado from '../components/PedidoRecusado.vue'
+import { api } from '../service'
 
 export default {
     name: 'concluirpedido',
@@ -408,10 +409,8 @@ export default {
                     formData.append('status_venda', 'Processamento')
                     formData.append('nome_produto', produto.produto.nome_produto)
 
-                    fetch('https://restapiecomerce.herokuapp.com/venda/', {
-                        method: 'POST',
-                        body: formData
-                    }).then(() => {
+                    api.post('venda/', formData)
+                    .then(() => {
                         this.pedidoFeito = true;
                         this.$store.commit('ZERAR_CARRINHO')
                         setTimeout(() => {

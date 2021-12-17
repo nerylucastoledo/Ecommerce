@@ -63,6 +63,7 @@
 <script>
 
 import Loading from '../components/Loading.vue'
+import { api } from '../service'
 
 export default {
 
@@ -84,10 +85,9 @@ export default {
     methods: {
         async pegarComprasDoUsuario() {
             const emailUsuario = this.$store.state.user.data.email
-            await fetch(`https://restapiecomerce.herokuapp.com/venda/?email=${emailUsuario}`)
-            .then(req => req.json())
+            await api.get(`venda/?email=${emailUsuario}`)
             .then(res => {
-                res.forEach(element => {
+                res.data.forEach(element => {
                     this.pedidos.push(element)
                 });
             })

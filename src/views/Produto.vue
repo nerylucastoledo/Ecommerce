@@ -127,6 +127,8 @@
 
 <script>
 
+import { api } from '../service'
+
 export default {
     name: 'Produto',
 
@@ -141,7 +143,7 @@ export default {
             qntd_estrelas_do_produto: 0,
             estrelas_restantes: 0,
             quantidade: 1,
-            loading: 1,
+            loading: true,
             valor_final: 0
         }
     },
@@ -153,18 +155,18 @@ export default {
     },
 
     methods: {
-        getProduto() {
-            fetch(`https://restapiecomerce.herokuapp.com/produto/?id=${this.id}`)
-            .then(req => req.json())
+        async getProduto() {
+            await api.get(`produto/?id=${this.id}`)
             .then(res => {
-                this.produto = res[0]
-                this.valor_final = res[0].valor_produto
-                this.avaliacoes = res[0].avaliacoes
-                if(res[0].avaliacoes.length) {
-                    this.verificarAQuantidadeDeEstrelas(res[0].avaliacoes, res[0].avaliacoes.length)
+                this.produto = res.data[0]
+                this.valor_final = res.data[0].valor_produto
+                this.avaliacoes = res.data[0].avaliacoes
+                if(res.data[0].avaliacoes.length) {
+                    this.verificarAQuantidadeDeEstrelas(res.data[0].avaliacoes, res.data[0].avaliacoes.length)
                 }
-                document.title = `${res[0].nome_produto} - LucasBiker`
+                document.title = `${res.data[0].nome_produto} - LucasBiker`
             })
+            this.loading = false
         },
 
         verificarAQuantidadeDeEstrelas(avaliacoes, qntd_comentario) {
@@ -209,10 +211,6 @@ export default {
     },
 
     mounted() {
-        setTimeout(() => {
-            this.loading = 0
-        }, 300)
-
         this.getProduto()
     }
 }
