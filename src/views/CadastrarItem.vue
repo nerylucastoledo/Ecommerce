@@ -4,6 +4,8 @@
             <HeaderDashboard/>
         </div>
 
+        <h1>Cadastrar novo item</h1>
+
         <div class="formulario container">
             <FormItem>
                 <div>
@@ -38,15 +40,27 @@ export default {
 <style scoped>
 
 .cadastrar-item {
-    display: flex;
+    margin-bottom: -60px;
 }
 
 .cadastrar-item > div:nth-child(2) {
-    margin-top: 160px;
+    margin-top: 40px;
+}
+
+.cadastrar-item h1 {
+    font-size: 42px;
+    text-align: center;
+    margin: 40px 0 40px;
 }
 
 .sidebar {
     height: 100%;
+}
+
+@media (max-width: 640px) {
+    .cadastrar-item h1 {
+        font-size: 2rem;
+    }
 }
 
 </style>

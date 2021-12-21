@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="formulario">
+        <div class="formulario container">
             <div>
                 <p class="fechar" @click="fecharModalFormulario">X</p>
                 <FormItem>
@@ -59,6 +59,7 @@ export default {
 
         atualizarItem(item) {
             document.querySelector('.formulario').style.display = 'block'
+            window.scrollTo({ top: 0, behavior: "smooth" })
             this.$root.$emit('FormItem', item)
         },
 
@@ -92,13 +93,7 @@ export default {
 
 <style scoped>
 
-.atualizar {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-}
-
 .atualizar-items {
-    margin: 100px 0 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -111,7 +106,8 @@ export default {
 }
 
 .atualizar-items img {
-    max-width: 350px;
+    width: 100%;
+    object-fit: cover;
     height: 250px;
 }
 
@@ -121,14 +117,22 @@ export default {
 
 .formulario {
     display: none;
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 100px;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.8);
-    border-radius: 4px;
     z-index: 2;
+}
+
+.formulario::before {
+    content: "";
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,.8)
 }
 
 .formulario > div {
@@ -138,12 +142,13 @@ export default {
     max-width: 500px;
     margin: 0px auto;
     background-color: #fff;
+    border-radius: 10px;
 }
 
 .fechar {
     position: absolute;
-    top: -4px;
-    right: -4px;
+    top: 0px;
+    right: 0px;
     font-size: 16px;
     color: #fff;
     background-color: red;
@@ -151,6 +156,13 @@ export default {
     cursor: pointer;
     border-radius: 50%;
     z-index: 2;
+}
+
+@media (max-width: 540px) {
+    .fechar {
+        top: 0px;
+        right: 5px;
+    }
 }
 
 </style>
