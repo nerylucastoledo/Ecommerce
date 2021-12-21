@@ -1,7 +1,7 @@
 <template>
     <section class="atualizar">
         <div class="sidebar">
-            <BarraLateral/>
+            <HeaderDashboard/>
         </div>
         
         <div v-if="todos_produtos" class="atualizar-items container">
@@ -32,14 +32,14 @@
 
 <script>
 
-import BarraLateral from '../components/BarraLateral.vue'
+import HeaderDashboard from '../components/HeaderDashboard.vue'
 import FormItem from '../components/FormItem.vue'
 import { api } from '../service'
 
 export default {
 
     components: {
-        BarraLateral,
+        HeaderDashboard,
         FormItem
     },
 

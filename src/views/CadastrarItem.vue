@@ -1,7 +1,7 @@
 <template>
     <section class="cadastrar-item">
         <div class="sidebar">
-            <BarraLateral/>
+            <HeaderDashboard/>
         </div>
 
         <div class="formulario container">
@@ -16,13 +16,13 @@
 
 <script>
 
-import BarraLateral from '../components/BarraLateral.vue'
+import HeaderDashboard from '../components/HeaderDashboard.vue'
 import FormItem from '../components/FormItem.vue'
 
 export default {
 
     components: {
-        BarraLateral,
+        HeaderDashboard,
         FormItem
     },
 

@@ -41,6 +41,7 @@ export default {
 <style>
 
 .sidebar {
+    width: 100%;
     margin-top: 100px;
     background-color: #fff;
     min-width: 200px;
@@ -48,10 +49,16 @@ export default {
     margin-right: 40px;
 }
 
+.sidebar ul {
+    display: flex;
+    justify-content: center;
+}
+
 .sidebar li {
     font-size: 18px;
-    padding: 15px 0px;
+    padding: 15px 10px;
     border-radius: 10px;
+    margin-right: 30px;
 }
 
 .sidebar p {
@@ -67,6 +74,27 @@ export default {
 .sidebar li:hover {
     background-color: #f5f7fb;
     transition: .3s;
+}
+
+@media (max-width: 760px) {
+    .sidebar ul {
+        margin-top: 120px;
+        justify-content: space-around;
+    }
+
+    .sidebar li {
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar li {
+        padding: 10px 5px;
+    }
+
+    .sidebar li span {
+        display: none;
+    }
 }
 
 </style>

@@ -5,116 +5,100 @@
             <Loading/>
         </div>
 
-        <div v-else class="dashboard">
+        <div v-else>
             <div class="sidebar">
-                <BarraLateral/>
+                <HeaderDashboard/>
             </div>
 
-            <div class="dashboard-content">
-                <h1>Dashboard</h1>
-                
+            <div class="dashboard container">
                 <div class="dados">
-                    <div>
-                        <h2>Hoje</h2>
+                    <div class="container dados-conteudo">
+                        <div>
+                            <h2>Hoje</h2>
 
-                        <p>{{valor_vendas_hoje | numeroPreco}}</p>
-                    </div>
+                            <p>{{valor_vendas_hoje | numeroPreco}}</p>
+                        </div>
 
-                    <div>
-                        <h2>Essa semana</h2>
+                        <div>
+                            <h2>Semana</h2>
 
-                        <p>{{valor_vendas_semana | numeroPreco}}</p>
-                    </div>
+                            <p>{{valor_vendas_semana | numeroPreco}}</p>
+                        </div>
 
-                    <div>
-                        <h2>Esse mês</h2>
+                        <div>
+                            <h2>Mês</h2>
 
-                        <p>{{valor_vendas_mes | numeroPreco}}</p>
+                            <p>{{valor_vendas_mes | numeroPreco}}</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="dados-vendas">
-                    <div>
-                        <h2>Últimas Vendas</h2>
+                <div class="tabela" style="overflow-x:auto;">
 
-                        <table>
-                            <tr>
-                                <th>Ordem da venda</th>
-                                <th>Comprador</th>
-                                <th>Produto</th>
-                                <th>Cidade</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Pedido</th>
-                            </tr>
+                    <h1>Vendas</h1>
+                    
+                    <table>
+                        <tr>
+                            <th>ID venda</th>
+                            <th>Comprador</th>
+                            <th>Produto</th>
+                            <th>Cidade</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Pedido</th>
+                        </tr>
 
-                            <tr v-for="(venda, index) in vendas" :key=" venda+index">
-                                <td class="ordem">{{venda.id_compra}}</td>
+                        <tr v-for="(venda, index) in vendas" :key=" venda+index">
+                            <td class="ordem">
+                                <a :href="`https://restapiecomerce.herokuapp.com/venda/${venda.id_compra}`">
+                                    {{venda.id_compra.slice(0, 8)}}
+                                </a>
+                            </td>
 
-                                <td>{{venda.nome_comprador}}</td>
+                            <td>{{formatarNomeComprador(venda.nome_comprador)}}</td>
 
-                                <td>{{venda.nome_produto}}</td>
+                            <td>{{venda.nome_produto}}</td>
 
-                                <td>{{venda.cidade_comprador}}</td>
+                            <td>{{venda.cidade_comprador}}</td>
 
-                                <td>{{venda.valor_pago | numeroPreco}}</td>
+                            <td>{{venda.valor_pago | numeroPreco}}</td>
 
-                                <td class="confirmado" 
-                                    v-if="venda.status_venda === 'Confirmado'"
-                                >
-                                    {{venda.status_venda}}
-                                </td>
+                            <td :class="venda.status_venda.toLowerCase()">
+                                {{statusDaVenda(venda.status_venda)}}
+                            </td>
 
-                                <td class="recusado" 
-                                    v-else-if="venda.status_venda === 'Recusado'"
-                                >
-                                    {{venda.status_venda}}
-                                </td>
+                            <td v-if="venda.status_venda === 'Processamento'">
+                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
+                                    <font-awesome-icon icon="check" size="1x"/>
+                                </button>
 
-                                <td class="processamento" 
-                                    v-else-if="venda.status_venda === 'Processamento'"
-                                >
-                                    {{venda.status_venda}}
-                                </td>
+                                <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
+                                    <font-awesome-icon icon="times" size="1x"/>
+                                </button>
+                            </td>
 
-                                <td class="entregue" 
-                                    v-else-if="venda.status_venda === 'Entregue'"
-                                >
-                                    Entregue
-                                </td>
+                            <td v-else-if="venda.status_venda !== 'Recusado' && venda.status_venda !== 'Entregue'">
+                                <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
+                                    <font-awesome-icon icon="truck-moving" size="1x"/>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-                                <td v-if="venda.status_venda === 'Processamento'">
-                                    <button class="confirmar-venda" @click="atualizarStatus(venda, 'Confirmado')">
-                                        <font-awesome-icon icon="check" size="1x"/>
-                                    </button>
+                <div class="metas">
+                    <h2>Gráficos</h2>
 
-                                    <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
-                                        <font-awesome-icon icon="times" size="1x"/>
-                                    </button>
-                                </td>
-
-                                <td v-else-if="venda.status_venda !== 'Processamento' && venda.status_venda !== 'Entregue'">
-                                    <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
-                                        <font-awesome-icon icon="truck-moving" size="1x"/>
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="dia">
+                        <DashboardPorcentagem :series="series_dia" categoria="Dia">
+                            <h2>% Vendas do dia</h2>
+                        </DashboardPorcentagem>
                     </div>
 
-                    <div class="metas">
-                        <div class="dia">
-                            <DashboardPorcentagem :series="series_dia" teste="Dia">
-                                <h2>% Vendas do dia</h2>
-                            </DashboardPorcentagem>
-                        </div>
-
-                        <div class="semana">
-                            <DashboardPorcentagem :series="seriesSemana" teste="Semana">
-                                <h2>% Vendas da semana</h2>
-                            </DashboardPorcentagem>
-                        </div>
-
+                    <div class="semana">
+                        <DashboardPorcentagem :series="seriesSemana" categoria="Semana">
+                            <h2>% Vendas da semana</h2>
+                        </DashboardPorcentagem>
                     </div>
                 </div>
             </div>
@@ -127,7 +111,7 @@
 
 import DashboardPorcentagem from '../components/DashboardPorcentagem.vue'
 import Loading from '../components/Loading.vue'
-import BarraLateral from '../components/BarraLateral.vue'
+import HeaderDashboard from '../components/HeaderDashboard.vue'
 
 import { api } from '../service'
 
@@ -136,7 +120,7 @@ export default {
 
     components: {
         DashboardPorcentagem,
-        BarraLateral,
+        HeaderDashboard,
         Loading
     },
     
@@ -262,6 +246,20 @@ export default {
             }
 
             return retorno
+        },
+
+        statusDaVenda(status) {
+            return status
+        },
+
+        formatarNomeComprador(nome) {
+            var nome_formatado = nome.split(' ')
+            var sobrenome = nome_formatado[1]
+            if(sobrenome) {
+                return  nome_formatado[0] + ' ' + sobrenome
+            } else {
+                return nome_formatado[0]
+            }
         }
         
     },
@@ -275,95 +273,79 @@ export default {
 
 <style scoped>
 
-.dashboard {
-    display: flex;
+section {
     background-color: #f5f7fb;
-    height: 100%;
-}
-
-.dashboard-content {
-    width: 100%;
-}
-
-.dashboard-content h1 {
+    padding-bottom: 60px;
     text-align: center;
-    font-size: 42px;
 }
 
-.dashboard-content {
-    margin-top: 160px;
+.metas div, table {
+    background-color: #fff;
 }
 
-.dados {
+/* VENDAS */
+
+.dados-conteudo {
     margin-top: 60px;
     margin-bottom: 30px;
     display: flex;
     justify-content: space-around;
+    color: #fff;
 }
 
-.dados > div {
+.dados-conteudo > div {
     width: 100%;
-    background-color: #fff;
-    margin-right: 30px;
     border-radius: 10px;
-    text-align: center;
 }
 
-.dados h2 {
-    margin-top: 30px;
+.dados-conteudo > div:nth-child(2), .dados-conteudo > div:nth-child(1) {
+    margin-right: 30px;
 }
 
-.dados > div:nth-child(1) {
+.dados-conteudo h2 {
+    padding-top: 10px;
+}
+
+.dados-conteudo > div:nth-child(1) {
     background-color: #0064de;
-    color: #fff;
 }
 
-.dados > div:nth-child(2) {
+.dados-conteudo > div:nth-child(2) {
     background-color: #12b457;
-    color: #fff;
 }
 
-.dados > div:nth-child(3) {
+.dados-conteudo > div:nth-child(3) {
     background-color: #7b2cdc;
-    color: #fff;
 }
 
-.dados p {
-    margin: 30px 0;
+.dados-conteudo p {
+    margin: 20px 0;
     font-size: 24px;
 }
 
-
-/* DADOS VENDAS */
-
-.dados-vendas {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    color: #49648d;
-    font-weight: bold;
+/* TABELA */
+.tabela {
+    margin: 60px auto 30px;
 }
 
-.dados-vendas > div:nth-child(1) {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
-
-.dados-vendas > div:nth-child(2) {
-    width: 400px;
-    margin-left: 30px;
+.tabela h1 {
+    font-size: 42px;
+    margin-bottom: 40px;
 }
 
 table {
-    margin-top: 40px;
-    border-collapse: collapse;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 td, th {
   border-bottom: 1px solid #dddddd;
   padding: 10px;
+}
+
+.ordem a{
+    color: #6589e4;
 }
 
 .confirmado, .processamento, .recusado {
@@ -383,12 +365,6 @@ td, th {
     background-color: coral;;
 }
 
-.ordem {
-    color: #6589e4;
-}
-
-
-/* BOTAO VENDA */
 .confirmar-venda, .recusar-venda {
     border: none;
     color: #fff;
@@ -400,32 +376,53 @@ td, th {
 
 .confirmar-venda {
     background-color: #56d388;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .recusar-venda {
     background-color: coral;
 }
 
-/* METAS */
+/* GRAFICO */
 
-.metas {
-    margin-right: 30px;
+.metas div {
+    padding: 10px;
 }
 
 .metas h2 {
-    margin-bottom: 30px;
-}
-
-.metas > div {
-    margin-bottom: 30px;
-    background-color: #fff;
-    padding: 30px 0;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 42px;
 }
 
 .loading {
     margin: 0 auto 60px;
 }
 
+@media (max-width: 760px) {
+    .dashboard {
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .tabela h1, .metas h2 {
+        font-size: 2rem;
+    }
+
+    td, th {
+        font-size: 14px;
+    }
+
+    .dados p {
+        font-size: 16px;
+        padding-bottom: 10px;
+    }
+
+    .dados-conteudo {
+        display: block;
+    }
+}
 
 </style>

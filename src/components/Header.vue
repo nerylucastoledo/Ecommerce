@@ -34,6 +34,12 @@
             <div class="menu ativo">
                 <ul v-if="user.loggedIn" @click="abrirMenu">
                     <li>
+                        <router-link to="/dashboard" title="Dashboard">
+                            <font-awesome-icon icon="chart-bar" size="2x"/>
+                        </router-link>
+                    </li>
+
+                    <li>
                         <router-link to="/meus-pedidos" title="Seus Pedidos">
                             <font-awesome-icon icon="truck-moving" size="2x"/>
                         </router-link>
@@ -326,6 +332,7 @@ header {
     .menu-meio li a {
         font-size: 16px;
     }
+
 }
 
 </style>

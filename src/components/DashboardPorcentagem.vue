@@ -13,7 +13,7 @@ export default {
     
     props: [
         'series',
-        'teste'
+        'categoria'
     ],
 
     data() {
@@ -34,7 +34,7 @@ export default {
                     colors: ['#fff']
                 },
                 xaxis: {
-                    categories: [this.teste],
+                    categories: [this.categoria],
                 },
                 tooltip: {
                     y: {
