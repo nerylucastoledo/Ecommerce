@@ -32,6 +32,10 @@ export default {
         cadastrarBicicleta() {
             this.$root.$emit('cadastrarBicicleta');
         }
+    },
+
+    created() {
+        document.title =  'Dashboard (Cadastrar) - LucasBiker'
     }
     
 }

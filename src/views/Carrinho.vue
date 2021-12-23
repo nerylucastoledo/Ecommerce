@@ -1,9 +1,8 @@
 <template>
     <section class="carrinho">
-
         <h1 class="titulo-pages">CARRINHO</h1>
 
-        <div class="container" v-if="carrinho.items.length > 0">
+        <div class="container" v-if="carrinho.items.length">
             <div 
                 class="carrinho-item" 
                 v-for="({produto}, index) in carrinho.items" 
@@ -32,7 +31,9 @@
                     <p class="preco-total preco-total-carrinho">{{produto.valor_produto * carrinho.items[index].quantidade | numeroPreco}}</p>
                 </div>
 
-                <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">X</p>
+                <p class="apagar-do-carrinho" @click="apagarItemCarrinho(produto)">
+                    X
+                </p>
             </div>
 
             <div>
@@ -80,9 +81,7 @@ export default {
 
         atualizarValores() {
             this.valorProdutosTotal = 0
-            this.carrinho.items.forEach((item) => {
-                this.valorProdutosTotal += item.produto.valor_produto * item.quantidade
-            })
+            this.carrinho.items.forEach(item => this.valorProdutosTotal += item.produto.valor_produto * item.quantidade)
         }
 
     },

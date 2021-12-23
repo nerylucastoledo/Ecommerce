@@ -1,6 +1,5 @@
 <template>
     <section class="concluir-pedido container">
-
         <h1 class="titulo">Concluindo seu pedido</h1>
 
         <form class="form" action="#" @submit.prevent="submit">
@@ -36,9 +35,9 @@
                     <label for="email">Email</label>
                     <input 
                         id="email" 
-                        type="email" 
+                        type="e-mail" 
                         name="email" 
-                        autocomplete="current-email" 
+                        autocomplete="email" 
                         required 
                         v-model="formCliente.email"
                     >
@@ -48,7 +47,7 @@
                     <label for="cpf">Cpf</label>
                     <input 
                         id="cpf" 
-                        type="text" 
+                        type="number" 
                         name="cpf" 
                         required 
                         v-model="formCliente.cpf"
@@ -88,7 +87,7 @@
                     <input 
                         id="cep" 
                         type="number" 
-                        cep="cep" 
+                        name="cep" 
                         required 
                         autofocus 
                         v-model="formCliente.cep"
@@ -175,62 +174,92 @@
                             required 
                             v-model="formEntregaPagamento.formaPagamento"
                         >
-                            <option value="credito">Cartão de crédito</option>
+                            <option selected value="credito">Cartão de crédito</option>
                             <option value="boleto">Boleto bancário</option>
                         </select>
                     </div>
                 </div>
 
-                <div v-if="formEntregaPagamento.formaPagamento !== 'boleto'">
+                <div v-if="formEntregaPagamento.formaPagamento == 'credito'">
                     <div>
                         <label class="label-cartao" for="numeroCartao">Número do cartão</label>
-                        <span v-if="valido">
+
+                        <span v-if="cartaoValido" class="valido">
                             <font-awesome-icon icon="check" size="1x"/>
                         </span>
-                        <span v-else>
+
+                        <span v-else class="invalido">
                             <font-awesome-icon icon="times" size="1x"/>
                         </span>
+
                         <input 
                             id="numeroCartao" 
-                            type="numeroCartao" 
+                            type="number" 
                             name="numeroCartao"
                             required
                             v-model="formEntregaPagamento.numeroCartao"
                             @keyup="verificarCartao(formEntregaPagamento.numeroCartao)"
-                            :class="{ valido: valido}"
                         >
                     </div>
 
 
                     <div>
-                        <label for="nomeSobrenome">Nome e sobrenome</label>
+                        <label class="label-cartao" for="nomeSobrenome">Nome e sobrenome</label>
+
+                        <span v-if="nomeValido" class="valido">
+                            <font-awesome-icon icon="check" size="1x"/>
+                        </span>
+
+                        <span v-else class="invalido">
+                            <font-awesome-icon icon="times" size="1x"/>
+                        </span>
+
                         <input 
                             id="nomeSobrenome" 
                             type="nomeSobrenome"
-                            name="nomeSobrenome" 
+                            name="text" 
                             required 
                             v-model="formEntregaPagamento.nomeSobrenome"
+                            @keyup="verificarNome(formEntregaPagamento.nomeSobrenome)"
                         >
                     </div>
                 </div>
 
-                <div v-if="formEntregaPagamento.formaPagamento !== 'boleto'">
+                <div v-if="formEntregaPagamento.formaPagamento == 'credito'">
                     <div>
-                        <label for="dataVencimento">Data de vencimento:</label>
+                        <label class="label-cartao" for="dataVencimento">Data de vencimento:</label>
+
+                        <span v-if="formEntregaPagamento.dataVencimento" class="valido">
+                            <font-awesome-icon icon="check" size="1x"/>
+                        </span>
+
+                        <span v-else class="invalido">
+                            <font-awesome-icon icon="times" size="1x"/>
+                        </span>
+
                         <input 
                             id="dataVencimento" 
-                            type="dataVencimento" 
-                            name="dataVencimento" 
+                            type="date" 
+                            name="dataVencimento"
                             required 
                             v-model="formEntregaPagamento.dataVencimento"
                         >
                     </div>
 
                     <div>
-                        <label for="codigoSeguranca">Código de segurança</label>
+                        <label class="label-cartao" for="codigoSeguranca">Código de segurança</label>
+
+                        <span v-if="formEntregaPagamento.codigoSeguranca.length > 2" class="valido">
+                            <font-awesome-icon icon="check" size="1x"/>
+                        </span>
+
+                        <span v-else class="invalido">
+                            <font-awesome-icon icon="times" size="1x"/>
+                        </span>
+
                         <input 
                             id="codigoSeguranca" 
-                            type="codigoSeguranca" 
+                            type="number" 
                             name="codigoSeguranca" 
                             required
                             v-model="formEntregaPagamento.codigoSeguranca"
@@ -351,7 +380,8 @@ export default {
             },
             compra: null,
             pedidoFeito: null,
-            valido: false,
+            cartaoValido: false,
+            nomeValido: false,
             mensagemDeErro: null
         };
     },
@@ -374,9 +404,19 @@ export default {
             const enterCard = require("cardvalidatorfabi")
             const cartaoValido = enterCard.cardValidator(numero)
             if(cartaoValido === true) {
-                this.valido = true
+                this.cartaoValido = true
             } else {
-                this.valido = false
+                this.cartaoValido = false
+            }
+        },
+
+        verificarNome(nome) {
+            var nomeSobrenome = nome.split(' ')
+
+            if(nomeSobrenome.length > 1 && nomeSobrenome[1].length > 0) {
+                this.nomeValido = true
+            } else {
+                this.nomeValido = false
             }
         },
         
@@ -386,13 +426,15 @@ export default {
         },
 
         confirmarPedido() {
-            if(this.valido || this.formEntregaPagamento.formaPagamento === 'boleto') {
+            var dataValida = this.formEntregaPagamento.dataVencimento
+            var codigoValido = this.formEntregaPagamento.codigoSeguranca
+
+            if (this.cartaoValido && this.nomeValido && dataValida && codigoValido || this.formEntregaPagamento.formaPagamento === 'boleto') {
                 const formData = new FormData()
                 let date = new Date()
 
                 const produtos = JSON.parse(localStorage.getItem('comprar'))
                 produtos.items.forEach((produto) => {
-                    
                     formData.append('nome_comprador', this.formCliente.name)
                     formData.append('cpf_comprador', this.formCliente.cpf)
                     formData.append('cep_comprador', this.formCliente.cep)
@@ -413,13 +455,15 @@ export default {
                     .then(() => {
                         this.pedidoFeito = true;
                         this.$store.commit('ZERAR_CARRINHO')
+
                         setTimeout(() => {
                             this.pedidoFeito = false;
-                            this.$router.push("/");
+                            this.$router.push("/meus-pedidos");
                         }, 1000);
-                        this.mensagemDeErro = null
+
                     }).catch(() => {
                         this.pedidoFeito = false;
+
                         setTimeout(() => {
                             this.pedidoFeito = null;
                         }, 1000);
@@ -427,7 +471,7 @@ export default {
                     })
                 })
             } else {
-                this.mensagemDeErro = 'Número de cartão incorreto'
+                this.mensagemDeErro = 'Dados do cartão inválidos'
             }
             
         },
@@ -455,8 +499,10 @@ export default {
     margin-top: 60px;
 }
 
+
 .form {
-    margin-bottom: 60px;
+    margin-top: -60px;
+    margin-bottom: 40px;
 }
 
 .form label {
@@ -508,7 +554,11 @@ select {
 }
 
 .valido {
-    border: 1px solid green;
+    color: green;
+}
+
+.invalido {
+    color: red;
 }
 
 .mensagem-erro-cartao {

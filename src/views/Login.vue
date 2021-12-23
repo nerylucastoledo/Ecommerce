@@ -1,6 +1,5 @@
 <template>
   <section class="login">
-    
     <h1 class="titulo-login">Login</h1>
 
     <p class="erro-usuario" v-if="error">{{error}}</p>
@@ -35,7 +34,6 @@
     <router-link class="acessar-conta" to="/register">Não tem conta? Crie uma</router-link>
 
     <router-link class="acessar-conta" to="/esqueci-senha">Esqueceu a senha?</router-link>
-
   </section>
 </template>
 

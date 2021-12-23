@@ -67,11 +67,10 @@ export default {
 }
 
 @media (max-width: 510px) {
-
-.pop-up {
-    right: 5%;
-    bottom: 30px;
-}
+    .pop-up {
+        right: 5%;
+        bottom: 30px;
+    }
 }
 
 </style>

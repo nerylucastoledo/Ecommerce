@@ -84,6 +84,7 @@ export default {
 }
 
 /* INFO ECOMMERCE */
+
 .info-ecommerce {
   display: flex;
   justify-content: space-between;

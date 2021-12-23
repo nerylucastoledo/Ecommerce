@@ -150,6 +150,7 @@ a {
 
 .nome-bicicleta {
     font-size: 30px;
+    color: #222
 }
 
 .preco-antigo-bicicleta {
@@ -170,6 +171,7 @@ a {
     margin-top: 5px;
     margin-bottom: 20px;
     font-weight: bold;
+    color: #222;
 }
 
 .comprar-bicicleta {

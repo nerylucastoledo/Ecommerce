@@ -13,9 +13,9 @@
             <div class="dashboard container">
                 <div class="dados">
                     <DadosDashbaord 
-                        :valoresVendasHoje="valor_vendas_hoje" 
-                        :valoresVendasSemana="valor_vendas_semana" 
-                        :valoresVendasMes="valor_vendas_mes">
+                        :valoresVendasHoje="valorVendasHoje" 
+                        :valoresVendasSemana="valorVendasSemana" 
+                        :valoresVendasMes="valorVendasMes">
                     </DadosDashbaord>
                 </div>
 
@@ -57,12 +57,12 @@
                                     <font-awesome-icon icon="check" size="1x"/>
                                 </button>
 
-                                <button class="recusar-venda" @click="atualizarStatus(venda, 'Recusado')">
+                                <button class="recusar-venda" @click="atualizarStatus(venda, 'Cancelado')">
                                     <font-awesome-icon icon="times" size="1x"/>
                                 </button>
                             </td>
 
-                            <td v-else-if="venda.status_venda !== 'Recusado' && venda.status_venda !== 'Entregue'">
+                            <td v-else-if="venda.status_venda !== 'Cancelado' && venda.status_venda !== 'Entregue'">
                                 <button class="confirmar-venda" @click="atualizarStatus(venda, 'Entregue')">
                                     <font-awesome-icon icon="truck-moving" size="1x"/>
                                 </button>
@@ -75,7 +75,7 @@
                     <h2>Gráficos</h2>
 
                     <div class="dia">
-                        <DashboardPorcentagem :series="series_dia" categoria="Dia">
+                        <DashboardPorcentagem :series="seriesDia" categoria="Dia">
                             <h2>% Vendas do dia</h2>
                         </DashboardPorcentagem>
                     </div>
@@ -114,12 +114,11 @@ export default {
     data() {
         return {
             vendas: null,
-            valor_vendas_hoje: 0,
-            valor_vendas_semana: 0,
-            valor_vendas_mes: 0,
-            filtro_status: "",
+            valorVendasHoje: 0,
+            valorVendasSemana: 0,
+            valorVendasMes: 0,
             date: new Date(),
-            series_dia: [],
+            seriesDia: [],
             seriesSemana: [],
             seriesMes: [],
             loading: true
@@ -142,6 +141,10 @@ export default {
         atualizarStatus(linha, status) {
             const formData = new FormData()
             linha.status_venda = status
+
+            if(status === 'Cancelado') {
+                linha.valor_pago = 0
+            }
 
             formData.append('cpf_comprador', linha.cpf_comprador)
             formData.append('cep_comprador', linha.cep_comprador)
@@ -169,7 +172,7 @@ export default {
                 this.vendasDoDia(res.data)
                 this.vendasDaSemana(res.data)
                 res.data.forEach((venda) => {
-                    this.valor_vendas_mes += venda.valor_pago
+                    this.valorVendasMes += venda.valor_pago
                 })
             })
             this.loading = false
@@ -180,10 +183,11 @@ export default {
             const resultado = this.formatarDadosVendas(quantidade, date, 8, 10, 0)
 
             resultado.listaSeries.forEach((item) => {
-                this.series_dia.push(item)
+                this.seriesDia.push(item)
             })
 
-            this.valor_vendas_hoje = resultado.valor_ganho
+
+            this.valorVendasHoje = resultado.valor_ganho
         },
 
         vendasDaSemana(quantidade) {
@@ -194,7 +198,7 @@ export default {
                 this.seriesSemana.push(item)
             })
 
-            this.valor_vendas_semana = resultado.valor_ganho
+            this.valorVendasSemana = resultado.valor_ganho
 
         },
 
@@ -251,6 +255,7 @@ export default {
 
     created() {
         this.pegarVendasFeitas()
+        document.title =  'Dashboard (Painel) - LucasBiker'
     }
 
 }
@@ -293,7 +298,7 @@ td, th {
     color: #6589e4;
 }
 
-.confirmado, .processamento, .recusado {
+.confirmado, .processamento, .cancelado {
     color: rgb(247, 239, 239);
     border-radius: 4px;
 }
@@ -306,7 +311,7 @@ td, th {
     background-color: rgb(103, 151, 170)
 }
 
-.recusado {
+.cancelado {
     background-color: coral;;
 }
 

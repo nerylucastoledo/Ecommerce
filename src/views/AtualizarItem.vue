@@ -4,14 +4,17 @@
             <HeaderDashboard/>
         </div>
         
-        <div v-if="todos_produtos" class="atualizar-items container">
-            <div v-for="produto in todos_produtos" :key="produto.id_produto">
+        <div v-if="todosOsProdutos" class="atualizar-items container">
+            <div v-for="produto in todosOsProdutos" :key="produto.id_produto">
                 <div class="item">
                     <div @click='atualizarItem(produto)'>
                         <img :src="produto.imagem_produto" :alt="produto.nome_produto + 'imagem'">
+
                         <p>{{produto.nome_produto}}</p>
                     </div>
-                    <p class="fechar" @click="deletarItem(produto.nome_produto, produto.id_produto)">X</p>
+                    <p class="fechar" @click="deletarItem(produto.nome_produto, produto.id_produto)">
+                        X
+                    </p>
                 </div>
             </div>
         </div>
@@ -45,7 +48,7 @@ export default {
 
     data() {
         return {
-            todos_produtos: null,
+            todosOsProdutos: null,
         }
     },
 
@@ -53,7 +56,7 @@ export default {
         pegarTodasBicicletas() {
             api.get('produto/')
             .then(res => {
-                this.todos_produtos = res.data
+                this.todosOsProdutos = res.data
             })
         },
 
@@ -86,6 +89,7 @@ export default {
 
     created() {
         this.pegarTodasBicicletas()
+        document.title =  'Dashboard (Atualizar) - LucasBiker'
     }
     
 }

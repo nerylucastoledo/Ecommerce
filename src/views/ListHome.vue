@@ -1,6 +1,5 @@
 <template>
   <section>
-      
     <div v-if="!loading">
         <Loading/>
     </div>
@@ -12,7 +11,7 @@
             <PopUpCupom/>
         </div>
 
-        <div key="ultimos-lancamentos" id="ultimos-lancamentos">
+        <div id="ultimos-lancamentos" key="ultimos-lancamentos">
             <UltimosLancamentos/>
         </div>
 

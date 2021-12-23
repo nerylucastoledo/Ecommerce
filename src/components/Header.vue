@@ -48,6 +48,7 @@
                     <li class="carrinho-header">
                         <router-link to="/carrinho" title="Carrinho">
                             <font-awesome-icon icon="shopping-cart" size="2x"/>
+
                             <span>{{ carrinhoQuantidade }}</span>
                         </router-link>
                     </li>
@@ -62,7 +63,10 @@
                 <ul v-else>
                     <li @click="abrirMenu">
                         <router-link to="/login">
-                            <button class="btn-login">Entrar <font-awesome-icon icon="user" size="3px"/></button>
+                            <button class="btn-login">
+                                Entrar 
+                                <font-awesome-icon icon="user" size="3px"/>
+                            </button>
                         </router-link>
                     </li>
                 </ul>

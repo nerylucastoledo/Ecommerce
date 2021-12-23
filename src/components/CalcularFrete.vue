@@ -55,10 +55,16 @@
         <div>
             <button class="comprar-bicicleta btn-finalizar" @click="comprar">Finalizar compra</button>
         </div>
+
+        <p class="cupom-errado mensagem-erro" v-if="mensagemErro">
+            {{mensagemErro}}
+        </p>
     </section>
 </template>
 
 <script>
+
+import {calcularPrecoPrazo} from 'correios-brasil';
 
 export default {
 
@@ -70,7 +76,8 @@ export default {
             valorFrete: 0,
             cupom: null,
             valorCupom: 0,
-            cupomErrado: null
+            cupomErrado: null,
+            mensagemErro: 0
         }
     },
 
@@ -78,12 +85,28 @@ export default {
 
         calcularFrete() {
             this.valorFrete = 46,99
+            this.mensagemErro = null
+            let args = {
+                sCepOrigem: '81200100',
+                sCepDestino: '21770200',
+                nVlPeso: '1',
+                nCdFormato: '1',
+                nVlComprimento: '20',
+                nVlAltura: '20',
+                nVlLargura: '20',
+                nCdServico: ['04014', '04510'], //Array com os códigos de serviço
+                nVlDiametro: '0',
+            }
+            calcularPrecoPrazo(args).then((response) => {
+                console.log(response);
+            });
         },
 
         calcularCupom(text_cupom) {
             if(text_cupom.toLowerCase() === 'bike10') {
                 this.valorCupom = 10
                 this.cupomErrado = null
+
             } else {
                 this.valorCupom = 0
                 this.cupomErrado = 'Cupom incorreto'
@@ -93,13 +116,19 @@ export default {
         comprar() {
             if(this.valorFrete) {
                 var carrinho = JSON.parse(localStorage.getItem('carrinho'))
+                
                 if(this.valorCupom) {
                     carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
+
                 } else {
                     carrinho.valor_final = this.valorProdutos + this.valorFrete
                 }
+
                 localStorage.setItem('comprar', JSON.stringify(carrinho))
                 this.$router.push("concluir-pedido");
+
+            } else {
+                this.mensagemErro = 'Digite o seu cep'
             }
         },
 
@@ -174,6 +203,11 @@ export default {
 
 .cupom-errado {
     color: coral;
+}
+
+.mensagem-erro {
+    text-align: center;
+    font-size: 18px;
 }
 
 @media (max-width: 530px) {

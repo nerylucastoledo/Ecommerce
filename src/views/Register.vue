@@ -1,6 +1,5 @@
 <template>
   <section class="login">
-    
       <h1 class="titulo-login">Crie sua conta</h1>
 
       <form action="#" @submit.prevent="submit">
@@ -39,7 +38,6 @@
       </form>
 
       <router-link to="/login" class="acessar-conta">Já tem uma conta? Faça login</router-link>
-
     </section>
 </template>
 

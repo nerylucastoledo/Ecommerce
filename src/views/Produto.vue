@@ -16,18 +16,18 @@
 
                         <span
                             class="estrelas-produto" 
-                            v-for="(estrela, index) in qntd_estrelas_do_produto" 
+                            v-for="(estrela, index) in qntdEstrelasDoProduto" 
                             :key="estrela+index" 
-                            >
-                            {{estrelas_preenchidas}}
+                        >
+                            {{estrelasPreenchidas}}
                         </span>
 
                         <span
                             class="estrelas-produto" 
-                            v-for="estrela in estrelas_restantes"  
+                            v-for="estrela in estrelasRestantes"  
                             :key="estrela+'estrela'" 
                         >
-                            {{estrela_vazia}}
+                            {{estrelaVazia}}
                         </span>
                     </div>
 
@@ -101,11 +101,12 @@
                                 v-for="(estrela, index) in avaliacao.qntd_estrelas" 
                                 :key="index"
                             >
-                                {{estrelas_preenchidas}}
+                                {{estrelasPreenchidas}}
                             </span>
                         
                             <div>
                                 <h2 class="nome-avaliador">{{avaliacao.nome_avaliador}}</h2>
+
                                 <p class="comentario-avaliador">{{avaliacao.comentario}}</p>
                             </div>
                         </div>
@@ -138,13 +139,13 @@ export default {
         return {
             produto: null,
             avaliacoes: null,
-            estrelas_preenchidas: "★",
-            estrela_vazia: "☆",
-            qntd_estrelas_do_produto: 0,
-            estrelas_restantes: 0,
+            estrelasPreenchidas: "★",
+            estrelaVazia: "☆",
+            qntdEstrelasDoProduto: 0,
+            estrelasRestantes: 0,
             quantidade: 1,
             loading: true,
-            valor_final: 0
+            valorFinal: 0
         }
     },
 
@@ -159,7 +160,7 @@ export default {
             await api.get(`produto/?id=${this.id}`)
             .then(res => {
                 this.produto = res.data[0]
-                this.valor_final = res.data[0].valor_produto
+                this.valorFinal = res.data[0].valor_produto
                 this.avaliacoes = res.data[0].avaliacoes
                 if(res.data[0].avaliacoes.length) {
                     this.verificarAQuantidadeDeEstrelas(res.data[0].avaliacoes, res.data[0].avaliacoes.length)
@@ -171,14 +172,12 @@ export default {
 
         verificarAQuantidadeDeEstrelas(avaliacoes, qntd_comentario) {
             var quantidade = 0
+            var max_estrelas = 5
 
-            avaliacoes.forEach(element => {
-                quantidade += element.qntd_estrelas
-            });
+            avaliacoes.forEach(element => quantidade += element.qntd_estrelas)
 
-            this.qntd_estrelas_do_produto = Math.trunc(quantidade / qntd_comentario)
-            this.estrelas_restantes = 5 - this.qntd_estrelas_do_produto
-
+            this.qntdEstrelasDoProduto = Math.trunc(quantidade / qntd_comentario)
+            this.estrelasRestantes = max_estrelas - this.qntdEstrelasDoProduto
         },
 
         adicionarAoCarrinho() {
@@ -198,14 +197,19 @@ export default {
             const produtoComprar = {
                 items: [{
                     produto: this.produto,
-                    quantidade: 1
+                    quantidade: this.quantidade
                 }],
-                valor_final: this.valor_final
+                valorFinal: this.valorFinal
             }
 
             localStorage.setItem('comprar', JSON.stringify(produtoComprar))
 
-            this.$router.push({name: 'concluirpedido'})
+            if(this.$store.state.user.loggedIn) {
+                this.$router.push({name: 'concluirpedido'})
+                
+            } else {
+                this.$router.push({name: 'Login'})
+            }
         }
 
     },

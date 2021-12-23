@@ -1,6 +1,5 @@
 <template>
     <section class="meus-pedidos">
-        
         <h1 class="titulo-pages">Meus Pedidos</h1>
 
         <div v-if="loading">
@@ -18,7 +17,6 @@
                         <h2>{{pedido.nome_produto}}</h2>
                         
                         <div>
-
                             <p>
                                 Valor pago: 
                                 <strong>{{pedido.valor_pago | numeroPreco}}</strong>
@@ -27,25 +25,16 @@
                     </div>
 
                     <div class="produto-entrega">
-                        <p class="dia-pra-chegar">Chegará até o dia {{dataQueChegara(pedido.data_venda)}}</p>
+
+                        <p class="dia-pra-chegar" v-if="typeof dataQueChegara(pedido.data_venda) === 'string'">
+                            Previsão:
+                            {{dataQueChegara(pedido.data_venda)}}
+                        </p>
 
                         <p class="status-pedido">
                             Status:
-
-                            <span class="processamento" v-if="pedido.status_venda === 'Processamento'">
-                                <strong>Em processamento</strong>
-                            </span>
-
-                            <span class="confirmado" v-if="pedido.status_venda === 'Confirmado'">
-                                <strong>Confirmado</strong>
-                            </span>
-
-                            <span class="entregue" v-else-if="pedido.status_venda === 'Entregue'">
-                                <strong>Entregue</strong>
-                            </span>
-
-                            <span class="cancelado" v-if="pedido.status_venda === 'Recusado'">
-                                <strong>Cancelado</strong>
+                            <span :class="pedido.status_venda.toLowerCase()">
+                                <strong>{{pedido.status_venda}}</strong>
                             </span>
                         </p>
                     </div>
@@ -85,11 +74,10 @@ export default {
     methods: {
         async pegarComprasDoUsuario() {
             const emailUsuario = this.$store.state.user.data.email
+            
             await api.get(`venda/?email=${emailUsuario}`)
             .then(res => {
-                res.data.forEach(element => {
-                    this.pedidos.push(element)
-                });
+                res.data.forEach(element => this.pedidos.push(element));
             })
             this.loading = false
         },
@@ -101,7 +89,7 @@ export default {
 
             var diaQueChegara = parseInt(dia) + 7
 
-            if(diaQueChegara > 31) {
+            if(parseInt(dia) > 31) {
                 mes = parseInt(mes) + 1
                 diaQueChegara = diaQueChegara - 31
             }
@@ -109,6 +97,12 @@ export default {
             if(mes >= 13) {
                 mes = 1
                 ano = parseInt(ano) + 1
+            }
+            
+            var dataFormatada = new Date(ano, mes - 1, diaQueChegara.toString());
+
+            if(new Date() > dataFormatada) {
+                return 'Pedido atrasado'
             }
 
             return diaQueChegara.toString() + "-" + mes + "-" + ano
@@ -122,7 +116,6 @@ export default {
     created() {
         document.title =  'Meus pedidos'
     }
-
 }
 </script>
 
