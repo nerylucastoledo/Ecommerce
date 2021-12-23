@@ -1,6 +1,7 @@
 # Ecommerce :moneybag:
 
 > Link do projeto: https://lucasbiker.netlify.app/
+> 
 > Status do Projeto: Em andamento! 	:warning:
 
 ## Uma loja virtual de vendas de bibicletas
