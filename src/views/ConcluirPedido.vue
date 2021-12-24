@@ -487,7 +487,7 @@ export default {
 <style scoped>
 .titulo {
     font-size: 42px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .concluir-pedido {
