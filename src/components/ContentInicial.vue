@@ -116,10 +116,9 @@ export default {
   padding: 15px 40px;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1280px) {
 
   .content-image {
-    background-position: left;
     justify-content: center;
     text-align: center;
   }
@@ -130,6 +129,8 @@ export default {
 
   .content-image p {
     font-size: 1.5rem;
+    display: block;
+    margin: 0 auto;
   }
 
 }
@@ -137,6 +138,14 @@ export default {
 @media (max-width: 700px) {
   .content-image {
     padding: 20px 0px;
+  }
+
+  .content-image h2 {
+    font-size: 3rem;
+  }
+
+  .content-image p {
+    font-size: 1rem;
   }
 
   .info-ecommerce {
@@ -155,13 +164,6 @@ export default {
 
 @media (max-width: 510px) {
 
-  .content-image h2 {
-    font-size: 3rem;
-  }
-
-  .content-image p {
-    font-size: 1rem;
-  }
 }
 
 
