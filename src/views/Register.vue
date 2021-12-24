@@ -34,7 +34,7 @@
           v-model="form.password"
         >
 
-        <input class="btn btn-login" type="submit" value="Criar Conta">
+        <button class="btn btn-login" type="submit">Criar Conta</button>
       </form>
 
       <router-link to="/login" class="acessar-conta">Já tem uma conta? Faça login</router-link>
