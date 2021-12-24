@@ -44,20 +44,16 @@
 </template>
 
 <script>
-
 export default {
   name: 'Home',
 }
-
 </script>
 
 <style scoped>
-
 .home-content {
   margin-top: 100px;
   margin-bottom: 60px;
 }
-
 .content-image {
   min-height: 90vh;
   display: flex;
@@ -66,14 +62,11 @@ export default {
   background-size: cover;
   background-position: center;
 }
-
 .content-image h2 {
   font-size: 6rem;
   text-transform: uppercase;
   color: #fff;
 }
-
-
 .content-image p {
   max-width: 800px;
   font-size: 1rem;
@@ -82,9 +75,7 @@ export default {
   color: #eee;
   margin-bottom: 20px;
 }
-
 /* INFO ECOMMERCE */
-
 .info-ecommerce {
   display: flex;
   justify-content: space-between;
@@ -92,79 +83,59 @@ export default {
   box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
   padding: 20px;
 }
-
 .info-ecommerce > div {
   margin: 0 8px;
 }
-
 .info-ecommerce p {
   margin-top: 10px;
   color: #222;
 }
-
 .info-ecommerce {
   text-align: center;
   color: #FFBA00;
 }
-
 .info-ecommerce div:hover {
   color: #222;
   transition: .3s;
 }
-
 .comprar-bicicleta {
   padding: 15px 40px;
 }
-
 @media (max-width: 1280px) {
-
   .content-image {
     justify-content: center;
     text-align: center;
   }
-
   .content-image h2 {
     font-size: 4.5rem;
   }
-
   .content-image p {
     font-size: 1.5rem;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 20px;
   }
-
 }
-
 @media (max-width: 700px) {
   .content-image {
     padding: 20px 0px;
   }
-
   .content-image h2 {
     font-size: 3rem;
   }
-
   .content-image p {
     font-size: 1rem;
   }
-
   .info-ecommerce {
     display: grid;
     grid-template-columns: 2fr 2fr;
   }
-
   .info-ecommerce div:nth-child(3), .info-ecommerce div:nth-child(4) {
     margin-top: 20px;
   }
-
   .info-ecommerce p {
     font-size: 14px;
   }
 }
-
 @media (max-width: 510px) {
-
 }
-
-
 </style>
