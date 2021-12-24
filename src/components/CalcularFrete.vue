@@ -102,10 +102,10 @@ export default {
                 var carrinho = JSON.parse(localStorage.getItem('carrinho'))
                 
                 if(this.valorCupom) {
-                    carrinho.valor_final = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
+                    carrinho.valorFinal = this.valorProdutos - (this.valorProdutos / this.valorCupom) + this.valorFrete
 
                 } else {
-                    carrinho.valor_final = this.valorProdutos + this.valorFrete
+                    carrinho.valorFinal = this.valorProdutos + this.valorFrete
                 }
 
                 localStorage.setItem('comprar', JSON.stringify(carrinho))

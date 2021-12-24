@@ -194,12 +194,13 @@ export default {
         },
 
         comprarProduto() {
+            const frete = 46.90
             const produtoComprar = {
                 items: [{
                     produto: this.produto,
                     quantidade: this.quantidade
                 }],
-                valorFinal: this.valorFinal
+                valorFinal: (this.valorFinal * this.quantidade) + frete
             }
 
             localStorage.setItem('comprar', JSON.stringify(produtoComprar))

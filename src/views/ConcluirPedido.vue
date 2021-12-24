@@ -308,7 +308,7 @@
 
                     <div>
                         <p class="valor-final">Valor Final + Frete: 
-                            <span>{{compra.valor_final | numeroPreco}}</span>
+                            <span>{{compra.valorFinal | numeroPreco}}</span>
                         </p>
 
                         <p v-if="mensagemDeErro" class="mensagem-erro-cartao">{{mensagemDeErro}}</p>
@@ -442,7 +442,7 @@ export default {
                     formData.append('bairro_comprador', this.formCliente.bairro)
                     formData.append('rua_comprador', this.formCliente.rua)
                     formData.append('numero_rua_comprador', this.formCliente.numero)
-                    formData.append('valor_pago', parseInt(this.compra.valor_final))
+                    formData.append('valor_pago', parseInt(this.compra.valorFinal))
                     formData.append('qntd_parcela', 2)
                     formData.append('quantidade', produto.quantidade)
                     formData.append('id_produto_comprado', produto.produto.id_produto)
