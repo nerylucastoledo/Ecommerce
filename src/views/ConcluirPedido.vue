@@ -355,10 +355,12 @@ import { api } from '../service'
 
 export default {
     name: 'concluirpedido',
+    
     components: {
         PedidoFeito,
         PedidoRecusado
     },
+    
     data() {
         return {
             formCliente: {
