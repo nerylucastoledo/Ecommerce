@@ -47,9 +47,11 @@
                     <label for="cpf">Cpf</label>
                     <input 
                         id="cpf" 
-                        type="number" 
+                        type="text" 
                         name="cpf" 
-                        required 
+                        required
+                        placeholder="xxx.xxx.xxx-xx"
+                        v-mask="'###.###.###-##'"
                         v-model="formCliente.cpf"
                     >
                 </div>
@@ -60,9 +62,10 @@
                     <label for="telefone">Telefone</label>
                     <input 
                         id="telefone" 
-                        type="number" 
-                        name="telefone" 
+                        name="telefone"
+                        placeholder="(xx)x-xxxx-xxxx"
                         required 
+                        v-mask="'(##) # ####-####'"
                         v-model="formCliente.telefone"
                     >
                 </div>
@@ -86,11 +89,12 @@
                     <label for="cep">Cep</label>
                     <input 
                         id="cep" 
-                        type="number" 
                         name="cep" 
                         required 
                         autofocus 
+                        v-mask="'#####-###'"
                         v-model="formCliente.cep"
+                        placeholder="xxxxx-xxx"
                         @keyup="puxarEndereco(formCliente.cep)"
                     >
                 </div>
@@ -102,6 +106,7 @@
                         type="text" 
                         name="estado"
                         required 
+                        placeholder="XX"
                         v-model="formCliente.estado"
                     >
                 </div>
@@ -171,7 +176,7 @@
                         <label for="formaDePagar">Forma de pagamento</label>
                         <select 
                             name="formaDePagar" 
-                            required 
+                            required
                             v-model="formEntregaPagamento.formaPagamento"
                         >
                             <option selected value="credito">Cartão de crédito</option>
@@ -194,9 +199,9 @@
 
                         <input 
                             id="numeroCartao" 
-                            type="number" 
                             name="numeroCartao"
                             required
+                            v-mask="'#### #### #### ####'"
                             v-model="formEntregaPagamento.numeroCartao"
                             @keyup="verificarCartao(formEntregaPagamento.numeroCartao)"
                         >
@@ -229,7 +234,7 @@
                     <div>
                         <label class="label-cartao" for="dataVencimento">Data de vencimento:</label>
 
-                        <span v-if="formEntregaPagamento.dataVencimento" class="valido">
+                        <span v-if="formEntregaPagamento.dataVencimento.length === 5" class="valido">
                             <font-awesome-icon icon="check" size="1x"/>
                         </span>
 
@@ -239,9 +244,9 @@
 
                         <input 
                             id="dataVencimento" 
-                            type="date" 
                             name="dataVencimento"
                             required 
+                            v-mask="'##/##'"
                             v-model="formEntregaPagamento.dataVencimento"
                         >
                     </div>
@@ -249,7 +254,7 @@
                     <div>
                         <label class="label-cartao" for="codigoSeguranca">Código de segurança</label>
 
-                        <span v-if="formEntregaPagamento.codigoSeguranca.length > 2" class="valido">
+                        <span v-if="formEntregaPagamento.codigoSeguranca.length === 3" class="valido">
                             <font-awesome-icon icon="check" size="1x"/>
                         </span>
 
@@ -388,8 +393,9 @@ export default {
 
     methods: {
         puxarEndereco(cep) {
-            if(cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            var new_cep = cep.replace('-', '')
+            if(new_cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${new_cep}/json/`)
                 .then(req => req.json())
                 .then(res => {
                     this.formCliente.estado = res.uf
@@ -401,12 +407,14 @@ export default {
         },
 
         verificarCartao(numero) {
-            const enterCard = require("cardvalidatorfabi")
-            const cartaoValido = enterCard.cardValidator(numero)
-            if(cartaoValido === true) {
-                this.cartaoValido = true
-            } else {
-                this.cartaoValido = false
+            var numeroFormatado = (numero.replace(' ', '').replace(' ', '').replace(' ', ''))
+            this.cartaoValido = false
+            if(numeroFormatado.length === 16) {
+                const enterCard = require("cardvalidatorfabi")
+                const cartaoValido = enterCard.cardValidator(numeroFormatado)
+                if(cartaoValido === true) {
+                    this.cartaoValido = true
+                }
             }
         },
 
@@ -437,7 +445,7 @@ export default {
                 produtos.items.forEach((produto) => {
                     formData.append('nome_comprador', this.formCliente.name)
                     formData.append('cpf_comprador', this.formCliente.cpf)
-                    formData.append('cep_comprador', this.formCliente.cep)
+                    formData.append('cep_comprador', this.formCliente.cep.replace('-', ''))
                     formData.append('cidade_comprador', this.formCliente.cidade)
                     formData.append('bairro_comprador', this.formCliente.bairro)
                     formData.append('rua_comprador', this.formCliente.rua)

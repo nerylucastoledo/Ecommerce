@@ -24,9 +24,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueApexCharts from 'vue-apexcharts'
+import VueMask from 'v-mask';
 
 Vue.component('apexchart', VueApexCharts)
 Vue.use(VueApexCharts)
+Vue.use(VueMask)
 
 Vue.config.productionTip = false
 

@@ -18,6 +18,7 @@
     "firebase": "^4.8.0",
     "frete": "^0.3.2",
     "git": "^0.1.5",
+    "v-mask": "^2.3.0",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-router": "^3.2.0",

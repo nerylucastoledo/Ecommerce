@@ -82,14 +82,15 @@ export default {
             this.loading = false
         },
 
-        dataQueChegara: function (dado) {
+        dataQueChegara(dado) {
+            console.log(dado)
             var dia = dado.slice(8, 10)
             var mes = dado.slice(5, 7)
             var ano = dado.slice(0, 4)
 
             var diaQueChegara = parseInt(dia) + 7
 
-            if(parseInt(dia) > 31) {
+            if(parseInt(diaQueChegara) > 31) {
                 mes = parseInt(mes) + 1
                 diaQueChegara = diaQueChegara - 31
             }
