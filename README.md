@@ -2,7 +2,9 @@
 
 > Link do projeto: https://lucasbiker.netlify.app/
 > 
-> Status do Projeto: Em andamento! 	:warning:
+> Status do Projeto: Finalizado!
+
+-- No primeiro acesso pode ser que demore a carregar, isso porque a API esta no heroku e quando ela hiberna, demora alguns segundos para voltar
 
 ## Uma loja virtual de vendas de bibicletas
 
